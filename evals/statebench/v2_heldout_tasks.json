@@ -1,0 +1,58 @@
+{
+  "frozen_before_run": true,
+  "note": "独立于开发集的五题。字符串、时间和负责人都与 v2_live 的六题不同。冻结后不得为了调参修改。",
+  "tasks": [
+    {
+      "task_id": "h_stable",
+      "scene": "stable",
+      "meeting": "访谈记录。待办：归档访谈录音。负责人：陈予。讨论了采样。",
+      "deadline": "项目截止时间：2026-12-02T09:30:00+08:00。",
+      "mutate": false,
+      "todo_all": ["归档访谈录音", "陈予"],
+      "reminder_expect": "2026-12-02T09:30:00+08:00",
+      "stale_value": ""
+    },
+    {
+      "task_id": "h_shift",
+      "scene": "shift",
+      "meeting": "访谈记录。待办：补齐数据集说明。讨论了采样。",
+      "deadline": "项目截止时间：2026-12-02T09:30:00+08:00。",
+      "mutate": true,
+      "mutate_deadline": "项目截止时间：2026-12-04T16:45:00+08:00。待办仍是补齐数据集说明。",
+      "todo_all": ["补齐数据集说明"],
+      "reminder_expect": "2026-12-04T16:45:00+08:00",
+      "stale_value": "2026-12-02T09:30:00+08:00"
+    },
+    {
+      "task_id": "h_conflict",
+      "scene": "conflict",
+      "meeting": "访谈记录。待办：校对图表。截止时间：2026-12-02T09:30:00+08:00。",
+      "deadline": "另一份日程。截止时间：2026-12-09T11:15:00+08:00。",
+      "mutate": false,
+      "todo_all": ["校对图表"],
+      "reminder_expect": "",
+      "stale_value": ""
+    },
+    {
+      "task_id": "h_missing",
+      "scene": "missing",
+      "meeting": "访谈记录。待办：整理问卷。讨论了采样。",
+      "deadline": "下次例会再定提交时间。",
+      "mutate": false,
+      "todo_all": ["整理问卷"],
+      "reminder_expect": "",
+      "stale_value": ""
+    },
+    {
+      "task_id": "h_two",
+      "scene": "two",
+      "meeting": "访谈记录。待办：补齐数据集说明。待办：复核图表。",
+      "deadline": "项目截止时间：2026-12-02T09:30:00+08:00。",
+      "mutate": true,
+      "mutate_deadline": "项目截止时间：2026-12-04T16:45:00+08:00。待办仍是补齐数据集说明。",
+      "todo_all": ["补齐数据集说明", "复核图表"],
+      "reminder_expect": "2026-12-04T16:45:00+08:00",
+      "stale_value": "2026-12-02T09:30:00+08:00"
+    }
+  ]
+}

@@ -1,0 +1,5362 @@
+[
+  {
+    "task_id": "s0_meeting_a",
+    "blueprint_id": "bp_s0_meeting_0",
+    "variant": "a",
+    "scene": "S0",
+    "family_id": "meeting:none",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "attachment.name",
+        "value": "slides.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_meeting_b",
+    "blueprint_id": "bp_s0_meeting_0",
+    "variant": "b",
+    "scene": "S0",
+    "family_id": "meeting:none",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "09:30",
+        "version": "v3"
+      },
+      {
+        "key": "attachment.name",
+        "value": "notes.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-B",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_note_a",
+    "blueprint_id": "bp_s0_note_1",
+    "variant": "a",
+    "scene": "S0",
+    "family_id": "note:none",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "draft",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "alpha",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-A",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_note_b",
+    "blueprint_id": "bp_s0_note_1",
+    "variant": "b",
+    "scene": "S0",
+    "family_id": "note:none",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "open",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "gamma",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-B",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_file_2a",
+    "blueprint_id": "bp_s0_file_2",
+    "variant": "a",
+    "scene": "S0",
+    "family_id": "file:none",
+    "domain": "file",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "file.status",
+    "target_key": "archive.status",
+    "readable": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "writable": [
+      "archive.status"
+    ],
+    "env_only": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "initial_facts": [
+      {
+        "key": "file.status",
+        "value": "pending",
+        "version": "v1"
+      },
+      {
+        "key": "file.owner",
+        "value": "alice",
+        "version": "v1"
+      },
+      {
+        "key": "file.bucket",
+        "value": "Bucket-A",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "archive.status",
+        "right": "file.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "archive.status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 file.status 。写入目标 archive.status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_file_2b",
+    "blueprint_id": "bp_s0_file_2",
+    "variant": "b",
+    "scene": "S0",
+    "family_id": "file:none",
+    "domain": "file",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "file.status",
+    "target_key": "archive.status",
+    "readable": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "writable": [
+      "archive.status"
+    ],
+    "env_only": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "initial_facts": [
+      {
+        "key": "file.status",
+        "value": "inbox",
+        "version": "v3"
+      },
+      {
+        "key": "file.owner",
+        "value": "bob",
+        "version": "v1"
+      },
+      {
+        "key": "file.bucket",
+        "value": "Bucket-B",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "archive.status",
+        "right": "file.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "archive.status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 file.status 。写入目标 archive.status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_cross_3a",
+    "blueprint_id": "bp_s0_cross_3",
+    "variant": "a",
+    "scene": "S0",
+    "family_id": "cross:none",
+    "domain": "cross",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "note.meeting_time",
+    "readable": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "writable": [
+      "note.meeting_time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "weekly",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.meeting_time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.meeting_time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 note.meeting_time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_cross_3b",
+    "blueprint_id": "bp_s0_cross_3",
+    "variant": "b",
+    "scene": "S0",
+    "family_id": "cross:none",
+    "domain": "cross",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "note.meeting_time",
+    "readable": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "writable": [
+      "note.meeting_time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "13:00",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "daily",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-C",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.meeting_time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.meeting_time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 note.meeting_time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_meeting_4a",
+    "blueprint_id": "bp_s0_meeting_4",
+    "variant": "a",
+    "scene": "S0",
+    "family_id": "meeting:none",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "attachment.name",
+        "value": "slides.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_meeting_4b",
+    "blueprint_id": "bp_s0_meeting_4",
+    "variant": "b",
+    "scene": "S0",
+    "family_id": "meeting:none",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "09:30",
+        "version": "v3"
+      },
+      {
+        "key": "attachment.name",
+        "value": "notes.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-B",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_note_5a",
+    "blueprint_id": "bp_s0_note_5",
+    "variant": "a",
+    "scene": "S0",
+    "family_id": "note:none",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "draft",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "alpha",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-A",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_note_5b",
+    "blueprint_id": "bp_s0_note_5",
+    "variant": "b",
+    "scene": "S0",
+    "family_id": "note:none",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "open",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "gamma",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-B",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_file_6a",
+    "blueprint_id": "bp_s0_file_6",
+    "variant": "a",
+    "scene": "S0",
+    "family_id": "file:none",
+    "domain": "file",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "file.status",
+    "target_key": "archive.status",
+    "readable": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "writable": [
+      "archive.status"
+    ],
+    "env_only": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "initial_facts": [
+      {
+        "key": "file.status",
+        "value": "pending",
+        "version": "v1"
+      },
+      {
+        "key": "file.owner",
+        "value": "alice",
+        "version": "v1"
+      },
+      {
+        "key": "file.bucket",
+        "value": "Bucket-A",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "archive.status",
+        "right": "file.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "archive.status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 file.status 。写入目标 archive.status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_file_6b",
+    "blueprint_id": "bp_s0_file_6",
+    "variant": "b",
+    "scene": "S0",
+    "family_id": "file:none",
+    "domain": "file",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "file.status",
+    "target_key": "archive.status",
+    "readable": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "writable": [
+      "archive.status"
+    ],
+    "env_only": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "initial_facts": [
+      {
+        "key": "file.status",
+        "value": "inbox",
+        "version": "v3"
+      },
+      {
+        "key": "file.owner",
+        "value": "bob",
+        "version": "v1"
+      },
+      {
+        "key": "file.bucket",
+        "value": "Bucket-B",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "archive.status",
+        "right": "file.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "archive.status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 file.status 。写入目标 archive.status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_cross_7a",
+    "blueprint_id": "bp_s0_cross_7",
+    "variant": "a",
+    "scene": "S0",
+    "family_id": "cross:none",
+    "domain": "cross",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "note.meeting_time",
+    "readable": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "writable": [
+      "note.meeting_time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "weekly",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.meeting_time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.meeting_time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 note.meeting_time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_cross_7b",
+    "blueprint_id": "bp_s0_cross_7",
+    "variant": "b",
+    "scene": "S0",
+    "family_id": "cross:none",
+    "domain": "cross",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "note.meeting_time",
+    "readable": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "writable": [
+      "note.meeting_time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "13:00",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "daily",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-C",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.meeting_time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.meeting_time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 note.meeting_time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_meeting_8a",
+    "blueprint_id": "bp_s0_meeting_8",
+    "variant": "a",
+    "scene": "S0",
+    "family_id": "meeting:none",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "attachment.name",
+        "value": "slides.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_meeting_8b",
+    "blueprint_id": "bp_s0_meeting_8",
+    "variant": "b",
+    "scene": "S0",
+    "family_id": "meeting:none",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "09:30",
+        "version": "v3"
+      },
+      {
+        "key": "attachment.name",
+        "value": "notes.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-B",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_note_9a",
+    "blueprint_id": "bp_s0_note_9",
+    "variant": "a",
+    "scene": "S0",
+    "family_id": "note:none",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "draft",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "alpha",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-A",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s0_note_9b",
+    "blueprint_id": "bp_s0_note_9",
+    "variant": "b",
+    "scene": "S0",
+    "family_id": "note:none",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "none",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "open",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "gamma",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-B",
+        "version": "v1"
+      }
+    ],
+    "events": [],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_meeting_a",
+    "blueprint_id": "bp_s1_meeting_0",
+    "variant": "a",
+    "scene": "S1",
+    "family_id": "meeting:source_notified",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "attachment.name",
+        "value": "slides.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "16:00",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_meeting_b",
+    "blueprint_id": "bp_s1_meeting_0",
+    "variant": "b",
+    "scene": "S1",
+    "family_id": "meeting:source_notified",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "09:30",
+        "version": "v3"
+      },
+      {
+        "key": "attachment.name",
+        "value": "notes.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "11:00",
+        "version": "v4",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_note_a",
+    "blueprint_id": "bp_s1_note_1",
+    "variant": "a",
+    "scene": "S1",
+    "family_id": "note:source_notified",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "draft",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "alpha",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.status",
+        "value": "final",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_note_b",
+    "blueprint_id": "bp_s1_note_1",
+    "variant": "b",
+    "scene": "S1",
+    "family_id": "note:source_notified",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "open",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "gamma",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.status",
+        "value": "closed",
+        "version": "v4",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_file_2a",
+    "blueprint_id": "bp_s1_file_2",
+    "variant": "a",
+    "scene": "S1",
+    "family_id": "file:source_notified",
+    "domain": "file",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "file.status",
+    "target_key": "archive.status",
+    "readable": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "writable": [
+      "archive.status"
+    ],
+    "env_only": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "initial_facts": [
+      {
+        "key": "file.status",
+        "value": "pending",
+        "version": "v1"
+      },
+      {
+        "key": "file.owner",
+        "value": "alice",
+        "version": "v1"
+      },
+      {
+        "key": "file.bucket",
+        "value": "Bucket-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "file.status",
+        "value": "ready",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "archive.status",
+        "right": "file.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "archive.status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 file.status 。写入目标 archive.status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_file_2b",
+    "blueprint_id": "bp_s1_file_2",
+    "variant": "b",
+    "scene": "S1",
+    "family_id": "file:source_notified",
+    "domain": "file",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "file.status",
+    "target_key": "archive.status",
+    "readable": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "writable": [
+      "archive.status"
+    ],
+    "env_only": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "initial_facts": [
+      {
+        "key": "file.status",
+        "value": "inbox",
+        "version": "v3"
+      },
+      {
+        "key": "file.owner",
+        "value": "bob",
+        "version": "v1"
+      },
+      {
+        "key": "file.bucket",
+        "value": "Bucket-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "file.status",
+        "value": "stored",
+        "version": "v4",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "archive.status",
+        "right": "file.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "archive.status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 file.status 。写入目标 archive.status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_cross_3a",
+    "blueprint_id": "bp_s1_cross_3",
+    "variant": "a",
+    "scene": "S1",
+    "family_id": "cross:source_notified",
+    "domain": "cross",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "note.meeting_time",
+    "readable": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "writable": [
+      "note.meeting_time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "weekly",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "16:00",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.meeting_time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.meeting_time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 note.meeting_time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_cross_3b",
+    "blueprint_id": "bp_s1_cross_3",
+    "variant": "b",
+    "scene": "S1",
+    "family_id": "cross:source_notified",
+    "domain": "cross",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "note.meeting_time",
+    "readable": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "writable": [
+      "note.meeting_time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "13:00",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "daily",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-C",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "18:00",
+        "version": "v4",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.meeting_time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.meeting_time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 note.meeting_time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_meeting_4a",
+    "blueprint_id": "bp_s1_meeting_4",
+    "variant": "a",
+    "scene": "S1",
+    "family_id": "meeting:source_notified",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "attachment.name",
+        "value": "slides.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "16:00",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_meeting_4b",
+    "blueprint_id": "bp_s1_meeting_4",
+    "variant": "b",
+    "scene": "S1",
+    "family_id": "meeting:source_notified",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "09:30",
+        "version": "v3"
+      },
+      {
+        "key": "attachment.name",
+        "value": "notes.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "11:00",
+        "version": "v4",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_note_5a",
+    "blueprint_id": "bp_s1_note_5",
+    "variant": "a",
+    "scene": "S1",
+    "family_id": "note:source_notified",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "draft",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "alpha",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.status",
+        "value": "final",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_note_5b",
+    "blueprint_id": "bp_s1_note_5",
+    "variant": "b",
+    "scene": "S1",
+    "family_id": "note:source_notified",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "open",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "gamma",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.status",
+        "value": "closed",
+        "version": "v4",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_file_6a",
+    "blueprint_id": "bp_s1_file_6",
+    "variant": "a",
+    "scene": "S1",
+    "family_id": "file:source_notified",
+    "domain": "file",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "file.status",
+    "target_key": "archive.status",
+    "readable": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "writable": [
+      "archive.status"
+    ],
+    "env_only": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "initial_facts": [
+      {
+        "key": "file.status",
+        "value": "pending",
+        "version": "v1"
+      },
+      {
+        "key": "file.owner",
+        "value": "alice",
+        "version": "v1"
+      },
+      {
+        "key": "file.bucket",
+        "value": "Bucket-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "file.status",
+        "value": "ready",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "archive.status",
+        "right": "file.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "archive.status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 file.status 。写入目标 archive.status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_file_6b",
+    "blueprint_id": "bp_s1_file_6",
+    "variant": "b",
+    "scene": "S1",
+    "family_id": "file:source_notified",
+    "domain": "file",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "file.status",
+    "target_key": "archive.status",
+    "readable": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "writable": [
+      "archive.status"
+    ],
+    "env_only": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "initial_facts": [
+      {
+        "key": "file.status",
+        "value": "inbox",
+        "version": "v3"
+      },
+      {
+        "key": "file.owner",
+        "value": "bob",
+        "version": "v1"
+      },
+      {
+        "key": "file.bucket",
+        "value": "Bucket-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "file.status",
+        "value": "stored",
+        "version": "v4",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "archive.status",
+        "right": "file.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "archive.status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 file.status 。写入目标 archive.status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_cross_7a",
+    "blueprint_id": "bp_s1_cross_7",
+    "variant": "a",
+    "scene": "S1",
+    "family_id": "cross:source_notified",
+    "domain": "cross",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "note.meeting_time",
+    "readable": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "writable": [
+      "note.meeting_time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "weekly",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "16:00",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.meeting_time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.meeting_time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 note.meeting_time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_cross_7b",
+    "blueprint_id": "bp_s1_cross_7",
+    "variant": "b",
+    "scene": "S1",
+    "family_id": "cross:source_notified",
+    "domain": "cross",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "note.meeting_time",
+    "readable": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "writable": [
+      "note.meeting_time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "13:00",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "daily",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-C",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "18:00",
+        "version": "v4",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.meeting_time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.meeting_time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 note.meeting_time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_meeting_8a",
+    "blueprint_id": "bp_s1_meeting_8",
+    "variant": "a",
+    "scene": "S1",
+    "family_id": "meeting:source_notified",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "attachment.name",
+        "value": "slides.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "16:00",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_meeting_8b",
+    "blueprint_id": "bp_s1_meeting_8",
+    "variant": "b",
+    "scene": "S1",
+    "family_id": "meeting:source_notified",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "09:30",
+        "version": "v3"
+      },
+      {
+        "key": "attachment.name",
+        "value": "notes.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "11:00",
+        "version": "v4",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_note_9a",
+    "blueprint_id": "bp_s1_note_9",
+    "variant": "a",
+    "scene": "S1",
+    "family_id": "note:source_notified",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "draft",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "alpha",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.status",
+        "value": "final",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s1_note_9b",
+    "blueprint_id": "bp_s1_note_9",
+    "variant": "b",
+    "scene": "S1",
+    "family_id": "note:source_notified",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_notified",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "open",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "gamma",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.status",
+        "value": "closed",
+        "version": "v4",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_meeting_a",
+    "blueprint_id": "bp_s2_meeting_0",
+    "variant": "a",
+    "scene": "S2",
+    "family_id": "meeting:unrelated_notified",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "attachment.name",
+        "value": "slides.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "attachment.name",
+        "value": "appendix.pdf",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_meeting_b",
+    "blueprint_id": "bp_s2_meeting_0",
+    "variant": "b",
+    "scene": "S2",
+    "family_id": "meeting:unrelated_notified",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "09:30",
+        "version": "v3"
+      },
+      {
+        "key": "attachment.name",
+        "value": "notes.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "attachment.name",
+        "value": "notes-final.pdf",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_note_a",
+    "blueprint_id": "bp_s2_note_1",
+    "variant": "a",
+    "scene": "S2",
+    "family_id": "note:unrelated_notified",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "draft",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "alpha",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.tag",
+        "value": "beta",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_note_b",
+    "blueprint_id": "bp_s2_note_1",
+    "variant": "b",
+    "scene": "S2",
+    "family_id": "note:unrelated_notified",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "open",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "gamma",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.tag",
+        "value": "delta",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_file_2a",
+    "blueprint_id": "bp_s2_file_2",
+    "variant": "a",
+    "scene": "S2",
+    "family_id": "file:unrelated_notified",
+    "domain": "file",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "file.status",
+    "target_key": "archive.status",
+    "readable": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "writable": [
+      "archive.status"
+    ],
+    "env_only": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "initial_facts": [
+      {
+        "key": "file.status",
+        "value": "pending",
+        "version": "v1"
+      },
+      {
+        "key": "file.owner",
+        "value": "alice",
+        "version": "v1"
+      },
+      {
+        "key": "file.bucket",
+        "value": "Bucket-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "file.owner",
+        "value": "carol",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "archive.status",
+        "right": "file.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "archive.status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 file.status 。写入目标 archive.status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_file_2b",
+    "blueprint_id": "bp_s2_file_2",
+    "variant": "b",
+    "scene": "S2",
+    "family_id": "file:unrelated_notified",
+    "domain": "file",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "file.status",
+    "target_key": "archive.status",
+    "readable": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "writable": [
+      "archive.status"
+    ],
+    "env_only": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "initial_facts": [
+      {
+        "key": "file.status",
+        "value": "inbox",
+        "version": "v3"
+      },
+      {
+        "key": "file.owner",
+        "value": "bob",
+        "version": "v1"
+      },
+      {
+        "key": "file.bucket",
+        "value": "Bucket-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "file.owner",
+        "value": "dave",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "archive.status",
+        "right": "file.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "archive.status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 file.status 。写入目标 archive.status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_cross_3a",
+    "blueprint_id": "bp_s2_cross_3",
+    "variant": "a",
+    "scene": "S2",
+    "family_id": "cross:unrelated_notified",
+    "domain": "cross",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "note.meeting_time",
+    "readable": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "writable": [
+      "note.meeting_time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "weekly",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.tag",
+        "value": "monthly",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.meeting_time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.meeting_time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 note.meeting_time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_cross_3b",
+    "blueprint_id": "bp_s2_cross_3",
+    "variant": "b",
+    "scene": "S2",
+    "family_id": "cross:unrelated_notified",
+    "domain": "cross",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "note.meeting_time",
+    "readable": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "writable": [
+      "note.meeting_time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "13:00",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "daily",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-C",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.tag",
+        "value": "yearly",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.meeting_time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.meeting_time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 note.meeting_time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_meeting_4a",
+    "blueprint_id": "bp_s2_meeting_4",
+    "variant": "a",
+    "scene": "S2",
+    "family_id": "meeting:unrelated_notified",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "attachment.name",
+        "value": "slides.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "attachment.name",
+        "value": "appendix.pdf",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_meeting_4b",
+    "blueprint_id": "bp_s2_meeting_4",
+    "variant": "b",
+    "scene": "S2",
+    "family_id": "meeting:unrelated_notified",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "09:30",
+        "version": "v3"
+      },
+      {
+        "key": "attachment.name",
+        "value": "notes.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "attachment.name",
+        "value": "notes-final.pdf",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_note_5a",
+    "blueprint_id": "bp_s2_note_5",
+    "variant": "a",
+    "scene": "S2",
+    "family_id": "note:unrelated_notified",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "draft",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "alpha",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.tag",
+        "value": "beta",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_note_5b",
+    "blueprint_id": "bp_s2_note_5",
+    "variant": "b",
+    "scene": "S2",
+    "family_id": "note:unrelated_notified",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "open",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "gamma",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.tag",
+        "value": "delta",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_file_6a",
+    "blueprint_id": "bp_s2_file_6",
+    "variant": "a",
+    "scene": "S2",
+    "family_id": "file:unrelated_notified",
+    "domain": "file",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "file.status",
+    "target_key": "archive.status",
+    "readable": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "writable": [
+      "archive.status"
+    ],
+    "env_only": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "initial_facts": [
+      {
+        "key": "file.status",
+        "value": "pending",
+        "version": "v1"
+      },
+      {
+        "key": "file.owner",
+        "value": "alice",
+        "version": "v1"
+      },
+      {
+        "key": "file.bucket",
+        "value": "Bucket-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "file.owner",
+        "value": "carol",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "archive.status",
+        "right": "file.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "archive.status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 file.status 。写入目标 archive.status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_file_6b",
+    "blueprint_id": "bp_s2_file_6",
+    "variant": "b",
+    "scene": "S2",
+    "family_id": "file:unrelated_notified",
+    "domain": "file",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "file.status",
+    "target_key": "archive.status",
+    "readable": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "writable": [
+      "archive.status"
+    ],
+    "env_only": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "initial_facts": [
+      {
+        "key": "file.status",
+        "value": "inbox",
+        "version": "v3"
+      },
+      {
+        "key": "file.owner",
+        "value": "bob",
+        "version": "v1"
+      },
+      {
+        "key": "file.bucket",
+        "value": "Bucket-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "file.owner",
+        "value": "dave",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "archive.status",
+        "right": "file.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "archive.status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 file.status 。写入目标 archive.status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_cross_7a",
+    "blueprint_id": "bp_s2_cross_7",
+    "variant": "a",
+    "scene": "S2",
+    "family_id": "cross:unrelated_notified",
+    "domain": "cross",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "note.meeting_time",
+    "readable": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "writable": [
+      "note.meeting_time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "weekly",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.tag",
+        "value": "monthly",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.meeting_time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.meeting_time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 note.meeting_time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_cross_7b",
+    "blueprint_id": "bp_s2_cross_7",
+    "variant": "b",
+    "scene": "S2",
+    "family_id": "cross:unrelated_notified",
+    "domain": "cross",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "note.meeting_time",
+    "readable": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "writable": [
+      "note.meeting_time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "13:00",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "daily",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-C",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.tag",
+        "value": "yearly",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.meeting_time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.meeting_time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 note.meeting_time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_meeting_8a",
+    "blueprint_id": "bp_s2_meeting_8",
+    "variant": "a",
+    "scene": "S2",
+    "family_id": "meeting:unrelated_notified",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "attachment.name",
+        "value": "slides.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "attachment.name",
+        "value": "appendix.pdf",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_meeting_8b",
+    "blueprint_id": "bp_s2_meeting_8",
+    "variant": "b",
+    "scene": "S2",
+    "family_id": "meeting:unrelated_notified",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "09:30",
+        "version": "v3"
+      },
+      {
+        "key": "attachment.name",
+        "value": "notes.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "attachment.name",
+        "value": "notes-final.pdf",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_note_9a",
+    "blueprint_id": "bp_s2_note_9",
+    "variant": "a",
+    "scene": "S2",
+    "family_id": "note:unrelated_notified",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "draft",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "alpha",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.tag",
+        "value": "beta",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s2_note_9b",
+    "blueprint_id": "bp_s2_note_9",
+    "variant": "b",
+    "scene": "S2",
+    "family_id": "note:unrelated_notified",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "unrelated_notified",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "open",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "gamma",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.tag",
+        "value": "delta",
+        "version": "v2",
+        "notify": true
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_meeting_a",
+    "blueprint_id": "bp_s3_meeting_0",
+    "variant": "a",
+    "scene": "S3",
+    "family_id": "meeting:source_silent",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "attachment.name",
+        "value": "slides.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "16:00",
+        "version": "v2",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_meeting_b",
+    "blueprint_id": "bp_s3_meeting_0",
+    "variant": "b",
+    "scene": "S3",
+    "family_id": "meeting:source_silent",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "09:30",
+        "version": "v3"
+      },
+      {
+        "key": "attachment.name",
+        "value": "notes.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "11:00",
+        "version": "v4",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_note_a",
+    "blueprint_id": "bp_s3_note_1",
+    "variant": "a",
+    "scene": "S3",
+    "family_id": "note:source_silent",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "draft",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "alpha",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.status",
+        "value": "final",
+        "version": "v2",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_note_b",
+    "blueprint_id": "bp_s3_note_1",
+    "variant": "b",
+    "scene": "S3",
+    "family_id": "note:source_silent",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "open",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "gamma",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.status",
+        "value": "closed",
+        "version": "v4",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_file_2a",
+    "blueprint_id": "bp_s3_file_2",
+    "variant": "a",
+    "scene": "S3",
+    "family_id": "file:source_silent",
+    "domain": "file",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "file.status",
+    "target_key": "archive.status",
+    "readable": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "writable": [
+      "archive.status"
+    ],
+    "env_only": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "initial_facts": [
+      {
+        "key": "file.status",
+        "value": "pending",
+        "version": "v1"
+      },
+      {
+        "key": "file.owner",
+        "value": "alice",
+        "version": "v1"
+      },
+      {
+        "key": "file.bucket",
+        "value": "Bucket-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "file.status",
+        "value": "ready",
+        "version": "v2",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "archive.status",
+        "right": "file.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "archive.status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 file.status 。写入目标 archive.status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_file_2b",
+    "blueprint_id": "bp_s3_file_2",
+    "variant": "b",
+    "scene": "S3",
+    "family_id": "file:source_silent",
+    "domain": "file",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "file.status",
+    "target_key": "archive.status",
+    "readable": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "writable": [
+      "archive.status"
+    ],
+    "env_only": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "initial_facts": [
+      {
+        "key": "file.status",
+        "value": "inbox",
+        "version": "v3"
+      },
+      {
+        "key": "file.owner",
+        "value": "bob",
+        "version": "v1"
+      },
+      {
+        "key": "file.bucket",
+        "value": "Bucket-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "file.status",
+        "value": "stored",
+        "version": "v4",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "archive.status",
+        "right": "file.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "archive.status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 file.status 。写入目标 archive.status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_cross_3a",
+    "blueprint_id": "bp_s3_cross_3",
+    "variant": "a",
+    "scene": "S3",
+    "family_id": "cross:source_silent",
+    "domain": "cross",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "note.meeting_time",
+    "readable": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "writable": [
+      "note.meeting_time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "weekly",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "16:00",
+        "version": "v2",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.meeting_time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.meeting_time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 note.meeting_time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_cross_3b",
+    "blueprint_id": "bp_s3_cross_3",
+    "variant": "b",
+    "scene": "S3",
+    "family_id": "cross:source_silent",
+    "domain": "cross",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "note.meeting_time",
+    "readable": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "writable": [
+      "note.meeting_time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "13:00",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "daily",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-C",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "18:00",
+        "version": "v4",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.meeting_time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.meeting_time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 note.meeting_time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_meeting_4a",
+    "blueprint_id": "bp_s3_meeting_4",
+    "variant": "a",
+    "scene": "S3",
+    "family_id": "meeting:source_silent",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "attachment.name",
+        "value": "slides.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "16:00",
+        "version": "v2",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_meeting_4b",
+    "blueprint_id": "bp_s3_meeting_4",
+    "variant": "b",
+    "scene": "S3",
+    "family_id": "meeting:source_silent",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "09:30",
+        "version": "v3"
+      },
+      {
+        "key": "attachment.name",
+        "value": "notes.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "11:00",
+        "version": "v4",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_note_5a",
+    "blueprint_id": "bp_s3_note_5",
+    "variant": "a",
+    "scene": "S3",
+    "family_id": "note:source_silent",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "draft",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "alpha",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.status",
+        "value": "final",
+        "version": "v2",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_note_5b",
+    "blueprint_id": "bp_s3_note_5",
+    "variant": "b",
+    "scene": "S3",
+    "family_id": "note:source_silent",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "open",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "gamma",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.status",
+        "value": "closed",
+        "version": "v4",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_file_6a",
+    "blueprint_id": "bp_s3_file_6",
+    "variant": "a",
+    "scene": "S3",
+    "family_id": "file:source_silent",
+    "domain": "file",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "file.status",
+    "target_key": "archive.status",
+    "readable": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "writable": [
+      "archive.status"
+    ],
+    "env_only": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "initial_facts": [
+      {
+        "key": "file.status",
+        "value": "pending",
+        "version": "v1"
+      },
+      {
+        "key": "file.owner",
+        "value": "alice",
+        "version": "v1"
+      },
+      {
+        "key": "file.bucket",
+        "value": "Bucket-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "file.status",
+        "value": "ready",
+        "version": "v2",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "archive.status",
+        "right": "file.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "archive.status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 file.status 。写入目标 archive.status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_file_6b",
+    "blueprint_id": "bp_s3_file_6",
+    "variant": "b",
+    "scene": "S3",
+    "family_id": "file:source_silent",
+    "domain": "file",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "file.status",
+    "target_key": "archive.status",
+    "readable": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "writable": [
+      "archive.status"
+    ],
+    "env_only": [
+      "file.status",
+      "file.owner",
+      "file.bucket"
+    ],
+    "initial_facts": [
+      {
+        "key": "file.status",
+        "value": "inbox",
+        "version": "v3"
+      },
+      {
+        "key": "file.owner",
+        "value": "bob",
+        "version": "v1"
+      },
+      {
+        "key": "file.bucket",
+        "value": "Bucket-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "file.status",
+        "value": "stored",
+        "version": "v4",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "archive.status",
+        "right": "file.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "archive.status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 file.status 。写入目标 archive.status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_cross_7a",
+    "blueprint_id": "bp_s3_cross_7",
+    "variant": "a",
+    "scene": "S3",
+    "family_id": "cross:source_silent",
+    "domain": "cross",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "note.meeting_time",
+    "readable": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "writable": [
+      "note.meeting_time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "weekly",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "16:00",
+        "version": "v2",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.meeting_time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.meeting_time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 note.meeting_time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_cross_7b",
+    "blueprint_id": "bp_s3_cross_7",
+    "variant": "b",
+    "scene": "S3",
+    "family_id": "cross:source_silent",
+    "domain": "cross",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "note.meeting_time",
+    "readable": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "writable": [
+      "note.meeting_time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "note.tag",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "13:00",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "daily",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-C",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "18:00",
+        "version": "v4",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.meeting_time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.meeting_time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 note.meeting_time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_meeting_8a",
+    "blueprint_id": "bp_s3_meeting_8",
+    "variant": "a",
+    "scene": "S3",
+    "family_id": "meeting:source_silent",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "15:00",
+        "version": "v1"
+      },
+      {
+        "key": "attachment.name",
+        "value": "slides.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "16:00",
+        "version": "v2",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_meeting_8b",
+    "blueprint_id": "bp_s3_meeting_8",
+    "variant": "b",
+    "scene": "S3",
+    "family_id": "meeting:source_silent",
+    "domain": "meeting",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "meeting.time",
+    "target_key": "reminder.time",
+    "readable": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "writable": [
+      "reminder.time"
+    ],
+    "env_only": [
+      "meeting.time",
+      "attachment.name",
+      "meeting.room"
+    ],
+    "initial_facts": [
+      {
+        "key": "meeting.time",
+        "value": "09:30",
+        "version": "v3"
+      },
+      {
+        "key": "attachment.name",
+        "value": "notes.pdf",
+        "version": "v1"
+      },
+      {
+        "key": "meeting.room",
+        "value": "Room-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "meeting.time",
+        "value": "11:00",
+        "version": "v4",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "reminder.time",
+        "right": "meeting.time"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "reminder.time",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_note_9a",
+    "blueprint_id": "bp_s3_note_9",
+    "variant": "a",
+    "scene": "S3",
+    "family_id": "note:source_silent",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "draft",
+        "version": "v1"
+      },
+      {
+        "key": "note.tag",
+        "value": "alpha",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-A",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.status",
+        "value": "final",
+        "version": "v2",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  },
+  {
+    "task_id": "s3_note_9b",
+    "blueprint_id": "bp_s3_note_9",
+    "variant": "b",
+    "scene": "S3",
+    "family_id": "note:source_silent",
+    "domain": "note",
+    "goal_structure": "copy_final_source_to_target",
+    "dependency_structure": "read_then_write",
+    "event_type": "source_silent",
+    "constraint_type": "single_target",
+    "source_key": "note.status",
+    "target_key": "note.saved_status",
+    "readable": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "writable": [
+      "note.saved_status"
+    ],
+    "env_only": [
+      "note.status",
+      "note.tag",
+      "note.folder"
+    ],
+    "initial_facts": [
+      {
+        "key": "note.status",
+        "value": "open",
+        "version": "v3"
+      },
+      {
+        "key": "note.tag",
+        "value": "gamma",
+        "version": "v1"
+      },
+      {
+        "key": "note.folder",
+        "value": "Folder-B",
+        "version": "v1"
+      }
+    ],
+    "events": [
+      {
+        "checkpoint": "after_first_source_read",
+        "fact_key": "note.status",
+        "value": "closed",
+        "version": "v4",
+        "notify": false
+      }
+    ],
+    "checkpoint": "after_first_source_read",
+    "success": [
+      {
+        "type": "equals_fact",
+        "left": "note.saved_status",
+        "right": "note.status"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "count_equals",
+        "key": "note.saved_status",
+        "count": 1
+      }
+    ],
+    "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+  }
+]

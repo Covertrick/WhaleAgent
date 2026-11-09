@@ -1,0 +1,36 @@
+schema: statebench-experiment-v1
+temperature: 0
+temperature_note: "温度为 0 不保证线上可复现。"
+max_rounds: 6
+tool_whitelist:
+  - read_fact
+  - write_fact
+  - list_facts
+budget:
+  max_tool_calls: 8
+  observe: 3
+  replan: 2
+  observe_fallback: 4
+budget_semantics:
+  check: before_execute
+  planned_read: {observe: 1, tool: 1, decision: 1}
+  observe_read: {observe: 1, tool: 1, decision: 1}
+  write: {observe: 0, tool: 1, decision: 1}
+  replan: {observe: 0, tool: 0, decision: 1}
+  recover: {observe: 0, tool: 0, decision: 1}
+  scorer: {observe: 0, tool: 0, decision: 0}
+  environment_event: {observe: 0, tool: 0, decision: 0}
+  failed_request_counts: true
+  local_reject_counts_as_tool: false
+risk:
+  active: before_irreversible
+  candidates:
+    - mode: before_irreversible
+    - mode: evidence_age
+      max_age: 10
+  selection: "验证集任务成功率较高者胜出；相同则观察次数较少者胜出；仍相同则取 before_irreversible。胜出规则在主预算下至少 4 条因预算停止时，改用观察预算 4 并重选一次。"
+model_env: MODEL_NAME
+default_llm: mock
+live_env: STATEBENCH_LLM
+comparison_baseline: scripted_react_loop
+model_cost_for_mock: not_applicable

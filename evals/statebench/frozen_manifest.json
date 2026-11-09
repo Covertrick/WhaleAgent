@@ -1,0 +1,15 @@
+{
+  "schema_version": "statebench-v1",
+  "tasks_sha256": "c15a011487989f8a33e33903ea75da61d5bc6c95d30bfdd546f8ad78b17e7223",
+  "splits_sha256": "f00ab25addc034bee42c0feaf1bbc43c0fffc2df13292cf2abe55010e2e2d56f",
+  "fixtures_sha256": "1567c809325389f3f62f9ccc802135fc0399b0f06883e42edae4fff6eea860e9",
+  "scoring_contract_sha256": "7dec0630a1aacbce82ecfdb74cd50d5e41eb77de979a4409aae2a493d4301c63",
+  "checkpoint_contract_sha256": "71269aae0111d5e87b1761bed68c09a27586f6132d30698e1b50ffd4821c88f7",
+  "generator_seed": "20261109",
+  "git_commit": "eda572c6985bddf438984fd9f6fbbabc91f912d1",
+  "execution": {
+    "code_commit": null,
+    "model_config": null,
+    "prompt_sha256": null
+  }
+}

@@ -29,7 +29,7 @@ SYSTEM_BASE = """你是挂在 QQ 上的 DeepSeek 鲸鱼娘（自研 Agent Loop�
    - category：exam / meeting / activity / todo
 4. 文件资产库：search_and_send_file / list_my_files（支持「上次那个PDF」自然语言）
 5. 联网：web_search；fetch_url 打开链接
-6. Obsidian Vault：search_vault / write_vault_note（需 QQ_VAULT_PATH）
+6. Obsidian Vault：search_vault / write_vault_note / write_vault_draft（需 QQ_VAULT_PATH）。已核实的原文用 write_vault_draft，不要再让模型扩写。
 7. 用户画像会注入；勿背诵整段画像，只在相关时自然用
 
 「联网硬性」：

@@ -65,6 +65,47 @@ def _ensure_frontmatter(md: str, topic: str) -> str:
     return "\n".join(lines) + "\n\n" + (body or "").strip() + "\n"
 
 
+def write_draft_note(topic: str, body: str, *, expected_content_sha256: str = "") -> str:
+    """按调用方给出的正文落盘。不调用模型，也不把内容哈希编成版本号。"""
+    import hashlib
+
+    if not vault_enabled():
+        return "Error: Vault 未启用，草稿没有写入。"
+    topic = (topic or "").strip()
+    body = (body or "").strip()
+    if not topic or not body:
+        return "Error: 草稿缺少主题或正文。"
+    day = datetime.now().strftime("%Y-%m-%d")
+    rel = Path(VAULT_NOTES_SUBDIR) / f"{day}-{_slug(topic)}-draft.md"
+    try:
+        target = safe_vault_path(rel)
+    except ValueError as exc:
+        return f"Error: {exc}"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    expected = (expected_content_sha256 or "").strip().lower()
+    if expected:
+        if not target.exists():
+            return "Error: 目标修订不存在，条件写入已拒绝。"
+        current = hashlib.sha256(target.read_bytes()).hexdigest()
+        if current != expected:
+            return "Error: 目标修订已经变化，旧正文没有写入。"
+        return f"已存在相同修订，未再次写入：{target.name}\ncontent_sha256: {current}"
+    if target.exists():
+        stamp = datetime.now().strftime("%H%M%S")
+        target = safe_vault_path(Path(VAULT_NOTES_SUBDIR) / f"{day}-{_slug(topic)}-draft-{stamp}.md")
+    text = _ensure_frontmatter(body, topic)
+    target.write_text(text, encoding="utf-8")
+    digest = hashlib.sha256(target.read_bytes()).hexdigest()
+    index_file(target)
+    root = vault_root()
+    rel_s = str(target.relative_to(root)).replace("\\", "/") if root else str(target)
+    return (
+        f"已写入 Vault：{rel_s}\n"
+        f"content_sha256: {digest}\n"
+        "正文按本次调用保存。内容哈希只标识这一份文件，不能当作可排序版本。"
+    )
+
+
 def generate_and_write_note(topic: str, *, extra: str = "") -> str:
     """根据主题生成笔记并写入 Vault。"""
     if not vault_enabled():

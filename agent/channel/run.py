@@ -1,15 +1,18 @@
-"""QQ 频道 → core.loop 的绞杀入口。
+"""QQ 频道入口。
 
-只注入 tools.qq（无 bash/edit/Task DAG/MCP）。
-依赖：channel.run → core.loop ← tools.qq（单向）。
+打开 Run 后选定一次 Policy 并冻结，再进入同一个 Engine。
+项目资料协同用 EGAA，其它消息用 ReAct。两条路径都只注入 tools.qq。
+冻结评测不经过本入口，见 evals.statebench。
 """
 
 from __future__ import annotations
 
+from agent.application.workflow import project_sync_requested, run_project_sync
 from agent.channel.context import ChatContext
 from agent.channel.prompts import build_system_prompt
 from agent.channel.trust import wrap_untrusted
 from agent.core.loop import agent_loop
+from agent.harness.adapters import HarnessExecutorAdapter
 from agent.harness.effect import RunStatus
 from agent.harness.runtime import get_runtime
 from agent.search import extract_urls, fetch_urls_from_text
@@ -53,6 +56,7 @@ def run_qq_agent(
         require_contract=True,
     )
     tools, handlers = build_tools(ctx)
+    executor = HarnessExecutorAdapter(handlers)
     system = build_system_prompt(ctx)
 
     def system_provider(_messages: list) -> str:
@@ -67,17 +71,24 @@ def run_qq_agent(
     ]
 
     try:
-        reply = agent_loop(
-            messages,
-            active_request=ctx.text,
-            tools=tools,
-            handlers=handlers,
-            system_provider=system_provider,
-            use_mcp=False,
-            extract_memory=False,  # QQ 长期记忆走 save_memory，不用 Coding MEMORY.md
-            todo_reminder=False,
-            max_rounds=max_rounds,
-        )
+        if project_sync_requested(ctx.text):
+            runtime.bind_policy(run, "egaa", "2")
+            report = run_project_sync(executor, user_text=user_content, mode="live")
+            reply = report.reply
+        else:
+            runtime.bind_policy(run, "react", "1")
+            reply = agent_loop(
+                messages,
+                active_request=ctx.text,
+                tools=tools,
+                handlers=handlers,
+                system_provider=system_provider,
+                use_mcp=False,
+                extract_memory=False,  # QQ 长期记忆走 save_memory，不用 Coding MEMORY.md
+                todo_reminder=False,
+                max_rounds=max_rounds,
+                executor=executor,
+            )
     except Exception as e:
         runtime.finish(run, status=RunStatus.FAILED, error=str(e))
         raise

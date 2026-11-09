@@ -2,11 +2,24 @@
 
 from __future__ import annotations
 
+import inspect
 from pathlib import Path
 from typing import Any, Callable
 
 from agent.harness.sandbox.ast_sandbox import run_ast
 from agent.harness.sandbox.process_sandbox import SandboxResult, run_process
+
+
+def _accepted_kwargs(handler: Callable[..., str], arguments: dict) -> dict:
+    """operation_id 只传给声明了该参数的工具，避免旧 handler 报错。"""
+    try:
+        signature = inspect.signature(handler)
+    except (TypeError, ValueError):
+        arguments.pop("operation_id", None)
+        return arguments
+    if any(item.kind is inspect.Parameter.VAR_KEYWORD for item in signature.parameters.values()):
+        return arguments
+    return {key: value for key, value in arguments.items() if key in signature.parameters}
 
 
 def _policy(snapshot: dict | None, fallback: str = "none") -> str:
@@ -63,6 +76,7 @@ def dispatch(
     call_args = dict(args)
     for key in ("run_in_background", "untrusted", "code", "script", "cwd", "timeout"):
         call_args.pop(key, None)
+    call_args = _accepted_kwargs(handler, call_args)
     output = str(handler(**call_args))
     try:
         from agent.harness.evolve.enforce import postcondition_verdict

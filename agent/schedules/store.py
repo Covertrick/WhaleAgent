@@ -134,6 +134,24 @@ class ScheduleStore:
             ),
         )
 
+    def task_by_operation_id(self, operation_id: str) -> ScheduleRecord | None:
+        """同一个业务操作 ID 只对应一条任务。空 ID 不参与去重。"""
+        token = (operation_id or "").strip()[:80]
+        if not token:
+            return None
+        with self._lock:
+            conn = self._connect()
+            try:
+                row = conn.execute(
+                    "SELECT * FROM schedules WHERE role = 'task' AND label = ? LIMIT 1",
+                    (token,),
+                ).fetchone()
+            finally:
+                conn.close()
+        if row is None:
+            return None
+        return self._row_to_record(row)
+
     def create_task_with_reminders(
         self,
         *,
@@ -143,11 +161,15 @@ class ScheduleStore:
         due_at: str,
         category: str = "todo",
         channel: str = "private",
+        operation_id: str = "",
     ) -> tuple[ScheduleRecord, list[ScheduleRecord]]:
         """创建任务 + 按类别展开的多点催办；返回 (任务, 催办列表含到点)。"""
         title = (title or "").strip()
         if not title:
             raise ValueError("行程标题不能为空")
+        existing = self.task_by_operation_id(operation_id)
+        if existing is not None:
+            return existing, []
         category = normalize_category(category)
         due_iso = _normalize_iso(due_at)
         due_dt = datetime.fromisoformat(due_iso)
@@ -172,7 +194,7 @@ class ScheduleStore:
             category=category,
             parent_id="",
             role="task",
-            label="",
+            label=(operation_id or "")[:80],
         )
         ticks: list[ScheduleRecord] = []
         for label, when in plan:

@@ -1,0 +1,61 @@
+{
+  "task_id": "s0_note_a",
+  "blueprint_id": "bp_s0_note_1",
+  "variant": "a",
+  "scene": "S0",
+  "family_id": "note:none",
+  "domain": "note",
+  "goal_structure": "copy_final_source_to_target",
+  "dependency_structure": "read_then_write",
+  "event_type": "none",
+  "constraint_type": "single_target",
+  "source_key": "note.status",
+  "target_key": "note.saved_status",
+  "readable": [
+    "note.status",
+    "note.tag",
+    "note.folder"
+  ],
+  "writable": [
+    "note.saved_status"
+  ],
+  "env_only": [
+    "note.status",
+    "note.tag",
+    "note.folder"
+  ],
+  "initial_facts": [
+    {
+      "key": "note.status",
+      "value": "draft",
+      "version": "v1"
+    },
+    {
+      "key": "note.tag",
+      "value": "alpha",
+      "version": "v1"
+    },
+    {
+      "key": "note.folder",
+      "value": "Folder-A",
+      "version": "v1"
+    }
+  ],
+  "events": [],
+  "checkpoint": "after_first_source_read",
+  "success": [
+    {
+      "type": "equals_fact",
+      "left": "note.saved_status",
+      "right": "note.status"
+    }
+  ],
+  "constraints": [
+    {
+      "type": "count_equals",
+      "key": "note.saved_status",
+      "count": 1
+    }
+  ],
+  "prompt": "来源事实 note.status 。写入目标 note.saved_status 。请先读取来源，再在下一轮把读到的值写入目标。"
+}

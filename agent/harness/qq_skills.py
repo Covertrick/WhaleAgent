@@ -34,7 +34,7 @@ QQ_SKILL_MANIFESTS: dict[str, SkillManifest] = {
         _m("delete_memory", EffectClass.IRREVERSIBLE, ["memory.write"], "删除记忆"),
         _m("synthesize_knowledge", EffectClass.RETRYABLE, ["memory.write"], "知识卡片"),
         _m("list_knowledge_cards", EffectClass.IDEMPOTENT, ["memory.read"], "列出卡片"),
-        _m("schedule_reminder", EffectClass.RETRYABLE, ["schedule.write"], "创建催办"),
+        _m("schedule_reminder", EffectClass.IRREVERSIBLE, ["schedule.write"], "创建催办"),
         _m("schedule_list", EffectClass.IDEMPOTENT, ["schedule.read"], "列出待办"),
         _m("schedule_done", EffectClass.IRREVERSIBLE, ["schedule.write"], "完成待办"),
         _m("schedule_cancel", EffectClass.IRREVERSIBLE, ["schedule.write"], "取消待办"),
@@ -46,6 +46,7 @@ QQ_SKILL_MANIFESTS: dict[str, SkillManifest] = {
         _m("search_and_send_file", EffectClass.IRREVERSIBLE, ["file.send"], "检索并发送"),
         _m("search_vault", EffectClass.IDEMPOTENT, ["vault.read"], "检索 Vault"),
         _m("write_vault_note", EffectClass.IRREVERSIBLE, ["vault.write"], "写入 Vault"),
+        _m("write_vault_draft", EffectClass.IRREVERSIBLE, ["vault.write"], "写入已核实草稿"),
     )
 }
 

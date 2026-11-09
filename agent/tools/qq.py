@@ -1,21 +1,24 @@
 """QQ 场景工具面（绞杀边界）：仅搜索 / 记忆 / 催办 / 文件。
 
 故意不包含 Coding 侧 bash / edit / Task DAG / MCP / todo_write。
-依赖方向：channel → core → tools.qq → knowledge|schedules|user_files。
+依赖方向：channel.run 把本模块的 handlers 注入 Harness 执行口，再进入 core.loop。
+本模块在运行时仍调用 knowledge / schedules / user_files；类型标注不在导入期引用 channel，避免和 channel.run 成环。
 """
 
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
-from typing import Callable
+from typing import TYPE_CHECKING, Callable
 
-from agent.channel.context import ChatContext
 from agent.harness.qq_skills import assert_covers_qq_tools
 from agent.knowledge import get_knowledge_store
 from agent.schedules import get_schedule_store
 from agent.schedules.rules import CATEGORY_LABELS
 from agent.search import fetch_url, web_search
 from agent.user_files import download_url, list_all_files, list_files
+
+if TYPE_CHECKING:
+    from agent.channel.context import ChatContext
 
 # QQ 路径白名单：冒烟/文档可对照，禁止混入 coding 工具
 QQ_TOOL_NAMES = frozenset(
@@ -39,6 +42,7 @@ QQ_TOOL_NAMES = frozenset(
         "search_and_send_file",
         "search_vault",
         "write_vault_note",
+        "write_vault_draft",
     }
 )
 FORBIDDEN_ON_QQ = frozenset(
@@ -246,6 +250,15 @@ def build_tools(ctx: ChatContext) -> tuple[list[dict], dict[str, Callable[..., s
             },
             ["topic"],
         ),
+        _fn(
+            "write_vault_draft",
+            "把已经核实过的待办草稿原样写入 Vault。不调用模型，也不把文件哈希当成版本号。",
+            {
+                "topic": {"type": "string", "description": "草稿标题"},
+                "body": {"type": "string", "description": "已核实的正文"},
+            },
+            ["topic", "body"],
+        ),
     ]
 
     def save_memory(
@@ -305,6 +318,7 @@ def build_tools(ctx: ChatContext) -> tuple[list[dict], dict[str, Callable[..., s
         category: str = "todo",
         notify_channel: str = "",
         remind_at: str = "",  # 兼容旧参数，忽略
+        operation_id: str = "",
     ) -> str:
         from agent.scheduler import get_reminder_scheduler
 
@@ -320,6 +334,7 @@ def build_tools(ctx: ChatContext) -> tuple[list[dict], dict[str, Callable[..., s
             due_at=due_at,
             category=category or "todo",
             channel=ch,
+            operation_id=operation_id,
         )
         sched = get_reminder_scheduler()
         if sched:
@@ -356,8 +371,9 @@ def build_tools(ctx: ChatContext) -> tuple[list[dict], dict[str, Callable[..., s
         lines = ["待办事项 list："]
         for i, s in enumerate(items, 1):
             cat = CATEGORY_LABELS.get(s.category, s.category)
+            operation = f" | operation_id={s.label}" if s.label else ""
             lines.append(
-                f"{i}. [{s.id}] [{cat}] {s.title} | 到期 {_fmt_local(s.due_at)} | {s.status}"
+                f"{i}. [{s.id}] [{cat}] {s.title} | 到期 {_fmt_local(s.due_at)} | {s.status}{operation}"
             )
         return "\n".join(lines)
 
@@ -514,6 +530,11 @@ def build_tools(ctx: ChatContext) -> tuple[list[dict], dict[str, Callable[..., s
 
         return generate_and_write_note(topic, extra=extra or "")
 
+    def write_vault_draft_tool(topic: str, body: str) -> str:
+        from agent.vault.writer import write_draft_note
+
+        return write_draft_note(topic, body)
+
     def _wrap_search(text: str) -> str:
         from agent.channel.trust import wrap_untrusted
 
@@ -546,6 +567,7 @@ def build_tools(ctx: ChatContext) -> tuple[list[dict], dict[str, Callable[..., s
         "search_and_send_file": search_and_send_file,
         "search_vault": search_vault_tool,
         "write_vault_note": write_vault_note_tool,
+        "write_vault_draft": write_vault_draft_tool,
     }
 
     names = {s["function"]["name"] for s in schemas}

@@ -22,6 +22,8 @@ NapCat*/
 
 # 评测：保留本地详细报告，入库汇总见 evals/SUMMARY.md
 evals/reports/
+evals/statebench/runs/
+evals/statebench/v3/runs/
 
 # IDE / OS
 .idea/

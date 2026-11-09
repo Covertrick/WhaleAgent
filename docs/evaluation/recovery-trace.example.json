@@ -1,0 +1,440 @@
+{
+  "cases": [
+    {
+      "name": "receipt_lost_then_operation_id_matches",
+      "schedule_reminder_calls": 1,
+      "operation_id": "int_337b0db32190",
+      "goal_verified": true,
+      "termination": "GOAL_MET",
+      "tool_order": [
+        "search_vault",
+        "search_vault",
+        "write_vault_draft",
+        "schedule_reminder",
+        "schedule_list"
+      ],
+      "traces": [
+        {
+          "run_id": "run_c34100b7e376",
+          "status": "unknown",
+          "channel": "qq",
+          "user_id": "7",
+          "group_id": "private",
+          "text": "帮我整理最近的项目会议资料，生成待办清单写进 Vault，根据最新截止时间创建提醒。\n遇到信息冲突先核实，完成后告诉我哪些操作成功、哪些还需要确认。",
+          "harness_rev": "base",
+          "error": "",
+          "reply": "项目资料协同做完了这一轮。\n已确认：待办草稿、截止提醒。\n草稿和提醒都对上了当前仍有效的证据。\n决策原因：PRECONDITIONS_HOLD → PRECONDITIONS_HOLD → PRECONDITIONS_HOLD → POTENTIALLY_STALE → PRECONDITIONS_HOLD → UNVERIFIED → GOAL_MET。",
+          "created_at": "2026-11-09T17:11:24.594838+00:00",
+          "updated_at": "2026-11-09T17:11:24.802774+00:00",
+          "intents": [
+            {
+              "intent_id": "int_74ccebbc266f",
+              "skill": "search_vault",
+              "version": "1.0.0",
+              "status": "succeeded",
+              "effect_class": "idempotent",
+              "recovery": "retry",
+              "result_digest": "EVIDENCE\nfact_key: project.materials\nsource_version: v1\nvalue: 纪要A\nsource_uri: vault://meeting\n",
+              "error": "",
+              "usage": {
+                "sandbox": "none",
+                "exit_code": 0,
+                "postcondition": true
+              }
+            },
+            {
+              "intent_id": "int_641e33f06449",
+              "skill": "search_vault",
+              "version": "1.0.0",
+              "status": "succeeded",
+              "effect_class": "idempotent",
+              "recovery": "retry",
+              "result_digest": "EVIDENCE\nfact_key: project.deadline\nsource_version: v1\nvalue: 2026-11-10T10:00:00+08:00\nsource_uri: vault://meeting#deadline\n",
+              "error": "",
+              "usage": {
+                "sandbox": "none",
+                "exit_code": 0,
+                "postcondition": true
+              }
+            },
+            {
+              "intent_id": "int_0e6bb34408db",
+              "skill": "write_vault_draft",
+              "version": "1.0.0",
+              "status": "succeeded",
+              "effect_class": "irreversible",
+              "recovery": "ask_user",
+              "result_digest": "已写入 Vault：notes/draft.md",
+              "error": "",
+              "usage": {
+                "sandbox": "none",
+                "exit_code": 0,
+                "postcondition": true
+              }
+            },
+            {
+              "intent_id": "int_337b0db32190",
+              "skill": "schedule_reminder",
+              "version": "1.0.0",
+              "status": "unknown",
+              "effect_class": "irreversible",
+              "recovery": "ask_user",
+              "result_digest": "UNKNOWN: timeout",
+              "error": "",
+              "usage": {
+                "sandbox": "none",
+                "exit_code": 0,
+                "postcondition": true
+              }
+            },
+            {
+              "intent_id": "int_bd8c2d5a1be7",
+              "skill": "schedule_list",
+              "version": "1.0.0",
+              "status": "succeeded",
+              "effect_class": "idempotent",
+              "recovery": "retry",
+              "result_digest": "待办事项 list：\n1. [sch1] [待办] 项目截止 | operation_id=int_337b0db32190",
+              "error": "",
+              "usage": {
+                "sandbox": "none",
+                "exit_code": 0,
+                "postcondition": true
+              }
+            }
+          ],
+          "decisions": [
+            {
+              "kind": "CONTINUE",
+              "reason_codes": [
+                "PRECONDITIONS_HOLD"
+              ],
+              "target_nodes": [
+                "read_materials"
+              ],
+              "observation_keys": [],
+              "notice_ids": [],
+              "goal_verified": false
+            },
+            {
+              "kind": "CONTINUE",
+              "reason_codes": [
+                "PRECONDITIONS_HOLD"
+              ],
+              "target_nodes": [
+                "read_deadline"
+              ],
+              "observation_keys": [],
+              "notice_ids": [],
+              "goal_verified": false
+            },
+            {
+              "kind": "CONTINUE",
+              "reason_codes": [
+                "PRECONDITIONS_HOLD"
+              ],
+              "target_nodes": [
+                "write_draft"
+              ],
+              "observation_keys": [],
+              "notice_ids": [],
+              "goal_verified": false
+            },
+            {
+              "kind": "OBSERVE",
+              "reason_codes": [
+                "POTENTIALLY_STALE"
+              ],
+              "target_nodes": [
+                "write_reminder"
+              ],
+              "observation_keys": [
+                "project.deadline"
+              ],
+              "notice_ids": [],
+              "goal_verified": false
+            },
+            {
+              "kind": "CONTINUE",
+              "reason_codes": [
+                "PRECONDITIONS_HOLD"
+              ],
+              "target_nodes": [
+                "write_reminder"
+              ],
+              "observation_keys": [],
+              "notice_ids": [],
+              "goal_verified": false
+            },
+            {
+              "kind": "OBSERVE",
+              "reason_codes": [
+                "UNVERIFIED"
+              ]
+            },
+            {
+              "kind": "STOP",
+              "reason_codes": [
+                "GOAL_MET"
+              ],
+              "target_nodes": [],
+              "observation_keys": [],
+              "notice_ids": [],
+              "goal_verified": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "same_title_different_operation_id_stays_unknown",
+      "schedule_reminder_calls": 1,
+      "goal_verified": false,
+      "termination": "UNVERIFIED",
+      "tool_order": [
+        "search_vault",
+        "search_vault",
+        "write_vault_draft",
+        "schedule_reminder",
+        "schedule_list"
+      ],
+      "traces": [
+        {
+          "run_id": "run_60c07d3dd57b",
+          "status": "unknown",
+          "channel": "qq",
+          "user_id": "8",
+          "group_id": "private",
+          "text": "帮我整理最近的项目会议资料，生成待办清单写进 Vault，根据最新截止时间创建提醒。\n遇到信息冲突先核实，完成后告诉我哪些操作成功、哪些还需要确认。",
+          "harness_rev": "base",
+          "error": "",
+          "reply": "项目资料协同做完了这一轮。\n已确认：待办草稿。\n还需要你确认：截止提醒。\n提醒那一步没有拿到确认回执，我没有再创建一次。\n决策原因：PRECONDITIONS_HOLD → PRECONDITIONS_HOLD → PRECONDITIONS_HOLD → POTENTIALLY_STALE → PRECONDITIONS_HOLD → UNVERIFIED。",
+          "created_at": "2026-11-09T17:11:24.848545+00:00",
+          "updated_at": "2026-11-09T17:11:25.045782+00:00",
+          "intents": [
+            {
+              "intent_id": "int_468e3e7b3ea1",
+              "skill": "search_vault",
+              "version": "1.0.0",
+              "status": "succeeded",
+              "effect_class": "idempotent",
+              "recovery": "retry",
+              "result_digest": "EVIDENCE\nfact_key: project.materials\nsource_version: v1\nvalue: 纪要A\nsource_uri: vault://meeting\n",
+              "error": "",
+              "usage": {
+                "sandbox": "none",
+                "exit_code": 0,
+                "postcondition": true
+              }
+            },
+            {
+              "intent_id": "int_a203f4abab5b",
+              "skill": "search_vault",
+              "version": "1.0.0",
+              "status": "succeeded",
+              "effect_class": "idempotent",
+              "recovery": "retry",
+              "result_digest": "EVIDENCE\nfact_key: project.deadline\nsource_version: v1\nvalue: 2026-11-10T10:00:00+08:00\nsource_uri: vault://meeting#deadline\n",
+              "error": "",
+              "usage": {
+                "sandbox": "none",
+                "exit_code": 0,
+                "postcondition": true
+              }
+            },
+            {
+              "intent_id": "int_45ab55b83d79",
+              "skill": "write_vault_draft",
+              "version": "1.0.0",
+              "status": "succeeded",
+              "effect_class": "irreversible",
+              "recovery": "ask_user",
+              "result_digest": "已写入 Vault：notes/draft.md",
+              "error": "",
+              "usage": {
+                "sandbox": "none",
+                "exit_code": 0,
+                "postcondition": true
+              }
+            },
+            {
+              "intent_id": "int_56913a3c1e0d",
+              "skill": "schedule_reminder",
+              "version": "1.0.0",
+              "status": "unknown",
+              "effect_class": "irreversible",
+              "recovery": "ask_user",
+              "result_digest": "UNKNOWN: timeout",
+              "error": "",
+              "usage": {
+                "sandbox": "none",
+                "exit_code": 0,
+                "postcondition": true
+              }
+            },
+            {
+              "intent_id": "int_57739c113c9c",
+              "skill": "schedule_list",
+              "version": "1.0.0",
+              "status": "succeeded",
+              "effect_class": "idempotent",
+              "recovery": "retry",
+              "result_digest": "待办事项 list：\n1. [sch9] [待办] 项目截止 | operation_id=int_other",
+              "error": "",
+              "usage": {
+                "sandbox": "none",
+                "exit_code": 0,
+                "postcondition": true
+              }
+            }
+          ],
+          "decisions": [
+            {
+              "kind": "CONTINUE",
+              "reason_codes": [
+                "PRECONDITIONS_HOLD"
+              ],
+              "target_nodes": [
+                "read_materials"
+              ],
+              "observation_keys": [],
+              "notice_ids": [],
+              "goal_verified": false
+            },
+            {
+              "kind": "CONTINUE",
+              "reason_codes": [
+                "PRECONDITIONS_HOLD"
+              ],
+              "target_nodes": [
+                "read_deadline"
+              ],
+              "observation_keys": [],
+              "notice_ids": [],
+              "goal_verified": false
+            },
+            {
+              "kind": "CONTINUE",
+              "reason_codes": [
+                "PRECONDITIONS_HOLD"
+              ],
+              "target_nodes": [
+                "write_draft"
+              ],
+              "observation_keys": [],
+              "notice_ids": [],
+              "goal_verified": false
+            },
+            {
+              "kind": "OBSERVE",
+              "reason_codes": [
+                "POTENTIALLY_STALE"
+              ],
+              "target_nodes": [
+                "write_reminder"
+              ],
+              "observation_keys": [
+                "project.deadline"
+              ],
+              "notice_ids": [],
+              "goal_verified": false
+            },
+            {
+              "kind": "CONTINUE",
+              "reason_codes": [
+                "PRECONDITIONS_HOLD"
+              ],
+              "target_nodes": [
+                "write_reminder"
+              ],
+              "observation_keys": [],
+              "notice_ids": [],
+              "goal_verified": false
+            },
+            {
+              "kind": "OBSERVE",
+              "reason_codes": [
+                "UNVERIFIED"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "timeout_handler_once",
+      "traces": [
+        {
+          "run_id": "run_4c8d53ca1774",
+          "status": "unknown",
+          "channel": "qq",
+          "user_id": "9",
+          "group_id": "private",
+          "text": "提醒",
+          "harness_rev": "base",
+          "error": "",
+          "reply": "",
+          "created_at": "2026-11-09T17:11:25.091148+00:00",
+          "updated_at": "2026-11-09T17:11:25.133761+00:00",
+          "intents": [
+            {
+              "intent_id": "int_83991a58e343",
+              "skill": "schedule_reminder",
+              "version": "1.0.0",
+              "status": "unknown",
+              "effect_class": "irreversible",
+              "recovery": "ask_user",
+              "result_digest": "lost receipt",
+              "error": "lost receipt",
+              "usage": {}
+            }
+          ],
+          "decisions": []
+        }
+      ]
+    },
+    {
+      "name": "restart_while_started",
+      "before_recovery": {
+        "run_id": "run_dd4d36b53866",
+        "run_status": "tool_running",
+        "intent_status": "started",
+        "recovery": "ask_user"
+      },
+      "first_recovery_count": 1,
+      "second_recovery_count": 0,
+      "notices": [
+        "「schedule_reminder」不确定有没有做成（可能已经发出或改过）。我不会自动再做一遍，你回我「已经好了」或「再来一次」。"
+      ],
+      "traces": [
+        {
+          "run_id": "run_dd4d36b53866",
+          "status": "unknown",
+          "channel": "qq",
+          "user_id": "10",
+          "group_id": "private",
+          "text": "提醒",
+          "harness_rev": "base",
+          "error": "存在未确认的工具副作用",
+          "reply": "",
+          "created_at": "2026-11-09T17:11:25.166940+00:00",
+          "updated_at": "2026-11-09T17:11:25.221049+00:00",
+          "intents": [
+            {
+              "intent_id": "int_79f0b8af39b7",
+              "skill": "schedule_reminder",
+              "version": "1.0.0",
+              "status": "unknown",
+              "effect_class": "irreversible",
+              "recovery": "ask_user",
+              "result_digest": "",
+              "error": "执行中断，结果未知",
+              "usage": {}
+            }
+          ],
+          "decisions": []
+        }
+      ]
+    }
+  ]
+}

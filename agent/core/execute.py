@@ -1,7 +1,11 @@
-"""工具执行：PreToolUse →（若处于 Harness Run）写 intent 账本 → handler → 收口。
+"""工具执行协调：PreToolUse →（若处于 Harness Run）写 intent 账本 → handler → 收口。
 
 QQ 生产路径要求 Skill 契约。缺契约直接拒绝，不调用 handler。
 执行前把意图刷成 STARTED；超时标 UNKNOWN，普通异常标 FAILED。
+沙箱与 postcondition 在 ``harness.executor.dispatch``，不在这里。
+
+``use_ledger=False`` 只给 Coding 执行口：即使线程上还有 Run，也不写 QQ 账本。
+默认 None 仍是「有当前 Run 才记账」。UNKNOWN 的不可逆动作不会因为这个参数自动重试。
 """
 
 from __future__ import annotations
@@ -18,12 +22,16 @@ def execute_tool(
     args: dict,
     handlers: dict,
     tool_call_id: str = "",
+    *,
+    use_ledger: bool | None = None,
 ) -> str:
     blocked = trigger_hook("PreToolUse", name, args)
     if blocked:
         return str(blocked)
 
     run = current_run()
+    if use_ledger is False:
+        run = None
     runtime = get_runtime() if run is not None else None
     intent: IntentRecord | None = None
     if run is not None and runtime is not None:
@@ -51,7 +59,10 @@ def execute_tool(
                 handler = get_skill_registry().handler(name, snap.get("version"))
             from agent.harness.executor import dispatch
 
-            output, usage = dispatch(name, dict(args or {}), handler, snap)
+            call_args = dict(args or {})
+            if intent is not None:
+                call_args["operation_id"] = intent.intent_id
+            output, usage = dispatch(name, call_args, handler, snap)
     except TimeoutError as e:
         if intent is not None and runtime is not None and run is not None:
             note =                     runtime.complete_intent(

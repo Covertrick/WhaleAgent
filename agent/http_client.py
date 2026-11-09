@@ -15,7 +15,8 @@ _LOOP: asyncio.AbstractEventLoop | None = None
 _THREAD: threading.Thread | None = None
 _ASYNC_CLIENT = None  # httpx.AsyncClient | None
 _SYNC_CLIENT = None  # httpx.Client | None
-_LOCK = threading.Lock()
+# get_async_client 持锁时会进入 _ensure_loop。普通 Lock 会在第一次模型请求上死锁。
+_LOCK = threading.RLock()
 _HTTPX_OK = False
 _UA = (
     "Mozilla/5.0 (compatible; TinyQQAgent/1.0) "

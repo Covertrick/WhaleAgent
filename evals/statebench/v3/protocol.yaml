@@ -1,0 +1,56 @@
+schema: whaleagent-eval-v3
+status: trial_only
+note: >
+  这是预注册的下一轮配置。预算还没在开发集冒烟后锁定。
+  仓库里目前只有 12 个结构不同的试验蓝图、24 条文本变体。
+  48 个蓝图和 96 条实例还没有写完，测试集也没有开放。
+
+dataset:
+  registered_blueprints: 48
+  variants_per_blueprint: 2
+  instantiated_blueprints: 12
+  instantiated_instances: 24
+  split_blueprints:
+    dev: 12
+    val: 12
+    test: 24
+
+model:
+  provider: deepseek
+  model_id: deepseek-flash
+  temperature: 0
+  record_actual_model_id: true
+
+policies:
+  primary:
+    - react
+    - egaa
+    - always_refresh
+  diagnostic:
+    - plan_only
+    - always_full_replan
+
+budgets:
+  max_decisions: null
+  max_tool_calls: null
+  max_observations: null
+  max_plan_calls: null
+
+analysis:
+  bootstrap_unit: blueprint_id
+  bootstrap_iterations: 5000
+  bootstrap_seed: 20261110
+  primary_comparison: egaa_vs_always_refresh
+
+safety:
+  prohibit_oracle_feedback: true
+  prohibit_duplicate_irreversible_effect: true
+  score_after_episode: true
+
+audit:
+  require_human_review: true
+  reviewer: developer
+  third_party: false
+  require_frozen_hashes: true
+  preserve_failed_episodes: true
+  allow_test_tuning: false

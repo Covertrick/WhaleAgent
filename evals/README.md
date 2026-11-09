@@ -1,5 +1,7 @@
 # 评测集（Evals）
 
+这里的 A–F 只验证 Coding Harness 的控制流。EGAA 的 v1 结果在 [docs/evaluation/egaa-v1-results.md](../docs/evaluation/egaa-v1-results.md)。两套结果不能混报。
+
 面向 Tiny QQ Agent 的量化评测：覆盖 A–F 六类维度。  
 模型：`.env` 中的 `MODEL_NAME`（当前预期 `qwen3.7-plus`）。
 

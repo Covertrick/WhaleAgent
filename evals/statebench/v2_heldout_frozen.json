@@ -1,0 +1,5 @@
+{
+  "sha256": "cb323e6b492c6e72095ac0e3a6a97bd5cde85daf36d9a198f5ee9d27b6270e9c",
+  "frozen_on": "2026-11-10",
+  "rule": "sha256 覆盖 v2_heldout_tasks.json 的原文。不一致就拒绝运行。"
+}

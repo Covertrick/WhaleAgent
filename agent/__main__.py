@@ -10,6 +10,7 @@ from __future__ import annotations
 import sys
 import time
 
+from agent.channel.async_ingress import OVERFLOW_MESSAGE, ingress_enabled, offer
 from agent.channel.client_ref import set_onebot_client
 from agent.channel.health import HealthMonitor
 from agent.channel.lifecycle import is_shutting_down, on_shutdown
@@ -86,8 +87,16 @@ def main() -> None:
     health: HealthMonitor | None = None
 
     def on_event(event: dict) -> None:
-        if router:
-            router.handle_event(event)
+        if not router:
+            return
+        if ingress_enabled():
+            accepted = offer(event, router.handle_event)
+            if accepted is None:
+                router.handle_event(event)
+            elif not accepted:
+                print(OVERFLOW_MESSAGE)
+            return
+        router.handle_event(event)
 
     client = OneBotClient(ws_url=cfg.ONEBOT_WS_URL, on_event=on_event)
     set_onebot_client(client)

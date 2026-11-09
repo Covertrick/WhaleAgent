@@ -98,6 +98,20 @@ class HarnessRuntime:
         _current.set(run)
         return run
 
+    def bind_policy(self, run: RunRecord, name: str, version: str) -> None:
+        """Run 开始后冻结策略。同一次 Run 不能改用另一种 Policy。"""
+        chosen = (name or "").strip()
+        pinned = (version or "").strip()
+        if not chosen or not pinned:
+            raise ValueError("policy_name 和 policy_version 都不能空")
+        if run.policy_name and (run.policy_name != chosen or run.policy_version != pinned):
+            raise RuntimeError(
+                f"Run {run.run_id} 已冻结为 {run.policy_name}@{run.policy_version}"
+            )
+        run.policy_name = chosen
+        run.policy_version = pinned
+        self.store.save(run)
+
     def set_status(self, run: RunRecord, status: RunStatus, *, error: str = "") -> None:
         run.status = status.value
         if error:

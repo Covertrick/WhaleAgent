@@ -19,7 +19,7 @@ SQLite（vault.db）+ 本地嵌入（与记忆共用 embedder）
 QQ「写一篇关于…的笔记」→ LLM 生成 MD → 安全写入 → Git commit
 ```
 
-**刻意未绑死 sqlite-vec**：当前与 `knowledge` 一样用 Python 余弦检索；接口留在 `VaultIndex`，装扩展后可替换存储层。
+块正文在 `vault.db`。`QQ_VECTOR_BACKEND=auto` 时同步到 `vector/` 的 sqlite-vec 索引；扩展加载失败则用 BLOB 加余弦。设为 `memory` / `off` 时不写这层索引。
 
 ### 配置
 
@@ -93,4 +93,4 @@ API（均需 Cookie / token）：`/api/me` `/api/schedules` `/api/knowledge` `/a
 
 1. 先开 Dashboard：`QQ_ADMIN_PORT` + `QQ_ADMIN_TUNNEL=cloudflare` → 私聊「打开控制台」
 2. 再挂 Vault：填 `QQ_VAULT_PATH` → `重建索引` → 试写一篇笔记
-3. 需要语义质量时再 `QQ_EMBEDDING_BACKEND=fastembed`
+3. 语义质量看 `QQ_FORCE_SEMANTIC` 和 `QQ_VECTOR_BACKEND`（默认优先 fastembed 与 sqlite-vec）

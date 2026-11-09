@@ -111,6 +111,8 @@ class RunRecord:
     guardrail_text: str = ""
     created_at: str = ""
     updated_at: str = ""
+    policy_name: str = ""
+    policy_version: str = ""
     intents: list[IntentRecord] = field(default_factory=list)
 
     def to_dict(self) -> dict:

@@ -1,0 +1,652 @@
+{
+  "model": "deepseek-flash",
+  "temperature": 0,
+  "max_rounds": 8,
+  "observe_budget": 6,
+  "tasks": 5,
+  "kind": "heldout_frozen_once",
+  "policy_version": {
+    "egaa": "2",
+    "react": "1"
+  },
+  "change": "read observation closes the read node; settled UNKNOWN is not read again for MISSING_EVIDENCE",
+  "complete": true,
+  "summary": [
+    {
+      "policy": "react",
+      "success": "3/5",
+      "success_strict": "3/5",
+      "stale_actions": 2,
+      "prompt_tokens": 10022,
+      "completion_tokens": 2627,
+      "reads": 10,
+      "elapsed_ms": 25287,
+      "completion_per_strict_success": 875.7,
+      "failure_reasons": [
+        "stale_action"
+      ],
+      "phases": {
+        "react": {
+          "prompt": 10022,
+          "completion": 2627,
+          "calls": 15
+        }
+      }
+    },
+    {
+      "policy": "egaa",
+      "success": "5/5",
+      "success_strict": "5/5",
+      "stale_actions": 0,
+      "prompt_tokens": 3218,
+      "completion_tokens": 18384,
+      "reads": 14,
+      "elapsed_ms": 111424,
+      "completion_per_strict_success": 3676.8,
+      "failure_reasons": [],
+      "phases": {
+        "plan": {
+          "prompt": 1440,
+          "completion": 12957,
+          "calls": 5
+        },
+        "extract": {
+          "prompt": 1778,
+          "completion": 5427,
+          "calls": 13
+        }
+      }
+    },
+    {
+      "policy": "always_refresh",
+      "success": "5/5",
+      "success_strict": "5/5",
+      "stale_actions": 0,
+      "prompt_tokens": 3752,
+      "completion_tokens": 19541,
+      "reads": 18,
+      "elapsed_ms": 120378,
+      "completion_per_strict_success": 3908.2,
+      "failure_reasons": [],
+      "phases": {
+        "plan": {
+          "prompt": 1440,
+          "completion": 10866,
+          "calls": 5
+        },
+        "extract": {
+          "prompt": 2312,
+          "completion": 8675,
+          "calls": 17
+        }
+      }
+    }
+  ],
+  "read_sequences_differ": [
+    "h_stable",
+    "h_shift",
+    "h_conflict",
+    "h_missing",
+    "h_two"
+  ],
+  "rows": [
+    {
+      "policy": "react",
+      "task_id": "h_stable",
+      "reply": "已完成。\n\n**会议待办（已写入草稿）**\n- 归档访谈录音 — 负责人：陈予\n\n**提醒**\n- 按 `2026-12-02T09:30:00+08:00` 创建（原样取自 deadline 资料）\n\n**关于时间一致性**：meeting 资料只记录了待办事项和负责人，未给出任何截止时间；deadline 资料给出了唯一的时间 `2026-12-02T09:30:00+08:00`。因此两份资料并不存在“时间不一致”的情况，我按该时间创建了提醒。请注意：如果你本意是“会议记录中必须也有明确时间才允许提醒”，那么这次提醒应视为不该创建，我可以据此撤回草稿中的相关说明。",
+      "tokens": {
+        "prompt": 2083,
+        "completion": 607,
+        "phases": {
+          "react": {
+            "prompt": 2083,
+            "completion": 607,
+            "calls": 3
+          }
+        }
+      },
+      "elapsed_ms": 6328,
+      "success": true,
+      "success_strict": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": "2026-12-02T09:30:00+08:00",
+      "draft": "会议待办\n\n1. 归档访谈录音 — 负责人：陈予\n\n备注：两份资料中仅 deadline 提供了明确截止时间（2026-12-02T09:30:00+08:00），会议记录未给出时间，两者无冲突。",
+      "reads": [
+        "meeting",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "egaa",
+      "task_id": "h_stable",
+      "plan_error": "",
+      "termination": "GOAL_MET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "POTENTIALLY_STALE",
+        "PRECONDITIONS_HOLD",
+        "GOAL_MET"
+      ],
+      "tokens": {
+        "prompt": 830,
+        "completion": 4708,
+        "phases": {
+          "plan": {
+            "prompt": 288,
+            "completion": 3251,
+            "calls": 1
+          },
+          "extract": {
+            "prompt": 542,
+            "completion": 1457,
+            "calls": 4
+          }
+        }
+      },
+      "elapsed_ms": 29270,
+      "success": true,
+      "success_strict": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": "2026-12-02T09:30:00+08:00",
+      "draft": "待办草稿\n- 归档访谈录音（负责人：陈予）\n来源：「待办：归档访谈录音。负责人：陈予。」",
+      "reads": [
+        "meeting",
+        "deadline",
+        "deadline",
+        "meeting"
+      ]
+    },
+    {
+      "policy": "always_refresh",
+      "task_id": "h_stable",
+      "plan_error": "",
+      "termination": "GOAL_MET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "ALWAYS_REFRESH",
+        "PRECONDITIONS_HOLD",
+        "ALWAYS_REFRESH",
+        "PRECONDITIONS_HOLD",
+        "GOAL_MET"
+      ],
+      "tokens": {
+        "prompt": 830,
+        "completion": 5742,
+        "phases": {
+          "plan": {
+            "prompt": 288,
+            "completion": 2337,
+            "calls": 1
+          },
+          "extract": {
+            "prompt": 542,
+            "completion": 3405,
+            "calls": 4
+          }
+        }
+      },
+      "elapsed_ms": 34490,
+      "success": true,
+      "success_strict": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": "2026-12-02T09:30:00+08:00",
+      "draft": "待办草稿\n- 归档访谈录音（负责人：陈予）\n来源：「待办：归档访谈录音。负责人：陈予。」",
+      "reads": [
+        "meeting",
+        "deadline",
+        "meeting",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "react",
+      "task_id": "h_shift",
+      "reply": "完成。三件事的结果：\n\n1. **会议待办已写入草稿**：`补齐数据集说明`，并附上“讨论了采样”的备注和截止时间。\n2. **提醒已创建**：`due_at = 2026-12-02T09:30:00+08:00`，该时间是 deadline 资料中的原文，未做任何格式改写。\n3. **时间冲突检查**：会议资料没有给出截止时间，deadline 资料给出了唯一的时间，两者之间不存在不一致，所以按规则创建了提醒。\n\n需要注意：会议记录内容很简短，只提到“补齐数据集说明”这一项待办，既没有负责人，也没有具体交付标准；如果实际还有其他待办事项，会议记录里没有体现，建议补充原始记录。",
+      "tokens": {
+        "prompt": 2040,
+        "completion": 576,
+        "phases": {
+          "react": {
+            "prompt": 2040,
+            "completion": 576,
+            "calls": 3
+          }
+        }
+      },
+      "elapsed_ms": 5066,
+      "success": false,
+      "success_strict": false,
+      "stale_action": true,
+      "failure_reasons": [
+        "stale_action"
+      ],
+      "reminder": "2026-12-02T09:30:00+08:00",
+      "draft": "会议待办\n\n- 补齐数据集说明\n\n备注：会议中讨论了采样相关内容。\n截止时间：2026-12-02T09:30:00+08:00（来自 deadline 资料）",
+      "reads": [
+        "meeting",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "egaa",
+      "task_id": "h_shift",
+      "plan_error": "",
+      "termination": "GOAL_MET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "POTENTIALLY_STALE",
+        "PRECONDITIONS_HOLD",
+        "GOAL_MET"
+      ],
+      "tokens": {
+        "prompt": 698,
+        "completion": 4594,
+        "phases": {
+          "plan": {
+            "prompt": 288,
+            "completion": 3222,
+            "calls": 1
+          },
+          "extract": {
+            "prompt": 410,
+            "completion": 1372,
+            "calls": 3
+          }
+        }
+      },
+      "elapsed_ms": 28045,
+      "success": true,
+      "success_strict": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": "2026-12-04T16:45:00+08:00",
+      "draft": "待办草稿\n- 补齐数据集说明（负责人：未写明）\n来源：「待办：补齐数据集说明。」",
+      "reads": [
+        "meeting",
+        "deadline",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "always_refresh",
+      "task_id": "h_shift",
+      "plan_error": "",
+      "termination": "GOAL_MET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "ALWAYS_REFRESH",
+        "PRECONDITIONS_HOLD",
+        "ALWAYS_REFRESH",
+        "PRECONDITIONS_HOLD",
+        "GOAL_MET"
+      ],
+      "tokens": {
+        "prompt": 827,
+        "completion": 3892,
+        "phases": {
+          "plan": {
+            "prompt": 288,
+            "completion": 2578,
+            "calls": 1
+          },
+          "extract": {
+            "prompt": 539,
+            "completion": 1314,
+            "calls": 4
+          }
+        }
+      },
+      "elapsed_ms": 24956,
+      "success": true,
+      "success_strict": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": "2026-12-04T16:45:00+08:00",
+      "draft": "待办草稿\n- 补齐数据集说明（负责人：未写明）\n来源：「待办：补齐数据集说明。」",
+      "reads": [
+        "meeting",
+        "deadline",
+        "meeting",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "react",
+      "task_id": "h_conflict",
+      "reply": "已完成读取和写入草稿，但**没有创建提醒**——因为两份资料的截止时间不一致。\n\n**会议待办（已写入草稿）**\n- 校对图表\n\n**截止时间冲突**\n| 来源 | 截止时间 |\n|---|---|\n| meeting（访谈记录） | 2026-12-02T09:30:00+08:00 |\n| deadline（另一份日程） | 2026-12-09T11:15:00+08:00 |\n\n虽然你提到“按最新截止时间”，但两份资料给出的时间不同，而规则要求时间不一致时不得创建提醒，所以我暂停了这一步，也没有按时间先后自行选定其中一份。请你确认以哪个时间为准，我再补建提醒。",
+      "tokens": {
+        "prompt": 1982,
+        "completion": 481,
+        "phases": {
+          "react": {
+            "prompt": 1982,
+            "completion": 481,
+            "calls": 3
+          }
+        }
+      },
+      "elapsed_ms": 4558,
+      "success": true,
+      "success_strict": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": null,
+      "draft": "待办事项（来源：访谈记录）\n1. 校对图表\n\n截止时间存在冲突，待确认：\n- 访谈记录（meeting）：2026-12-02T09:30:00+08:00\n- 另一份日程（deadline）：2026-12-09T11:15:00+08:00\n\n说明：两份资料的截止时间不一致，因此未创建提醒。请确认以哪个时间为准后再补建。\n",
+      "reads": [
+        "meeting",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "egaa",
+      "task_id": "h_conflict",
+      "plan_error": "",
+      "termination": "EVIDENCE_UNKNOWN",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "MISSING_EVIDENCE"
+      ],
+      "tokens": {
+        "prompt": 573,
+        "completion": 3846,
+        "phases": {
+          "plan": {
+            "prompt": 288,
+            "completion": 3012,
+            "calls": 1
+          },
+          "extract": {
+            "prompt": 285,
+            "completion": 834,
+            "calls": 2
+          }
+        }
+      },
+      "elapsed_ms": 22827,
+      "success": true,
+      "success_strict": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": null,
+      "draft": "待办草稿\n- 校对图表（负责人：未写明）\n来源：「待办：校对图表。截止时间：2026-12-02T09:30:00+08:00。」",
+      "reads": [
+        "meeting",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "always_refresh",
+      "task_id": "h_conflict",
+      "plan_error": "",
+      "termination": "EVIDENCE_UNKNOWN",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "ALWAYS_REFRESH",
+        "PRECONDITIONS_HOLD",
+        "MISSING_EVIDENCE"
+      ],
+      "tokens": {
+        "prompt": 718,
+        "completion": 3029,
+        "phases": {
+          "plan": {
+            "prompt": 288,
+            "completion": 1988,
+            "calls": 1
+          },
+          "extract": {
+            "prompt": 430,
+            "completion": 1041,
+            "calls": 3
+          }
+        }
+      },
+      "elapsed_ms": 18904,
+      "success": true,
+      "success_strict": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": null,
+      "draft": "待办草稿\n- 校对图表（负责人：未写明）\n来源：「待办：校对图表。截止时间：2026-12-02T09:30:00+08:00。」",
+      "reads": [
+        "meeting",
+        "deadline",
+        "meeting"
+      ]
+    },
+    {
+      "policy": "react",
+      "task_id": "h_missing",
+      "reply": "完成情况：\n\n**已做**\n- 读取 meeting 与 deadline 两份资料。\n- 把会议待办「整理问卷」写入草稿，并附上截止时间待定的说明。\n\n**未做（有意为之）**\n- 没有创建提醒。原因是 deadline 资料中没有给出任何时间，更没有出现 ISO8601 字符串；它只说明「下次例会再定提交时间」。既然没有可用的截止时间，就无法给出资料中原样出现的值，创建提醒会凭空编造时间，所以这次跳过。\n\n**需要你确认的一点**\n- 如果「下次例会」的时间在别处有明确记录，并对应一个 ISO8601 值，请把它发给我，我再补建提醒。",
+      "tokens": {
+        "prompt": 2009,
+        "completion": 571,
+        "phases": {
+          "react": {
+            "prompt": 2009,
+            "completion": 571,
+            "calls": 3
+          }
+        }
+      },
+      "elapsed_ms": 5217,
+      "success": true,
+      "success_strict": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": null,
+      "draft": "项目待办（来源：meeting 访谈记录）\n\n1. 整理问卷。\n\n备注：\n- 会议中还讨论了采样相关内容（记录中未形成明确待办）。\n- 截止时间：deadline 资料中未给出具体日期，仅注明「下次例会再定提交时间」，因此未创建提醒，待下次例会确定时间后再补。",
+      "reads": [
+        "meeting",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "egaa",
+      "task_id": "h_missing",
+      "plan_error": "",
+      "termination": "EVIDENCE_UNKNOWN",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "MISSING_EVIDENCE"
+      ],
+      "tokens": {
+        "prompt": 416,
+        "completion": 2036,
+        "phases": {
+          "plan": {
+            "prompt": 288,
+            "completion": 1593,
+            "calls": 1
+          },
+          "extract": {
+            "prompt": 128,
+            "completion": 443,
+            "calls": 1
+          }
+        }
+      },
+      "elapsed_ms": 11872,
+      "success": true,
+      "success_strict": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": null,
+      "draft": "待办草稿\n- 整理问卷（负责人：未写明）\n来源：「待办：整理问卷」",
+      "reads": [
+        "meeting",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "always_refresh",
+      "task_id": "h_missing",
+      "plan_error": "",
+      "termination": "EVIDENCE_UNKNOWN",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "ALWAYS_REFRESH",
+        "PRECONDITIONS_HOLD",
+        "MISSING_EVIDENCE"
+      ],
+      "tokens": {
+        "prompt": 544,
+        "completion": 3392,
+        "phases": {
+          "plan": {
+            "prompt": 288,
+            "completion": 2880,
+            "calls": 1
+          },
+          "extract": {
+            "prompt": 256,
+            "completion": 512,
+            "calls": 2
+          }
+        }
+      },
+      "elapsed_ms": 20155,
+      "success": true,
+      "success_strict": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": null,
+      "draft": "待办草稿\n- 整理问卷（负责人：未写明）\n来源：「待办：整理问卷」",
+      "reads": [
+        "meeting",
+        "deadline",
+        "meeting"
+      ]
+    },
+    {
+      "policy": "react",
+      "task_id": "h_two",
+      "reply": "已完成：\n\n- **草稿已写入**，含两条会议待办：\n  1. 补齐数据集说明\n  2. 复核图表\n- **提醒已创建**，截止时间 `2026-12-02T09:30:00+08:00`（原样取自 deadline 资料）。\n\n关于截止时间一致性：meeting 资料中只记录了待办，**未给出任何截止时间**，因此不存在两份资料时间冲突的情况，提醒正常创建。如果实际另有一处你没提供的截止时间来源，请告知，我可复核并调整。",
+      "tokens": {
+        "prompt": 1908,
+        "completion": 392,
+        "phases": {
+          "react": {
+            "prompt": 1908,
+            "completion": 392,
+            "calls": 3
+          }
+        }
+      },
+      "elapsed_ms": 4118,
+      "success": false,
+      "success_strict": false,
+      "stale_action": true,
+      "failure_reasons": [
+        "stale_action"
+      ],
+      "reminder": "2026-12-02T09:30:00+08:00",
+      "draft": "会议待办（来源：访谈记录）\n1. 补齐数据集说明\n2. 复核图表\n\n项目截止时间：2026-12-02T09:30:00+08:00（来源：deadline 资料）",
+      "reads": [
+        "meeting",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "egaa",
+      "task_id": "h_two",
+      "plan_error": "",
+      "termination": "GOAL_MET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "POTENTIALLY_STALE",
+        "PRECONDITIONS_HOLD",
+        "GOAL_MET"
+      ],
+      "tokens": {
+        "prompt": 701,
+        "completion": 3200,
+        "phases": {
+          "plan": {
+            "prompt": 288,
+            "completion": 1879,
+            "calls": 1
+          },
+          "extract": {
+            "prompt": 413,
+            "completion": 1321,
+            "calls": 3
+          }
+        }
+      },
+      "elapsed_ms": 19410,
+      "success": true,
+      "success_strict": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": "2026-12-04T16:45:00+08:00",
+      "draft": "待办草稿\n- 补齐数据集说明（负责人：未写明）\n- 复核图表（负责人：未写明）\n来源：「待办：补齐数据集说明。待办：复核图表。」",
+      "reads": [
+        "meeting",
+        "deadline",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "always_refresh",
+      "task_id": "h_two",
+      "plan_error": "",
+      "termination": "GOAL_MET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "ALWAYS_REFRESH",
+        "PRECONDITIONS_HOLD",
+        "ALWAYS_REFRESH",
+        "PRECONDITIONS_HOLD",
+        "GOAL_MET"
+      ],
+      "tokens": {
+        "prompt": 833,
+        "completion": 3486,
+        "phases": {
+          "plan": {
+            "prompt": 288,
+            "completion": 1083,
+            "calls": 1
+          },
+          "extract": {
+            "prompt": 545,
+            "completion": 2403,
+            "calls": 4
+          }
+        }
+      },
+      "elapsed_ms": 21873,
+      "success": true,
+      "success_strict": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": "2026-12-04T16:45:00+08:00",
+      "draft": "待办草稿\n- 补齐数据集说明（负责人：未写明）\n- 复核图表（负责人：未写明）\n来源：「待办：补齐数据集说明。待办：复核图表。」",
+      "reads": [
+        "meeting",
+        "deadline",
+        "meeting",
+        "deadline"
+      ]
+    }
+  ]
+}

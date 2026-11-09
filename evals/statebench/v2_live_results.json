@@ -1,0 +1,535 @@
+{
+  "model": "deepseek-flash",
+  "temperature": 0,
+  "tasks": 6,
+  "kind": "developer_authored_live_comparison",
+  "complete": true,
+  "summary": [
+    {
+      "policy": "react",
+      "success": "4/6",
+      "stale_actions": 2,
+      "prompt_tokens": 11812,
+      "completion_tokens": 2872,
+      "reads": 12,
+      "failure_reasons": [
+        "stale_action"
+      ]
+    },
+    {
+      "policy": "egaa",
+      "success": "4/6",
+      "stale_actions": 0,
+      "prompt_tokens": 9053,
+      "completion_tokens": 31798,
+      "reads": 27,
+      "failure_reasons": [
+        "draft_missing_todo",
+        "reminder_missing"
+      ]
+    },
+    {
+      "policy": "always_refresh",
+      "success": "5/6",
+      "stale_actions": 0,
+      "prompt_tokens": 4990,
+      "completion_tokens": 24912,
+      "reads": 29,
+      "failure_reasons": [
+        "draft_missing_todo"
+      ]
+    }
+  ],
+  "read_sequences_differ": [
+    "v2_stable",
+    "v2_shift",
+    "v2_owner",
+    "v2_two_todos"
+  ],
+  "rows": [
+    {
+      "policy": "react",
+      "task_id": "v2_stable",
+      "reply": "完成情况：\n\n- **读取资料**：meeting / deadline 两份均已读取。\n- **草稿**：已将会议待办「整理实验记录」写入草稿。\n- **提醒**：已按 `2026-11-20T10:00:00+08:00` 创建提醒。该时间原样取自 deadline 资料，是资料中唯一出现的 ISO8601 截止时间；会议纪要未给出截止时间，因此两份资料不存在截止时间不一致的情况。\n\n如果你希望在有具体截止时间前先暂缓提醒，或需要把会议中的「进度讨论」内容也整理进草稿，可以再告诉我。",
+      "tokens": {
+        "prompt": 2036,
+        "completion": 543
+      },
+      "success": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": "2026-11-20T10:00:00+08:00",
+      "draft": "项目待办（来自会议纪要）\n\n1. 整理实验记录\n\n截止时间：2026-11-20T10:00:00+08:00（依据 deadline 资料）\n备注：会议纪要中仅记录了待办「整理实验记录」及进度讨论，未给出具体截止时间。",
+      "reads": [
+        "meeting",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "egaa",
+      "task_id": "v2_stable",
+      "plan_error": "",
+      "termination": "GOAL_MET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "POTENTIALLY_STALE",
+        "PRECONDITIONS_HOLD",
+        "GOAL_MET"
+      ],
+      "tokens": {
+        "prompt": 691,
+        "completion": 5178
+      },
+      "success": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": "2026-11-20T10:00:00+08:00",
+      "draft": "待办草稿\n- 整理实验记录（负责人：未写明）\n来源：「待办：整理实验记录」",
+      "reads": [
+        "meeting",
+        "deadline",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "always_refresh",
+      "task_id": "v2_stable",
+      "plan_error": "",
+      "termination": "GOAL_MET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "ALWAYS_REFRESH",
+        "PRECONDITIONS_HOLD",
+        "ALWAYS_REFRESH",
+        "PRECONDITIONS_HOLD",
+        "GOAL_MET"
+      ],
+      "tokens": {
+        "prompt": 820,
+        "completion": 3343
+      },
+      "success": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": "2026-11-20T10:00:00+08:00",
+      "draft": "待办草稿\n- 整理实验记录（负责人：未写明）\n来源：「待办：整理实验记录」",
+      "reads": [
+        "meeting",
+        "deadline",
+        "meeting",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "react",
+      "task_id": "v2_shift",
+      "reply": "完成：\n\n- **草稿**：已写入会议待办「整理实验记录」。\n- **提醒**：已按截止时间 `2026-11-20T10:00:00+08:00` 创建。\n- **一致性检查**：会议纪要中没有给出截止时间，只有 deadline 资料提供了上述时间，两份资料之间没有冲突，因此提醒正常创建，并直接采用资料里原样出现的 ISO8601 时间。",
+      "tokens": {
+        "prompt": 2084,
+        "completion": 549
+      },
+      "success": false,
+      "stale_action": true,
+      "failure_reasons": [
+        "stale_action"
+      ],
+      "reminder": "2026-11-20T10:00:00+08:00",
+      "draft": "待办：整理实验记录。",
+      "reads": [
+        "meeting",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "egaa",
+      "task_id": "v2_shift",
+      "plan_error": "",
+      "termination": "OBSERVE_BUDGET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD"
+      ],
+      "tokens": {
+        "prompt": 1102,
+        "completion": 6710
+      },
+      "success": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "reminder_missing",
+        "draft_missing_todo"
+      ],
+      "reminder": null,
+      "draft": "",
+      "reads": [
+        "meeting",
+        "deadline",
+        "deadline",
+        "deadline",
+        "deadline",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "always_refresh",
+      "task_id": "v2_shift",
+      "plan_error": "",
+      "termination": "GOAL_MET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "ALWAYS_REFRESH",
+        "PRECONDITIONS_HOLD",
+        "ALWAYS_REFRESH",
+        "PRECONDITIONS_HOLD",
+        "GOAL_MET"
+      ],
+      "tokens": {
+        "prompt": 827,
+        "completion": 4300
+      },
+      "success": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": "2026-11-22T15:00:00+08:00",
+      "draft": "待办草稿\n- 整理实验记录（负责人：未写明）\n来源：「待办：整理实验记录。」",
+      "reads": [
+        "meeting",
+        "deadline",
+        "meeting",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "react",
+      "task_id": "v2_conflict",
+      "reply": "已完成，但**没有创建提醒**——原因是两份资料的截止时间不一致：\n\n| 来源 | 截止时间 |\n|---|---|\n| meeting（会议纪要） | 2026-11-20T10:00:00+08:00 |\n| deadline（日程表） | 2026-11-25T18:00:00+08:00 |\n\n按你的规则（以及工具约束），时间冲突时不得擅自择一创建提醒，所以只做了草稿。\n\n**草稿内容：**\n- 待办：整理实验记录\n- 并注明了两个来源各自的截止时间与冲突情况，便于后续确认。\n\n**需要你确认：** 以哪个时间为准？确认后我再创建提醒（due_at 会用资料中原样出现的那个 ISO8601 字符串）。\n\n补充一点：即使按\"最新截止时间\"理解为取较晚的 2026-11-25T18:00:00+08:00，它仍与会议纪要相差 5 天多，属于实质性冲突而非格式差异，因此我没有把\"取最新\"当作默认可行方案。",
+      "tokens": {
+        "prompt": 2019,
+        "completion": 594
+      },
+      "success": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": null,
+      "draft": "待办事项（来自会议纪要）\n\n1. 整理实验记录\n\n备注：会议纪要标注的截止时间为 2026-11-20T10:00:00+08:00；日程表（deadline）标注的截止时间为 2026-11-25T18:00:00+08:00。两份资料不一致，需向会议主持方确认唯一的截止时间后再设定提醒。",
+      "reads": [
+        "meeting",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "egaa",
+      "task_id": "v2_conflict",
+      "plan_error": "",
+      "termination": "OBSERVE_BUDGET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD"
+      ],
+      "tokens": {
+        "prompt": 1129,
+        "completion": 5710
+      },
+      "success": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": null,
+      "draft": "",
+      "reads": [
+        "meeting",
+        "deadline",
+        "deadline",
+        "deadline",
+        "deadline",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "always_refresh",
+      "task_id": "v2_conflict",
+      "plan_error": "",
+      "termination": "OBSERVE_BUDGET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD"
+      ],
+      "tokens": {
+        "prompt": 1129,
+        "completion": 5464
+      },
+      "success": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": null,
+      "draft": "",
+      "reads": [
+        "meeting",
+        "deadline",
+        "deadline",
+        "deadline",
+        "deadline",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "react",
+      "task_id": "v2_missing",
+      "reply": "已完成能够执行的部分：\n\n**草稿已写入**\n- 待办：整理实验记录\n\n**未创建提醒**\n- 两份资料中都没有出现任何格式为 ISO8601 的时间。\n- deadline 资料只写了“本周继续讨论，具体提交时间还没定”，没有给出可以原样引用的截止时间。\n- 因此缺少符合要求的 `due_at` 值，无法创建提醒。\n\n建议：等截止时间确定后，再提供具体的 ISO8601 时间（例如 `2025-06-10T18:00:00+08:00`），届时可立即补建提醒。",
+      "tokens": {
+        "prompt": 1821,
+        "completion": 354
+      },
+      "success": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": null,
+      "draft": "待办：整理实验记录。\n\n（来源：会议纪要。会议另提及进度讨论，无其他待办事项。）",
+      "reads": [
+        "meeting",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "egaa",
+      "task_id": "v2_missing",
+      "plan_error": "",
+      "termination": "OBSERVE_BUDGET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD"
+      ],
+      "tokens": {
+        "prompt": 417,
+        "completion": 4083
+      },
+      "success": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "draft_missing_todo"
+      ],
+      "reminder": null,
+      "draft": "",
+      "reads": [
+        "meeting",
+        "deadline",
+        "deadline",
+        "deadline",
+        "deadline",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "always_refresh",
+      "task_id": "v2_missing",
+      "plan_error": "",
+      "termination": "OBSERVE_BUDGET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD"
+      ],
+      "tokens": {
+        "prompt": 417,
+        "completion": 3525
+      },
+      "success": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "draft_missing_todo"
+      ],
+      "reminder": null,
+      "draft": "",
+      "reads": [
+        "meeting",
+        "deadline",
+        "deadline",
+        "deadline",
+        "deadline",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "react",
+      "task_id": "v2_owner",
+      "reply": "已完成两项操作：\n\n**草稿已写入**（来源：会议纪要）\n- 待办：提交周报\n- 负责人：林夏\n- 备注：纪要中另提及讨论了进度，但未给出截止时间\n\n**提醒已创建**\n- 截止时间：`2026-11-20T10:00:00+08:00`（原样来自 deadline 资料）\n\n关于「时间是否不一致」的判断说明：会议纪要通篇没有出现任何时间信息，因此两份资料之间不存在相互冲突的截止时间；截止时间仅有 deadline 一处来源，故按该 ISO8601 原值创建了提醒。如果你认为「会议纪要未标注截止时间」本身也应视为信息不一致，我可以撤销这条提醒，请告知。",
+      "tokens": {
+        "prompt": 1927,
+        "completion": 449
+      },
+      "success": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": "2026-11-20T10:00:00+08:00",
+      "draft": "待办事项（来自会议纪要）\n\n- 提交周报 — 负责人：林夏\n\n（会议纪要中仅记录了上述待办，另讨论了进度；纪要本身未给出截止时间。）",
+      "reads": [
+        "meeting",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "egaa",
+      "task_id": "v2_owner",
+      "plan_error": "",
+      "termination": "GOAL_MET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "POTENTIALLY_STALE",
+        "PRECONDITIONS_HOLD",
+        "GOAL_MET"
+      ],
+      "tokens": {
+        "prompt": 5013,
+        "completion": 6852
+      },
+      "success": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": "2026-11-20T10:00:00+08:00",
+      "draft": "待办草稿\n- 提交周报（负责人：林夏）\n来源：「待办：提交周报。负责人：林夏。」",
+      "reads": [
+        "meeting",
+        "deadline",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "always_refresh",
+      "task_id": "v2_owner",
+      "plan_error": "",
+      "termination": "GOAL_MET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "ALWAYS_REFRESH",
+        "PRECONDITIONS_HOLD",
+        "ALWAYS_REFRESH",
+        "PRECONDITIONS_HOLD",
+        "GOAL_MET"
+      ],
+      "tokens": {
+        "prompt": 964,
+        "completion": 5023
+      },
+      "success": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": "2026-11-20T10:00:00+08:00",
+      "draft": "待办草稿\n- 提交周报（负责人：林夏）\n来源：「待办：提交周报。负责人：林夏。」",
+      "reads": [
+        "meeting",
+        "deadline",
+        "meeting",
+        "deadline",
+        "meeting"
+      ]
+    },
+    {
+      "policy": "react",
+      "task_id": "v2_two_todos",
+      "reply": "完成情况：\n\n- **会议待办已写入草稿**：① 整理实验记录；② 核对引用。\n- **提醒已创建**：截止时间 `2026-11-20T10:00:00+08:00`（取自 deadline 资料原文）。\n\n关于时间一致性：会议纪要中只列了待办事项，未给出任何截止时间，因此两份资料不存在互相冲突的时间，可以安全创建提醒。",
+      "tokens": {
+        "prompt": 1925,
+        "completion": 383
+      },
+      "success": false,
+      "stale_action": true,
+      "failure_reasons": [
+        "stale_action"
+      ],
+      "reminder": "2026-11-20T10:00:00+08:00",
+      "draft": "会议待办：\n1. 整理实验记录\n2. 核对引用\n",
+      "reads": [
+        "meeting",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "egaa",
+      "task_id": "v2_two_todos",
+      "plan_error": "",
+      "termination": "GOAL_MET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "POTENTIALLY_STALE",
+        "PRECONDITIONS_HOLD",
+        "GOAL_MET"
+      ],
+      "tokens": {
+        "prompt": 701,
+        "completion": 3265
+      },
+      "success": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": "2026-11-22T15:00:00+08:00",
+      "draft": "待办草稿\n- 整理实验记录（负责人：未写明）\n- 核对引用（负责人：未写明）\n来源：「待办：整理实验记录。待办：核对引用。」",
+      "reads": [
+        "meeting",
+        "deadline",
+        "deadline"
+      ]
+    },
+    {
+      "policy": "always_refresh",
+      "task_id": "v2_two_todos",
+      "plan_error": "",
+      "termination": "GOAL_MET",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "ALWAYS_REFRESH",
+        "PRECONDITIONS_HOLD",
+        "ALWAYS_REFRESH",
+        "PRECONDITIONS_HOLD",
+        "GOAL_MET"
+      ],
+      "tokens": {
+        "prompt": 833,
+        "completion": 3257
+      },
+      "success": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reminder": "2026-11-22T15:00:00+08:00",
+      "draft": "待办草稿\n- 整理实验记录（负责人：未写明）\n- 核对引用（负责人：未写明）\n来源：「待办：整理实验记录。待办：核对引用。」",
+      "reads": [
+        "meeting",
+        "deadline",
+        "meeting",
+        "deadline"
+      ]
+    }
+  ]
+}

@@ -38,7 +38,14 @@ def trace_for(run_id: str, store: HarnessStore | None = None) -> dict | None:
         "created_at": run.created_at,
         "updated_at": run.updated_at,
         "intents": [_intent_view(it) for it in run.intents],
+        "decisions": _decision_view(run.run_id),
     }
+
+
+def _decision_view(run_id: str) -> list[dict]:
+    from agent.application.run_driver import load_decisions
+
+    return load_decisions(run_id)
 
 
 def list_traces(limit: int = 30, store: HarnessStore | None = None) -> list[dict]:

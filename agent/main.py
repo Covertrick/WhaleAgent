@@ -1,4 +1,5 @@
 from .config import MODEL_NAME
+from .core.coding_executor import CodingExecutorAdapter
 from .core.loop import agent_loop
 from .hooks import trigger_hook
 from .memory import build_system
@@ -10,6 +11,7 @@ def main() -> None:
     print("输入任务，回车发送，输入 exit 退出。\n")
 
     history = [{"role": "system", "content": build_system()}]
+    executor = CodingExecutorAdapter()
     while True:
         try:
             query = input("\033[36ms01 >> \033[0m")
@@ -20,7 +22,7 @@ def main() -> None:
 
         trigger_hook("UserPromptSubmit", query)
         history.append({"role": "user", "content": query})
-        agent_loop(history, active_request=query)
+        agent_loop(history, active_request=query, executor=executor)
 
         final_resp = history[-1]
         if final_resp.get("role") == "assistant" and final_resp.get("content"):

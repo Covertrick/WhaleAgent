@@ -11,7 +11,7 @@
 | Run 状态机 | 每条 QQ 消息有 `run_id`，崩溃后能区分「还没副作用」和「不确定做没做成」 |
 | Skill 契约 | 每个 QQ 工具有 `effect_class`。没有契约的工具直接拒绝 |
 | Intent 账本 | 执行前刷成 STARTED。超时或进程中断变成 UNKNOWN |
-| 恢复策略 | 可重试的可以再做；发消息、删记忆、抓取这类不可逆操作不自动重做 |
+| 恢复策略 | 进程中断后不自动重跑模型。幂等/可重试只在同一次 Run 里跳过已成功的同参数调用；不可逆在 guardrails 禁止自动重试时，同参数的失败或未知不会再执行。重启后统一先告诉用户 |
 | 插件 | 启动只读 `manifest.yaml`。Run 还引用着该版本时不能卸载。`unregister` 会停掉定时器 |
 | 沙箱 | 不可信脚本进子进程：越权读文件和对外连接失败，主进程还在，用量写入 trace |
 | 约束演进 | 只改 guardrails / 技能说明 / postcondition。回放对照失败就丢弃，通过才晋升，可按快照回滚 |
@@ -170,16 +170,16 @@ OCR / 图表看板：**后置**。
 - sqlite-vec 持久索引（knowledge / vault；无扩展则 BLOB 回退）  
 - 联网搜索统一走连接池；无结果/失败也返回可转述说明，模型必须口语回应  
 
-## 架构主线（非功能清单）
+## 当前主线
 
-应用层功能暂停堆砌。深度见 **[harness-runtime-plan.md](./harness-runtime-plan.md)**：  
-Harness Runtime（Run / Skill 契约 / intent 账本 / 沙箱 / 受控自进化）。
+上面这些能力服务于一条任务：整理项目资料、写入 Vault 草稿、按最新截止时间创建提醒。决策在 `agent/application`，执行仍走 Harness。v1 数字见 [evaluation/egaa-v1-results.md](./evaluation/egaa-v1-results.md)。
 
-## 后置（领域能力，不抢 Runtime 优先级）
+## 后置
 
-- PDF/DOCX 全文切片 RAG  
-- 图片 OCR / 多模态发票  
-- OneBot 全程 asyncio 重写  
-- Google Calendar OAuth  
+- PDF/DOCX 全文切片、图片 OCR
+- Google Calendar OAuth
+- 工具 RAG、SFT、强化学习
+- 公开基准接入
+- OneBot 异步化只按计划的两天范围做，并且不承载算法对照  
 
 

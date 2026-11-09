@@ -1,0 +1,69 @@
+{
+  "task_id": "s3_meeting_a",
+  "blueprint_id": "bp_s3_meeting_0",
+  "variant": "a",
+  "scene": "S3",
+  "family_id": "meeting:source_silent",
+  "domain": "meeting",
+  "goal_structure": "copy_final_source_to_target",
+  "dependency_structure": "read_then_write",
+  "event_type": "source_silent",
+  "constraint_type": "single_target",
+  "source_key": "meeting.time",
+  "target_key": "reminder.time",
+  "readable": [
+    "meeting.time",
+    "attachment.name",
+    "meeting.room"
+  ],
+  "writable": [
+    "reminder.time"
+  ],
+  "env_only": [
+    "meeting.time",
+    "attachment.name",
+    "meeting.room"
+  ],
+  "initial_facts": [
+    {
+      "key": "meeting.time",
+      "value": "15:00",
+      "version": "v1"
+    },
+    {
+      "key": "attachment.name",
+      "value": "slides.pdf",
+      "version": "v1"
+    },
+    {
+      "key": "meeting.room",
+      "value": "Room-A",
+      "version": "v1"
+    }
+  ],
+  "events": [
+    {
+      "checkpoint": "after_first_source_read",
+      "fact_key": "meeting.time",
+      "value": "16:00",
+      "version": "v2",
+      "notify": false
+    }
+  ],
+  "checkpoint": "after_first_source_read",
+  "success": [
+    {
+      "type": "equals_fact",
+      "left": "reminder.time",
+      "right": "meeting.time"
+    }
+  ],
+  "constraints": [
+    {
+      "type": "count_equals",
+      "key": "reminder.time",
+      "count": 1
+    }
+  ],
+  "prompt": "来源事实 meeting.time 。写入目标 reminder.time 。请先读取来源，再在下一轮把读到的值写入目标。"
+}
