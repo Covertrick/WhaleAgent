@@ -1,0 +1,69 @@
+{
+  "task_id": "s4_join_conflict_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "纪要时间",
+      "v1": "纪要时间｜时间：2026-12-01T09:00:00+08:00。",
+      "v2": "纪要时间｜时间：2026-12-01T09:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-01T09:00:00+08:00",
+      "token_v2": "2026-12-01T09:00:00+08:00"
+    },
+    {
+      "sid": "clock",
+      "title": "日程时间",
+      "v1": "日程时间｜时间：2026-12-11T09:00:00+08:00。",
+      "v2": "日程时间｜时间：2026-12-11T09:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-11T09:00:00+08:00",
+      "token_v2": "2026-12-11T09:00:00+08:00"
+    },
+    {
+      "sid": "extra",
+      "title": "待办原文",
+      "v1": "待办原文｜待办：整理实验记录。",
+      "v2": "待办原文｜待办：整理实验记录。",
+      "phrase": "整理实验记录",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_extra"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "extra"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_notes",
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "abstain",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "never",
+  "notify": false,
+  "goal_structure": "两份截止时间从一开始就不同。可以写待办草稿，不要创建提醒。"
+}

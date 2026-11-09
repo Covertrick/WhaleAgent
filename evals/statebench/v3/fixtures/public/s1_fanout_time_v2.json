@@ -1,0 +1,13 @@
+{
+  "task_id": "s1_fanout_time_v2",
+  "public_goal": "请阅读「计划书」。待办句子和截止时间来自同一份原文。通知只改时间，两路输出都从这份原文重新取。若出现更新通知，以重新读到的原文为准。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "计划书"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

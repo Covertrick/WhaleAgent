@@ -1,0 +1,43 @@
+{
+  "task_id": "s3_chain_hidden_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "合同",
+      "v1": "合同｜待办：交付前复核。",
+      "v2": "合同｜待办：交付前复核。",
+      "phrase": "交付前复核",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "合同时间",
+      "v1": "合同时间｜时间：2026-12-09T17:00:00+08:00。",
+      "v2": "合同时间｜时间：2026-12-11T17:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-09T17:00:00+08:00",
+      "token_v2": "2026-12-11T17:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r2"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": false,
+  "goal_structure": "没有通知。时间在第一次阅读后会变，提醒必须使用变后的时间。"
+}

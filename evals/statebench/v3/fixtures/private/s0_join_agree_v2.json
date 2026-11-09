@@ -1,0 +1,59 @@
+{
+  "task_id": "s0_join_agree_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "周报提纲",
+      "v1": "周报提纲｜待办：核对引用。",
+      "v2": "周报提纲｜待办：核对引用。",
+      "phrase": "核对引用",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "共享日历",
+      "v1": "共享日历｜时间：2026-12-05T14:00:00+08:00。",
+      "v2": "共享日历｜时间：2026-12-05T14:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-05T14:00:00+08:00",
+      "token_v2": "2026-12-05T14:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_notes",
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "never",
+  "notify": false,
+  "goal_structure": "两份时间一致才创建提醒，草稿仍只写纪要里的待办。"
+}

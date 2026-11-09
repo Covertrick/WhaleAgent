@@ -1,0 +1,15 @@
+{
+  "task_id": "s2_parallel_irrelevant_v1",
+  "public_goal": "请阅读「会议待办」、「截止说明」、「附件标签」。会议待办和提醒照写。附件标签即使有通知，也不进入待办或提醒。与目标无关的更新不要写进结果。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "会议待办",
+    "clock": "截止说明",
+    "extra": "附件标签"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "task_id": "s3_chain_hidden_v2",
+  "public_goal": "请阅读「合同」、「合同时间」。没有通知。时间在第一次阅读后会变，提醒必须使用变后的时间。没有更新通知。不要提交已经变掉的旧值。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "合同",
+    "clock": "合同时间"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

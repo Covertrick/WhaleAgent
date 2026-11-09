@@ -1,11 +1,14 @@
-# StateBench v3 试验任务
+# StateBench v3 数据集
 
-正式的 48 个蓝图、96 条实例还没有写。测试集没有开放，预算也还是空的。预注册文本在 [evals/statebench/v3/protocol.yaml](../../evals/statebench/v3/protocol.yaml)。
+48 个蓝图，每个两条正文变体，共 96 条。划分是开发 12、验证 12、测试 24 个蓝图。S0 到 S5 各 8 个蓝图，每个场景都包含并行、扇出、长链和汇合。
 
-现在落盘的是 12 个决策结构不同的试验蓝图，每个两条文本变体，共 24 条。它们覆盖 S0 到 S5，以及并行、扇出、长链、多来源汇合四种依赖图。变体改的是体裁和句子，不是只换一个时间。可见提示里没有期望行为和隐藏事件。
+公开提示只写要读的资料名和决策约束。变化后的原句、新时间和新负责人不出现在提示里。评分在脚本化轨迹结束后看隐藏世界。
 
-核对人是开发者本人，不是第三方。24 行核对记录由 `audit_rows()` 生成，`third_party` 都是 `no`。
+自动审计 96 行都没有失败备注。人工复核全部是 `HUMAN_REVIEW_PENDING`，不是第三方审核，也不是人工 PASS。因此测试集没有开封。
 
 ```bash
-python -m unittest tests.statebench.test_v3_trial -v
+python -m evals.statebench.v3.audit
+python -m unittest tests.statebench.test_v3_dataset -v
 ```
+
+产物：`evals/statebench/v3/splits.json`、`reviewer_audit.csv`、`fixtures/public/`、`fixtures/private/`。原先 `blueprints.py` 里的 12 条试验提示还在，可执行数据集以 `catalog.py` 为准。v1、v2 的结果文件哈希没有改。

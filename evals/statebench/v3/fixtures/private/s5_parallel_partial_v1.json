@@ -1,0 +1,83 @@
+{
+  "task_id": "s5_parallel_partial_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "会议纪要",
+      "v1": "会议纪要｜待办：整理实验记录。",
+      "v2": "会议纪要｜待办：整理实验记录。",
+      "phrase": "整理实验记录",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "extra",
+      "title": "附件索引",
+      "v1": "附件索引｜索引：已同步。",
+      "v2": "附件索引｜索引：已同步。",
+      "phrase": "已同步",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "截止说明",
+      "v1": "截止说明｜时间：2026-12-01T09:00:00+08:00。",
+      "v2": "截止说明｜时间：2026-12-04T15:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-01T09:00:00+08:00",
+      "token_v2": "2026-12-04T15:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "index",
+      "kind": "draft",
+      "needs": [
+        "r_extra"
+      ],
+      "slot": "index",
+      "must_from": [
+        "extra"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "待办和附件索引都不变，只有时间变化。前两段保持原文，提醒用新时间。"
+}

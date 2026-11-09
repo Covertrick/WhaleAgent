@@ -1,0 +1,44 @@
+{
+  "task_id": "s3_join_converge_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "甲方旧时间",
+      "v1": "甲方旧时间｜时间：2026-12-01T09:00:00+08:00。",
+      "v2": "甲方旧时间｜时间：2026-12-06T09:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-01T09:00:00+08:00",
+      "token_v2": "2026-12-06T09:00:00+08:00"
+    },
+    {
+      "sid": "clock",
+      "title": "乙方旧时间",
+      "v1": "乙方旧时间｜时间：2026-12-02T09:00:00+08:00。",
+      "v2": "乙方旧时间｜时间：2026-12-06T09:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-02T09:00:00+08:00",
+      "token_v2": "2026-12-06T09:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_notes",
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": false,
+  "goal_structure": "两份时间会悄悄改成同一个新时间。提醒使用这个新时间，不能沿用任何一份旧时间。"
+}

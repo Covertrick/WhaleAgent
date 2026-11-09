@@ -1,0 +1,14 @@
+{
+  "task_id": "s1_parallel_second_clock_v2",
+  "public_goal": "请阅读「联调安排」、「验收时间」。两份时间彼此独立。只有第二份会收到通知，提醒跟第二份的新时间。若出现更新通知，以重新读到的原文为准。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "联调安排",
+    "extra": "验收时间"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

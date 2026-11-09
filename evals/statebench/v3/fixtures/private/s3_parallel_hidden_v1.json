@@ -1,0 +1,58 @@
+{
+  "task_id": "s3_parallel_hidden_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "实验记录",
+      "v1": "实验记录｜待办：整理实验记录。",
+      "v2": "实验记录｜待办：整理实验记录。",
+      "phrase": "整理实验记录",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "提交时间",
+      "v1": "提交时间｜时间：2026-12-01T09:00:00+08:00。",
+      "v2": "提交时间｜时间：2026-12-04T15:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-01T09:00:00+08:00",
+      "token_v2": "2026-12-04T15:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": false,
+  "goal_structure": "没有通知。草稿保持，提醒必须改用阅读后变掉的时间。"
+}

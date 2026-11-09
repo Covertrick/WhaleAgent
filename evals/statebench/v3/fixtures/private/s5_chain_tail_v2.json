@@ -1,0 +1,55 @@
+{
+  "task_id": "s5_chain_tail_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "账号单",
+      "v1": "账号单｜待办：加入审计组。",
+      "v2": "账号单｜待办：加入审计组。",
+      "phrase": "加入审计组",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "extra",
+      "title": "权限复查",
+      "v1": "权限复查｜复查：没有写权限。",
+      "v2": "权限复查｜复查：没有写权限。",
+      "phrase": "没有写权限",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "tail",
+      "title": "审批",
+      "v1": "审批｜签核：待审批。",
+      "v2": "审批｜签核：同意加入。",
+      "phrase": "同意加入",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "signoff",
+      "kind": "draft",
+      "needs": [
+        "r3"
+      ],
+      "slot": "signoff",
+      "must_from": [
+        "tail"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "长链里只有最后一份签核会变。草稿使用变后的签核原句。"
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "whaleagent-eval-v3",
+  "test_opened": false,
+  "review_status": "HUMAN_REVIEW_PENDING",
+  "reason": "协议把人工复核设为正式测试门槛。自动审计通过不能代替人工 PASS。",
+  "blueprints": 48,
+  "instances": 96,
+  "splits": {"dev": 12, "val": 12, "test": 24},
+  "bootstrap_seed": 20261110,
+  "bootstrap_iterations": 5000,
+  "budgets": null,
+  "model_runs": "not_started"
+}

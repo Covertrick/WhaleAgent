@@ -1,0 +1,43 @@
+{
+  "task_id": "s3_chain_hidden_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "工单",
+      "v1": "工单｜待办：关闭前复核。",
+      "v2": "工单｜待办：关闭前复核。",
+      "phrase": "关闭前复核",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "状态页时间",
+      "v1": "状态页时间｜时间：2026-12-01T09:00:00+08:00。",
+      "v2": "状态页时间｜时间：2026-12-04T09:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-01T09:00:00+08:00",
+      "token_v2": "2026-12-04T09:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r2"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": false,
+  "goal_structure": "没有通知。时间在第一次阅读后会变，提醒必须使用变后的时间。"
+}

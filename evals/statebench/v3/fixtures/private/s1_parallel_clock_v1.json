@@ -1,0 +1,58 @@
+{
+  "task_id": "s1_parallel_clock_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "发布说明",
+      "v1": "发布说明｜待办：更新回滚步骤。",
+      "v2": "发布说明｜待办：更新回滚步骤。",
+      "phrase": "更新回滚步骤",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "上线窗口",
+      "v1": "上线窗口｜时间：2026-12-03T21:00:00+08:00。",
+      "v2": "上线窗口｜时间：2026-12-05T21:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-03T21:00:00+08:00",
+      "token_v2": "2026-12-05T21:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "草稿分支保持不变，只有提醒分支跟随通知后的时间。"
+}

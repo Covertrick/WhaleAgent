@@ -1,0 +1,50 @@
+{
+  "task_id": "s4_fanout_undated_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "讨论记录",
+      "v1": "讨论记录｜待办：整理实验记录。",
+      "v2": "讨论记录｜待办：整理实验记录。",
+      "phrase": "整理实验记录",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "copy",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "copy",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "never",
+  "notify": false,
+  "goal_structure": "同一份原文只有待办、没有时间。两段草稿都只写待办，不要创建提醒。"
+}

@@ -1,0 +1,83 @@
+{
+  "task_id": "s5_parallel_partial_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "发布单",
+      "v1": "发布单｜待办：更新回滚步骤。",
+      "v2": "发布单｜待办：更新回滚步骤。",
+      "phrase": "更新回滚步骤",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "extra",
+      "title": "检查清单",
+      "v1": "检查清单｜索引：已勾选。",
+      "v2": "检查清单｜索引：已勾选。",
+      "phrase": "已勾选",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "上线窗口",
+      "v1": "上线窗口｜时间：2026-12-03T21:00:00+08:00。",
+      "v2": "上线窗口｜时间：2026-12-05T21:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-03T21:00:00+08:00",
+      "token_v2": "2026-12-05T21:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "index",
+      "kind": "draft",
+      "needs": [
+        "r_extra"
+      ],
+      "slot": "index",
+      "must_from": [
+        "extra"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "待办和附件索引都不变，只有时间变化。前两段保持原文，提醒用新时间。"
+}

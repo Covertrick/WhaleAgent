@@ -1,0 +1,14 @@
+{
+  "task_id": "s3_join_converge_v2",
+  "public_goal": "请阅读「出发旧时间」、「集合旧时间」。两份时间会悄悄改成同一个新时间。提醒使用这个新时间，不能沿用任何一份旧时间。没有更新通知。不要提交已经变掉的旧值。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "出发旧时间",
+    "clock": "集合旧时间"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

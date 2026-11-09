@@ -1,0 +1,15 @@
+{
+  "task_id": "s2_parallel_rename_v2",
+  "public_goal": "请阅读「手册甲」、「手册乙」、「附件名」。两段正稿各自依赖自己的原文。旁边的文件改名通知不进入正稿。与目标无关的更新不要写进结果。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "手册甲",
+    "extra": "手册乙",
+    "tail": "附件名"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

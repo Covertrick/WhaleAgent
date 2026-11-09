@@ -1,0 +1,83 @@
+{
+  "task_id": "s5_parallel_keep_drafts_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "报价说明",
+      "v1": "报价说明｜待办：维持原报价。",
+      "v2": "报价说明｜待办：维持原报价。",
+      "phrase": "维持原报价",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "extra",
+      "title": "条款说明",
+      "v1": "条款说明｜待办：维持原条款。",
+      "v2": "条款说明｜待办：维持原条款。",
+      "phrase": "维持原条款",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "签约时间",
+      "v1": "签约时间｜时间：2026-12-07T12:00:00+08:00。",
+      "v2": "签约时间｜时间：2026-12-09T12:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-07T12:00:00+08:00",
+      "token_v2": "2026-12-09T12:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "budget",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "budget",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "risk",
+      "kind": "draft",
+      "needs": [
+        "r_extra"
+      ],
+      "slot": "risk",
+      "must_from": [
+        "extra"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "预算说明和风险说明都不变，只有付款时间变化。两段说明保持原文，提醒用新时间。"
+}

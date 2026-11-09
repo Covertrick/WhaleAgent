@@ -1,0 +1,59 @@
+{
+  "task_id": "s1_join_reread_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "排期单",
+      "v1": "排期单｜待办：预约场地。负责人：陈舟。",
+      "v2": "排期单｜待办：预约场地。负责人：陈舟。",
+      "phrase": "预约场地",
+      "detail": "陈舟",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "场地时间",
+      "v1": "场地时间｜时间：2026-12-06T15:00:00+08:00。",
+      "v2": "场地时间｜时间：2026-12-13T15:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-06T15:00:00+08:00",
+      "token_v2": "2026-12-13T15:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "owner",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "owner",
+      "must_from": [],
+      "detail_from": [
+        "notes"
+      ],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_notes",
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "负责人和时间都要读到。通知只改时间，提醒用新时间，负责人仍用原文。"
+}

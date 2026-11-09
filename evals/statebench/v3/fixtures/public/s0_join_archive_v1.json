@@ -1,0 +1,14 @@
+{
+  "task_id": "s0_join_archive_v1",
+  "public_goal": "请阅读「归档条件」、「归档时间」。两份状态都读到之后，才按时间那一份创建归档提醒。阅读之后资料不会再改。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "归档条件",
+    "clock": "归档时间"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

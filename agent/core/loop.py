@@ -16,6 +16,27 @@ from ..mcp import mcp_system_addon
 from ..memory import build_system, load_memories
 
 
+def chat(*args, **kwargs):
+    """评测会替换这个入口。默认转到 llm.chat。"""
+    from agent.core.llm import chat as real_chat
+
+    return real_chat(*args, **kwargs)
+
+
+def execute_tool(name, args, handlers, tool_call_id="", **kwargs):
+    """评测会替换这个入口。默认转到 core.execute。"""
+    from agent.core.execute import execute_tool as real_execute
+
+    return real_execute(name, args, handlers, tool_call_id=tool_call_id, **kwargs)
+
+
+def inject_background_results(messages):
+    """评测会包一层决策记录。默认转到 background。"""
+    from agent.background import inject_background_results as real_inject
+
+    return real_inject(messages)
+
+
 def _is_http_overflow(exc: Exception) -> bool:
     httpish = isinstance(exc, requests.HTTPError)
     if not httpish:

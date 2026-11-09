@@ -5,21 +5,32 @@ from __future__ import annotations
 import json
 import re
 
+from collections.abc import Mapping
+
 from agent.algorithms.planner import PlanError, plan_errors
+from agent.algorithms.repair import RepairResult, repair_plan
 from agent.algorithms.types import PlanNode
 from agent.core.model_step import model_step
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.S)
 
 
-def compile_model_plan(prompt: str, *, schema_hint: str) -> list[PlanNode]:
-    """最多两次模型请求：第一次生成，JSON 或图不合法时把错误发回去再要一次。"""
+def compile_model_plan(prompt: str, *, schema_hint: str, compact: bool = False) -> list[PlanNode]:
+    """最多两次模型请求：第一次生成，JSON 或图不合法时把错误发回去再要一次。
+
+    compact 只收紧输出格式，不降低 max_tokens，也不删掉依赖、权限和不可逆标记。
+    """
+    compact_rule = (
+        "只输出 JSON，字段只保留 id、action、args、depends_on_nodes、requires_evidence、irreversible。"
+        if compact
+        else "你只输出一个 JSON 对象，不要解释。"
+    )
     messages = [
         {
             "role": "system",
             "content": (
-                "你只输出一个 JSON 对象，不要解释。"
-                "计划必须能被校验器接受：动作只有 read_fact 和 write_fact，"
+                compact_rule
+                + "计划必须能被校验器接受：动作只有 read_fact 和 write_fact，"
                 "依赖无环，写入节点用 value_from 指向已读事实，不可逆写入把 irreversible 设为 true。"
             ),
         },
@@ -91,3 +102,25 @@ def _nodes_from_text(text: str) -> list[PlanNode]:
     if not validation.valid:
         raise PlanError(validation.error_code + ":" + ",".join(validation.details))
     return nodes
+
+
+def local_or_full_update(
+    nodes: list[PlanNode],
+    targets: list[str] | tuple[str, ...],
+    public_view: Mapping,
+    replacements: dict[str, PlanNode] | None = None,
+    *,
+    confirmed_writes: tuple[str, ...] = (),
+) -> RepairResult:
+    """先改未执行子图。局部结果不合法时才整图重编译。已完成节点由 repair_plan 保留。"""
+    local = repair_plan(
+        nodes,
+        targets,
+        public_view,
+        "local",
+        replacements=replacements,
+        confirmed_writes=confirmed_writes,
+    )
+    if local.mode == "stopped" or local.degraded:
+        return repair_plan(nodes, targets, public_view, "full", confirmed_writes=confirmed_writes)
+    return local

@@ -1,0 +1,59 @@
+{
+  "task_id": "s1_join_notified_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "看板卡片",
+      "v1": "看板卡片｜待办：补测试数据。",
+      "v2": "看板卡片｜待办：补测试数据。",
+      "phrase": "补测试数据",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "日期字段",
+      "v1": "日期字段｜时间：2026-12-02T10:00:00+08:00。",
+      "v2": "日期字段｜时间：2026-12-06T11:30:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-02T10:00:00+08:00",
+      "token_v2": "2026-12-06T11:30:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_notes",
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "纪要里的待办不改。提醒必须同时依据纪要和通知后的新时间。"
+}

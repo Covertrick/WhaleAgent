@@ -1,0 +1,46 @@
+{
+  "task_id": "s1_chain_notified_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "值守记录",
+      "v1": "值守记录｜待办：结束前复核。",
+      "v2": "值守记录｜待办：结束前复核。",
+      "phrase": "结束前复核",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "最新通知",
+      "v1": "最新通知｜状态：仍在观察。",
+      "v2": "最新通知｜状态：观察结束。",
+      "phrase": "观察结束",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "status",
+      "kind": "draft",
+      "needs": [
+        "r2"
+      ],
+      "slot": "status",
+      "must_from": [
+        "notes",
+        "clock"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "先读工单再读状态。草稿必须同时留下工单事项和通知后的状态原句。"
+}

@@ -1,0 +1,64 @@
+{
+  "task_id": "s2_fanout_color_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "议程",
+      "v1": "议程｜待办：确定发言顺序。负责人：林夏。",
+      "v2": "议程｜待办：确定发言顺序。负责人：林夏。",
+      "phrase": "确定发言顺序",
+      "detail": "林夏",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "extra",
+      "title": "日历颜色",
+      "v1": "日历颜色｜蓝色",
+      "v2": "日历颜色｜灰色",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "蓝色",
+      "token_v2": "灰色"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "topic",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "topic",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [
+        "extra"
+      ],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "owner",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "owner",
+      "must_from": [],
+      "detail_from": [
+        "notes"
+      ],
+      "must_not_from": [
+        "extra"
+      ],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "一份议程写出两段草稿。日历颜色通知不进入这两段。"
+}

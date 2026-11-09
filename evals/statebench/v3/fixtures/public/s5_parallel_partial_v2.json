@@ -1,0 +1,15 @@
+{
+  "task_id": "s5_parallel_partial_v2",
+  "public_goal": "请阅读「发布单」、「检查清单」、「上线窗口」。待办和附件索引都不变，只有时间变化。前两段保持原文，提醒用新时间。只有一部分资料会变。没变的内容保持原样。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "发布单",
+    "extra": "检查清单",
+    "clock": "上线窗口"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

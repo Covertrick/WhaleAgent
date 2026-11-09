@@ -1,0 +1,48 @@
+{
+  "task_id": "s3_fanout_hidden_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "值班纪要",
+      "v1": "值班纪要｜待办：接听告警。时间：2026-12-02T08:00:00+08:00。",
+      "v2": "值班纪要｜待办：接听告警。时间：2026-12-03T08:00:00+08:00。",
+      "phrase": "接听告警",
+      "detail": "",
+      "token_v1": "2026-12-02T08:00:00+08:00",
+      "token_v2": "2026-12-03T08:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "notes"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": false,
+  "goal_structure": "同一份原文里的待办不变、时间会悄悄变。草稿留待办，提醒用变后的时间。"
+}

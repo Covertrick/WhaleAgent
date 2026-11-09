@@ -1,0 +1,13 @@
+{
+  "task_id": "s5_fanout_partial_v1",
+  "public_goal": "请阅读「项目纪要」。同一份原文的待办句子不变，只有时间变化。草稿留待办，提醒用新时间。只有一部分资料会变。没变的内容保持原样。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "项目纪要"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

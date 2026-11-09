@@ -1,0 +1,13 @@
+{
+  "task_id": "s4_fanout_undated_v2",
+  "public_goal": "请阅读「设计讨论」。同一份原文只有待办、没有时间。两段草稿都只写待办，不要创建提醒。证据冲突或缺失时不要编造。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "设计讨论"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

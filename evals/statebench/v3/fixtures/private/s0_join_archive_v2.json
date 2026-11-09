@@ -1,0 +1,44 @@
+{
+  "task_id": "s0_join_archive_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "封存条件",
+      "v1": "封存条件｜条件：索引已完成。",
+      "v2": "封存条件｜条件：索引已完成。",
+      "phrase": "索引已完成",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "封存时间",
+      "v1": "封存时间｜时间：2026-12-08T18:00:00+08:00。",
+      "v2": "封存时间｜时间：2026-12-08T18:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-08T18:00:00+08:00",
+      "token_v2": "2026-12-08T18:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_notes",
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "never",
+  "notify": false,
+  "goal_structure": "两份状态都读到之后，才按时间那一份创建归档提醒。"
+}

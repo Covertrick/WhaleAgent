@@ -1,0 +1,58 @@
+{
+  "task_id": "s3_parallel_one_clock_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "内部安排",
+      "v1": "内部安排｜安排：保持原计划。",
+      "v2": "内部安排｜安排：保持原计划。",
+      "phrase": "保持原计划",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "extra",
+      "title": "外部时间",
+      "v1": "外部时间｜时间：2026-12-02T09:00:00+08:00。",
+      "v2": "外部时间｜时间：2026-12-12T09:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-02T09:00:00+08:00",
+      "token_v2": "2026-12-12T09:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "first",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "first",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_extra"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "extra"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": false,
+  "goal_structure": "两份时间独立。只有第二份会悄悄变化，提醒跟第二份的新时间。"
+}

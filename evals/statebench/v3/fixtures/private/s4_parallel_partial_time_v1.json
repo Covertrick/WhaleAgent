@@ -1,0 +1,58 @@
+{
+  "task_id": "s4_parallel_partial_time_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "需求说明",
+      "v1": "需求说明｜待办：补齐接口示例。",
+      "v2": "需求说明｜待办：补齐接口示例。",
+      "phrase": "补齐接口示例",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "排期栏",
+      "v1": "排期栏｜时间：时间未定。",
+      "v2": "排期栏｜时间：时间未定。",
+      "phrase": "时间未定",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "abstain",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "never",
+  "notify": false,
+  "goal_structure": "一份写了待办，另一份明确没有时间。草稿只写待办，不要用空时间创建提醒。"
+}

@@ -1,0 +1,14 @@
+{
+  "task_id": "s5_join_one_side_v2",
+  "public_goal": "请阅读「检查清单」、「上线窗口」。索引草稿不能混入新时间。提醒仍要等两侧都读完，并使用变后的时间。只有一部分资料会变。没变的内容保持原样。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "检查清单",
+    "clock": "上线窗口"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "task_id": "s2_join_watermark_v1",
+  "public_goal": "请阅读「甲方时间」、「乙方时间」、「水印」。两份时间一致才提醒。水印通知不参与这个判断。与目标无关的更新不要写进结果。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "甲方时间",
+    "clock": "乙方时间",
+    "extra": "水印"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

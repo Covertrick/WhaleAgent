@@ -1,0 +1,14 @@
+{
+  "task_id": "s2_fanout_irrelevant_v1",
+  "public_goal": "请阅读「设计纪要」、「颜色通知」。两段草稿都只来自纪要。第三份颜色通知不进入任何草稿。与目标无关的更新不要写进结果。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "设计纪要",
+    "extra": "颜色通知"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

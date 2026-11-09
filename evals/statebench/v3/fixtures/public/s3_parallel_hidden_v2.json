@@ -1,0 +1,14 @@
+{
+  "task_id": "s3_parallel_hidden_v2",
+  "public_goal": "请阅读「备份记录」、「备份时间」。没有通知。草稿保持，提醒必须改用阅读后变掉的时间。没有更新通知。不要提交已经变掉的旧值。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "备份记录",
+    "clock": "备份时间"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

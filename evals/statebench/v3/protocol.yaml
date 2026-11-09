@@ -1,15 +1,15 @@
 schema: whaleagent-eval-v3
-status: trial_only
+status: test_closed_human_review_pending
 note: >
-  这是预注册的下一轮配置。预算还没在开发集冒烟后锁定。
-  仓库里目前只有 12 个结构不同的试验蓝图、24 条文本变体。
-  48 个蓝图和 96 条实例还没有写完，测试集也没有开放。
+  48 个蓝图和 96 条实例已经可以离线审计。
+  人工复核仍是 HUMAN_REVIEW_PENDING，测试集没有开封。
+  预算没有在真实开发集运行后锁定。
 
 dataset:
   registered_blueprints: 48
   variants_per_blueprint: 2
-  instantiated_blueprints: 12
-  instantiated_instances: 24
+  instantiated_blueprints: 48
+  instantiated_instances: 96
   split_blueprints:
     dev: 12
     val: 12
@@ -49,7 +49,7 @@ safety:
 
 audit:
   require_human_review: true
-  reviewer: developer
+  reviewer: HUMAN_REVIEW_PENDING
   third_party: false
   require_frozen_hashes: true
   preserve_failed_episodes: true

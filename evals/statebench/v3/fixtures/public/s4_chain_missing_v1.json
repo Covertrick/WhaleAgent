@@ -1,0 +1,14 @@
+{
+  "task_id": "s4_chain_missing_v1",
+  "public_goal": "请阅读「会议纪要」、「时间栏」。先读事项再读时间栏。时间栏写明还没定，草稿记下事项和「时间未定」，不要创建提醒。证据冲突或缺失时不要编造。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "会议纪要",
+    "clock": "时间栏"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

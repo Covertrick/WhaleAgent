@@ -1,0 +1,60 @@
+{
+  "task_id": "s4_parallel_owner_conflict_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "名单乙",
+      "v1": "名单乙｜负责人甲：赵衡。负责人乙：陈舟。",
+      "v2": "名单乙｜负责人甲：赵衡。负责人乙：陈舟。",
+      "phrase": "赵衡",
+      "detail": "陈舟",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "extra",
+      "title": "提醒栏",
+      "v1": "提醒栏｜约束：不要合并。",
+      "v2": "提醒栏｜约束：不要合并。",
+      "phrase": "不要合并",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "names",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "names",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [
+        "notes"
+      ],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_extra"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "abstain",
+      "reminder_source": "extra"
+    }
+  ],
+  "change_on": "never",
+  "notify": false,
+  "goal_structure": "两份资料给出不同负责人。草稿要同时保留两个名字，不要合并成一个提醒。"
+}

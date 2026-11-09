@@ -1,0 +1,15 @@
+{
+  "task_id": "s1_chain_middle_v1",
+  "public_goal": "请阅读「封面」、「范围说明」、「附录」。长链的中间一份资料会更新。草稿只采用中间这份通知后的原句。若出现更新通知，以重新读到的原文为准。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "封面",
+    "extra": "范围说明",
+    "tail": "附录"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

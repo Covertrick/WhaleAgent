@@ -1,0 +1,14 @@
+{
+  "task_id": "s0_parallel_two_drafts_v2",
+  "public_goal": "请阅读「迁移说明」、「回滚说明」。两份独立说明各写一段草稿，不创建提醒。阅读之后资料不会再改。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "迁移说明",
+    "extra": "回滚说明"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

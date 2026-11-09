@@ -1,0 +1,13 @@
+{
+  "task_id": "s5_fanout_one_field_v1",
+  "public_goal": "请阅读「值班名单」。同一份名单只更换负责人。待办草稿不能写入新名字，负责人备忘必须使用新名字。只有一部分资料会变。没变的内容保持原样。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "值班名单"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

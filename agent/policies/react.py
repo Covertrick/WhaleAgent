@@ -42,12 +42,11 @@ class ReActPolicy(StepPolicy):
 
     def next_step(self) -> StepDecision:
         from agent.compaction import COMPACTOR, MAX_REACTIVE_RETRIES
-        from agent.core.loop import _is_http_overflow, _update_system_message
+        from agent.core.loop import _is_http_overflow, _update_system_message, inject_background_results
         from agent.hooks import trigger_hook
         from agent.mcp import assemble_tool_pool
         from agent.memory import consolidate_memories, extract_memories
         from agent.tools import TASK_TOOLS, TOOL_HANDLERS
-        from agent.background import inject_background_results
 
         while True:
             inject_background_results(self.messages)

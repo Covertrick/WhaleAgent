@@ -1,0 +1,48 @@
+{
+  "task_id": "s5_fanout_partial_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "计划书",
+      "v1": "计划书｜待办：补齐监控。时间：2026-12-08T16:00:00+08:00。",
+      "v2": "计划书｜待办：补齐监控。时间：2026-12-10T16:00:00+08:00。",
+      "phrase": "补齐监控",
+      "detail": "",
+      "token_v1": "2026-12-08T16:00:00+08:00",
+      "token_v2": "2026-12-10T16:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "notes"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "同一份原文的待办句子不变，只有时间变化。草稿留待办，提醒用新时间。"
+}

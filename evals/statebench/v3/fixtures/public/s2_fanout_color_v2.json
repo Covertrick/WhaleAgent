@@ -1,0 +1,14 @@
+{
+  "task_id": "s2_fanout_color_v2",
+  "public_goal": "请阅读「流程」、「标签颜色」。一份议程写出两段草稿。日历颜色通知不进入这两段。与目标无关的更新不要写进结果。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "流程",
+    "extra": "标签颜色"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

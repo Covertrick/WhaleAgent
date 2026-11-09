@@ -1,0 +1,55 @@
+{
+  "task_id": "s4_join_three_way_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "渠道甲",
+      "v1": "渠道甲｜时间：2026-12-04T09:00:00+08:00。",
+      "v2": "渠道甲｜时间：2026-12-04T09:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-04T09:00:00+08:00",
+      "token_v2": "2026-12-04T09:00:00+08:00"
+    },
+    {
+      "sid": "clock",
+      "title": "渠道乙",
+      "v1": "渠道乙｜时间：2026-12-05T09:00:00+08:00。",
+      "v2": "渠道乙｜时间：2026-12-05T09:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-05T09:00:00+08:00",
+      "token_v2": "2026-12-05T09:00:00+08:00"
+    },
+    {
+      "sid": "extra",
+      "title": "渠道丙",
+      "v1": "渠道丙｜时间：2026-12-06T09:00:00+08:00。",
+      "v2": "渠道丙｜时间：2026-12-06T09:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-06T09:00:00+08:00",
+      "token_v2": "2026-12-06T09:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_notes",
+        "r_clock",
+        "r_extra"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "abstain",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "never",
+  "notify": false,
+  "goal_structure": "三份时间互不相同。不要创建提醒。"
+}

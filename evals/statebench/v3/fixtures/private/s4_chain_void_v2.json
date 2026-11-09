@@ -1,0 +1,45 @@
+{
+  "task_id": "s4_chain_void_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "旧排期",
+      "v1": "旧排期｜时间：2026-12-03T10:00:00+08:00。",
+      "v2": "旧排期｜时间：2026-12-03T10:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-03T10:00:00+08:00",
+      "token_v2": "2026-12-03T10:00:00+08:00"
+    },
+    {
+      "sid": "clock",
+      "title": "作废通知",
+      "v1": "作废通知｜结论：该排期作废。",
+      "v2": "作废通知｜结论：该排期作废。",
+      "phrase": "该排期作废",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "void",
+      "kind": "draft",
+      "needs": [
+        "r2"
+      ],
+      "slot": "void",
+      "must_from": [
+        "clock"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "never",
+  "notify": false,
+  "goal_structure": "第一份给了时间，第二份写明作废。草稿只保留作废原句，不要按第一份时间创建提醒。"
+}

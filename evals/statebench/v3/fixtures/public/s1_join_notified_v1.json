@@ -1,0 +1,14 @@
+{
+  "task_id": "s1_join_notified_v1",
+  "public_goal": "请阅读「会议纪要」、「截止说明」。纪要里的待办不改。提醒必须同时依据纪要和通知后的新时间。若出现更新通知，以重新读到的原文为准。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "会议纪要",
+    "clock": "截止说明"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

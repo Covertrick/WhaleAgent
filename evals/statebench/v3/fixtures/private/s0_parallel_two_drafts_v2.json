@@ -1,0 +1,60 @@
+{
+  "task_id": "s0_parallel_two_drafts_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "迁移说明",
+      "v1": "迁移说明｜待办：双写一周。",
+      "v2": "迁移说明｜待办：双写一周。",
+      "phrase": "双写一周",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "extra",
+      "title": "回滚说明",
+      "v1": "回滚说明｜条目：先停新写入。",
+      "v2": "回滚说明｜条目：先停新写入。",
+      "phrase": "先停新写入",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "left",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "left",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "right",
+      "kind": "draft",
+      "needs": [
+        "r_extra"
+      ],
+      "slot": "right",
+      "must_from": [
+        "extra"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "never",
+  "notify": false,
+  "goal_structure": "两份独立说明各写一段草稿，不创建提醒。"
+}

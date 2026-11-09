@@ -1,8 +1,8 @@
 # WhaleAgent
 
-状态感知的多步任务 Agent。QQ 里给出跨资料、笔记和提醒的目标后，Agent 自己取证并执行工具；资料变化或回执未知时改后续动作。未确认的外部效果不会自动再执行。
+**Evidence-Aware Agent for Multi-Step Workflows**
 
-Evidence-Aware Planning · Reliable Tool Execution · Multi-Step Task Recovery
+状态感知的多步任务 Agent。QQ 里给出跨资料、笔记和提醒的目标后，Agent 自己取证并执行工具；资料变化或回执未知时改后续动作。未确认的外部效果不会自动再执行。
 
 本项目为个人独立设计与实现。QQ 是入口，Harness 是可靠执行底座，EGAA 是证据门控决策。三者服务同一条任务。
 
@@ -152,6 +152,8 @@ ReAct 在两道截止时间会变化的题上用了旧时间。EGAA 和 Always R
 
 **旁证：Coding Harness A–F。** 2026-08-21，`qwen3.7-plus`，离线 17/17、在线 31/31。它检查工具、权限、任务图、MCP 和上下文是否按契约工作。这不是本工作流的成绩，也不是 SWE-bench。汇总见 [evals/SUMMARY.md](evals/SUMMARY.md)。
 
+**StateBench v3。** 48 个蓝图、96 条实例已经能离线审计，覆盖 S0–S5 和四种依赖图。人工复核是 `HUMAN_REVIEW_PENDING`，测试集没有开封，所以没有新的真实模型主表，也没有置信区间。紧凑计划和局部更新有代码和单测，没有开发集费用对照。审计在 [docs/evaluation/v3-dataset-audit.md](docs/evaluation/v3-dataset-audit.md)。
+
 协议与复现：[docs/evaluation/statebench-v2-protocol.md](docs/evaluation/statebench-v2-protocol.md)。
 
 ## 3 分钟上手
@@ -159,6 +161,8 @@ ReAct 在两道截止时间会变化的题上用了旧时间。EGAA 和 Always R
 不连接 QQ，也不读取模型密钥：
 
 ```bash
+python scripts/demo_whaleagent.py
+python -m evals.statebench.v3.audit
 python -m unittest tests.application.test_project_sync tests.harness.test_recovery_trace tests.architecture tests.harness.test_executor_port -v
 python -m evals.statebench.runner --split dev --mock
 ```
@@ -190,7 +194,7 @@ agent/application/     项目资料的工具对照和目标核对
 agent/channel/         QQ 适配器，打开 Run 后进入 Engine
 agent/harness/         Run、Intent 账本、UNKNOWN、Trace
 agent/algorithms/      计划、信念、证据、decide。不执行副作用
-evals/statebench/      v1 冻结对照与 v2 真实模型记录
+evals/statebench/      v1 冻结对照、v2 真实模型记录、v3 未开封数据集
 tests/application/     本条主线的行为测试
 docs/                  架构、契约、评测、ADR
 ```
@@ -206,6 +210,12 @@ docs/                  架构、契约、评测、ADR
 | 无来源 | 截止时间没有版本、哈希和来源时，不创建提醒 |
 | 内容哈希 | 同一来源的相同哈希保持一个修订，可以创建提醒；两个来源值不同则保持未知 |
 | 未知回执 | `schedule_reminder` 只出现一次。查询结果含本次 `operation_id` 才确认；同名但另一个 id 保持未知。重启把 `STARTED` 收成 `UNKNOWN`，第二次恢复不再追加通知 |
+
+## 已知限制
+
+EGAA 还没有在 v3 上证明比 Always Refresh 更省，同时保持成功率。v2 开发集和冻结五题的费用方向相反。200 次故障注入只覆盖预定义种子，Vault 和调度器之间仍有剩余竞态。v1 的 40/40 是 Mock，不是真实模型。人工复核没有完成。
+
+可以写进简历的数字只有这些：同一 Engine 上的 `react@1` 与 `egaa@2`；冻结五题一次运行的 3/5、5/5、5/5，以及 EGAA 计划 token 12957/18384；故障注入 200 次、重复不可逆效果 0。不能写稳定优于 Always Refresh，不能写 96 题真实模型成绩。
 
 ## 明确不引入
 

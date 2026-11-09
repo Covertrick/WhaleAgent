@@ -1,0 +1,58 @@
+{
+  "task_id": "s5_chain_keep_early_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "步骤",
+      "v1": "步骤｜待办：补齐备份校验。",
+      "v2": "步骤｜待办：补齐备份校验。",
+      "phrase": "补齐备份校验",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "链尾排期",
+      "v1": "链尾排期｜时间：2026-12-03T18:00:00+08:00。",
+      "v2": "链尾排期｜时间：2026-12-06T18:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-03T18:00:00+08:00",
+      "token_v2": "2026-12-06T18:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "early",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "early",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r2"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "前面的事项草稿保持不变。提醒依赖链尾，并使用变后的时间。"
+}

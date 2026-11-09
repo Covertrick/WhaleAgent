@@ -1,0 +1,55 @@
+{
+  "task_id": "s0_chain_three_reads_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "申请单",
+      "v1": "申请单｜待办：开通只读权限。",
+      "v2": "申请单｜待办：开通只读权限。",
+      "phrase": "开通只读权限",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "extra",
+      "title": "安全复查",
+      "v1": "安全复查｜复查：没有外联。",
+      "v2": "安全复查｜复查：没有外联。",
+      "phrase": "没有外联",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "tail",
+      "title": "签核",
+      "v1": "签核｜签核：同意开通。",
+      "v2": "签核｜签核：同意开通。",
+      "phrase": "同意开通",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "signoff",
+      "kind": "draft",
+      "needs": [
+        "r3"
+      ],
+      "slot": "signoff",
+      "must_from": [
+        "tail"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "never",
+  "notify": false,
+  "goal_structure": "草稿只能在读完第三份签核后写下签核原句。"
+}

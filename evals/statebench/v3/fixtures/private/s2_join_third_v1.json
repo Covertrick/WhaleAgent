@@ -1,0 +1,71 @@
+{
+  "task_id": "s2_join_third_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "纪要",
+      "v1": "纪要｜待办：整理实验记录。",
+      "v2": "纪要｜待办：整理实验记录。",
+      "phrase": "整理实验记录",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "日程",
+      "v1": "日程｜时间：2026-12-01T09:00:00+08:00。",
+      "v2": "日程｜时间：2026-12-01T09:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-01T09:00:00+08:00",
+      "token_v2": "2026-12-01T09:00:00+08:00"
+    },
+    {
+      "sid": "extra",
+      "title": "水印",
+      "v1": "水印｜水印甲",
+      "v2": "水印｜水印乙",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "水印甲",
+      "token_v2": "水印乙"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [
+        "extra"
+      ],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_notes",
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "提醒只由纪要和日程共同决定。第三份水印通知不改变这个决定。"
+}

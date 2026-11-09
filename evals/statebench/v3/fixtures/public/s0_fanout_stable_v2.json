@@ -1,0 +1,13 @@
+{
+  "task_id": "s0_fanout_stable_v2",
+  "public_goal": "请阅读「发布邮件」。同一份纪要同时写出待办草稿和负责人备忘，没有第二来源。阅读之后资料不会再改。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "发布邮件"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

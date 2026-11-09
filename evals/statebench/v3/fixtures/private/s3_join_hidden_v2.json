@@ -1,0 +1,69 @@
+{
+  "task_id": "s3_join_hidden_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "邮件时间",
+      "v1": "邮件时间｜时间：2026-12-05T12:00:00+08:00。",
+      "v2": "邮件时间｜时间：2026-12-05T12:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-05T12:00:00+08:00",
+      "token_v2": "2026-12-05T12:00:00+08:00"
+    },
+    {
+      "sid": "clock",
+      "title": "表格时间",
+      "v1": "表格时间｜时间：2026-12-05T12:00:00+08:00。",
+      "v2": "表格时间｜时间：2026-12-07T12:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-05T12:00:00+08:00",
+      "token_v2": "2026-12-07T12:00:00+08:00"
+    },
+    {
+      "sid": "extra",
+      "title": "待办原文",
+      "v1": "待办原文｜待办：准备验收材料。",
+      "v2": "待办原文｜待办：准备验收材料。",
+      "phrase": "准备验收材料",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_extra"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "extra"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_notes",
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "abstain",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": false,
+  "goal_structure": "两份时间最初相同，其中一份会悄悄改掉。没有通知时不要用先读到的旧时间创建提醒。"
+}

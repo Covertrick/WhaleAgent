@@ -1,0 +1,15 @@
+{
+  "task_id": "s3_join_hidden_v1",
+  "public_goal": "请阅读「纪要时间」、「日程时间」、「待办原文」。两份时间最初相同，其中一份会悄悄改掉。没有通知时不要用先读到的旧时间创建提醒。没有更新通知。不要提交已经变掉的旧值。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "纪要时间",
+    "clock": "日程时间",
+    "extra": "待办原文"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

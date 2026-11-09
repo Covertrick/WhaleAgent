@@ -1,0 +1,50 @@
+{
+  "task_id": "s0_fanout_stable_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "项目纪要",
+      "v1": "项目纪要｜待办：更新部署说明。负责人：林夏。",
+      "v2": "项目纪要｜待办：更新部署说明。负责人：林夏。",
+      "phrase": "更新部署说明",
+      "detail": "林夏",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "owner",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "owner",
+      "must_from": [],
+      "detail_from": [
+        "notes"
+      ],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "never",
+  "notify": false,
+  "goal_structure": "同一份纪要同时写出待办草稿和负责人备忘，没有第二来源。"
+}

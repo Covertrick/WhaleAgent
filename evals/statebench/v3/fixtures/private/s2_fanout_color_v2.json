@@ -1,0 +1,64 @@
+{
+  "task_id": "s2_fanout_color_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "流程",
+      "v1": "流程｜待办：确定演示顺序。负责人：周宁。",
+      "v2": "流程｜待办：确定演示顺序。负责人：周宁。",
+      "phrase": "确定演示顺序",
+      "detail": "周宁",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "extra",
+      "title": "标签颜色",
+      "v1": "标签颜色｜绿色",
+      "v2": "标签颜色｜黄色",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "绿色",
+      "token_v2": "黄色"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "topic",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "topic",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [
+        "extra"
+      ],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "owner",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "owner",
+      "must_from": [],
+      "detail_from": [
+        "notes"
+      ],
+      "must_not_from": [
+        "extra"
+      ],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "一份议程写出两段草稿。日历颜色通知不进入这两段。"
+}

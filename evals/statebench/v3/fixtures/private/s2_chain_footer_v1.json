@@ -1,0 +1,57 @@
+{
+  "task_id": "s2_chain_footer_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "首页",
+      "v1": "首页｜待办：不要改首页。",
+      "v2": "首页｜待办：不要改首页。",
+      "phrase": "不要改首页",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "extra",
+      "title": "页脚",
+      "v1": "页脚｜页脚甲",
+      "v2": "页脚｜页脚乙",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "页脚甲",
+      "token_v2": "页脚乙"
+    },
+    {
+      "sid": "tail",
+      "title": "签注",
+      "v1": "签注｜签注：同意留档。",
+      "v2": "签注｜签注：同意留档。",
+      "phrase": "同意留档",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "signoff",
+      "kind": "draft",
+      "needs": [
+        "r3"
+      ],
+      "slot": "signoff",
+      "must_from": [
+        "tail"
+      ],
+      "detail_from": [],
+      "must_not_from": [
+        "extra"
+      ],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "第三份才是要抄的签注。页脚通知不进入签注草稿。"
+}

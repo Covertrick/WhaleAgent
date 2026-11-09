@@ -1,0 +1,74 @@
+{
+  "task_id": "s2_parallel_rename_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "手册甲",
+      "v1": "手册甲｜待办：补齐命令。",
+      "v2": "手册甲｜待办：补齐命令。",
+      "phrase": "补齐命令",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "extra",
+      "title": "手册乙",
+      "v1": "手册乙｜条目：保留旧命令。",
+      "v2": "手册乙｜条目：保留旧命令。",
+      "phrase": "保留旧命令",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "tail",
+      "title": "附件名",
+      "v1": "附件名｜旧附件名",
+      "v2": "附件名｜新附件名",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "旧附件名",
+      "token_v2": "新附件名"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "left",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "left",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [
+        "tail"
+      ],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "right",
+      "kind": "draft",
+      "needs": [
+        "r_extra"
+      ],
+      "slot": "right",
+      "must_from": [
+        "extra"
+      ],
+      "detail_from": [],
+      "must_not_from": [
+        "tail"
+      ],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "两段正稿各自依赖自己的原文。旁边的文件改名通知不进入正稿。"
+}

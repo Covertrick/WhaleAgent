@@ -90,7 +90,7 @@ def run_engine(policy: StepPolicy, executor, *, max_rounds: int | None = 8) -> E
 
 def _execute(policy: StepPolicy, executor, call: ToolCall) -> str:
     if executor is None:
-        from agent.core.execute import execute_tool
+        from agent.core.loop import execute_tool
 
         return execute_tool(
             call.name,

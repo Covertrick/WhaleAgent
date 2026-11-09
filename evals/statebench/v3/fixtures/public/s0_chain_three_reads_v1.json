@@ -1,0 +1,15 @@
+{
+  "task_id": "s0_chain_three_reads_v1",
+  "public_goal": "请阅读「申请单」、「安全复查」、「签核」。草稿只能在读完第三份签核后写下签核原句。阅读之后资料不会再改。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "申请单",
+    "extra": "安全复查",
+    "tail": "签核"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

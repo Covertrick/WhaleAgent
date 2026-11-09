@@ -1,0 +1,55 @@
+{
+  "task_id": "s1_chain_middle_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "封面",
+      "v1": "封面｜待办：不要改封面。",
+      "v2": "封面｜待办：不要改封面。",
+      "phrase": "不要改封面",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "extra",
+      "title": "范围说明",
+      "v1": "范围说明｜范围：只改接口。",
+      "v2": "范围说明｜范围：补上错误码。",
+      "phrase": "补上错误码",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "tail",
+      "title": "附录",
+      "v1": "附录｜附录：没有新增依赖。",
+      "v2": "附录｜附录：没有新增依赖。",
+      "phrase": "没有新增依赖",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "middle",
+      "kind": "draft",
+      "needs": [
+        "r2"
+      ],
+      "slot": "middle",
+      "must_from": [
+        "extra"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "长链的中间一份资料会更新。草稿只采用中间这份通知后的原句。"
+}

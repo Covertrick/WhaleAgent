@@ -1,0 +1,58 @@
+{
+  "task_id": "s3_parallel_hidden_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "备份记录",
+      "v1": "备份记录｜待办：补齐备份校验。",
+      "v2": "备份记录｜待办：补齐备份校验。",
+      "phrase": "补齐备份校验",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "备份时间",
+      "v1": "备份时间｜时间：2026-12-03T18:00:00+08:00。",
+      "v2": "备份时间｜时间：2026-12-06T18:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-03T18:00:00+08:00",
+      "token_v2": "2026-12-06T18:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": false,
+  "goal_structure": "没有通知。草稿保持，提醒必须改用阅读后变掉的时间。"
+}

@@ -1,0 +1,83 @@
+{
+  "task_id": "s5_parallel_keep_drafts_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "预算说明",
+      "v1": "预算说明｜待办：维持原预算。",
+      "v2": "预算说明｜待办：维持原预算。",
+      "phrase": "维持原预算",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "extra",
+      "title": "风险说明",
+      "v1": "风险说明｜待办：维持原风险。",
+      "v2": "风险说明｜待办：维持原风险。",
+      "phrase": "维持原风险",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "付款时间",
+      "v1": "付款时间｜时间：2026-12-06T12:00:00+08:00。",
+      "v2": "付款时间｜时间：2026-12-08T12:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-06T12:00:00+08:00",
+      "token_v2": "2026-12-08T12:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "budget",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "budget",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "risk",
+      "kind": "draft",
+      "needs": [
+        "r_extra"
+      ],
+      "slot": "risk",
+      "must_from": [
+        "extra"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "预算说明和风险说明都不变，只有付款时间变化。两段说明保持原文，提醒用新时间。"
+}

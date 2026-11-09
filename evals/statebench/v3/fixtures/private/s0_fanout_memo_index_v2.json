@@ -1,0 +1,50 @@
+{
+  "task_id": "s0_fanout_memo_index_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "采样备忘",
+      "v1": "采样备忘｜待办：复核标定。负责人：台架 B。",
+      "v2": "采样备忘｜待办：复核标定。负责人：台架 B。",
+      "phrase": "复核标定",
+      "detail": "台架 B",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "body",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "body",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "index",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "index",
+      "must_from": [],
+      "detail_from": [
+        "notes"
+      ],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "never",
+  "notify": false,
+  "goal_structure": "一份备忘同时产出正文草稿和索引行。"
+}

@@ -1,0 +1,46 @@
+{
+  "task_id": "s0_chain_checklist_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "检查清单",
+      "v1": "检查清单｜待办：逐项核对。",
+      "v2": "检查清单｜待办：逐项核对。",
+      "phrase": "逐项核对",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "结论页",
+      "v1": "结论页｜结论：可以归档。",
+      "v2": "结论页｜结论：可以归档。",
+      "phrase": "可以归档",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "result",
+      "kind": "draft",
+      "needs": [
+        "r2"
+      ],
+      "slot": "result",
+      "must_from": [
+        "notes",
+        "clock"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "never",
+  "notify": false,
+  "goal_structure": "先读清单再读结论，草稿必须同时留下清单事项和结论原句。"
+}

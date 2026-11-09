@@ -1,0 +1,14 @@
+{
+  "task_id": "s0_chain_checklist_v2",
+  "public_goal": "请阅读「值守单」、「结论文档」。先读清单再读结论，草稿必须同时留下清单事项和结论原句。阅读之后资料不会再改。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "值守单",
+    "clock": "结论文档"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

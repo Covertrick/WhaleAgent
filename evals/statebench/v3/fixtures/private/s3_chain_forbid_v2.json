@@ -1,0 +1,45 @@
+{
+  "task_id": "s3_chain_forbid_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "巡检",
+      "v1": "巡检｜待办：归档前再看。",
+      "v2": "巡检｜待办：归档前再看。",
+      "phrase": "归档前再看",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "巡检状态",
+      "v1": "巡检状态｜状态：观察中。",
+      "v2": "巡检状态｜状态：不要归档。",
+      "phrase": "不要归档",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "status",
+      "kind": "draft",
+      "needs": [
+        "r2"
+      ],
+      "slot": "status",
+      "must_from": [
+        "clock"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": false,
+  "goal_structure": "第二份状态会悄悄变成禁止关闭。草稿必须写下变后的原句，并且不要创建提醒。"
+}

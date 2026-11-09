@@ -1,0 +1,14 @@
+{
+  "task_id": "s1_join_reread_v2",
+  "public_goal": "请阅读「排期单」、「场地时间」。负责人和时间都要读到。通知只改时间，提醒用新时间，负责人仍用原文。若出现更新通知，以重新读到的原文为准。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "排期单",
+    "clock": "场地时间"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

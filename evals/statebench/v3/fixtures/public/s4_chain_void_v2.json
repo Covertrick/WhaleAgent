@@ -1,0 +1,14 @@
+{
+  "task_id": "s4_chain_void_v2",
+  "public_goal": "请阅读「旧排期」、「作废通知」。第一份给了时间，第二份写明作废。草稿只保留作废原句，不要按第一份时间创建提醒。证据冲突或缺失时不要编造。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "旧排期",
+    "clock": "作废通知"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

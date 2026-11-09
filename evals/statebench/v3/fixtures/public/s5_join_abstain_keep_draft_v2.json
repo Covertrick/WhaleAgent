@@ -1,0 +1,15 @@
+{
+  "task_id": "s5_join_abstain_keep_draft_v2",
+  "public_goal": "请阅读「邮件时间」、「表格时间」、「待办原文」。待办草稿保持。时间一侧变化后两份时间不再一致，这时不要创建提醒。只有一部分资料会变。没变的内容保持原样。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "邮件时间",
+    "clock": "表格时间",
+    "extra": "待办原文"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

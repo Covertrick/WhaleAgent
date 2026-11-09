@@ -1,0 +1,54 @@
+{
+  "task_id": "s2_join_watermark_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "出发时间",
+      "v1": "出发时间｜时间：2026-12-08T08:00:00+08:00。",
+      "v2": "出发时间｜时间：2026-12-08T08:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-08T08:00:00+08:00",
+      "token_v2": "2026-12-08T08:00:00+08:00"
+    },
+    {
+      "sid": "clock",
+      "title": "集合时间",
+      "v1": "集合时间｜时间：2026-12-08T08:00:00+08:00。",
+      "v2": "集合时间｜时间：2026-12-08T08:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-08T08:00:00+08:00",
+      "token_v2": "2026-12-08T08:00:00+08:00"
+    },
+    {
+      "sid": "extra",
+      "title": "背景",
+      "v1": "背景｜浅底",
+      "v2": "背景｜深底",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "浅底",
+      "token_v2": "深底"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_notes",
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "两份时间一致才提醒。水印通知不参与这个判断。"
+}

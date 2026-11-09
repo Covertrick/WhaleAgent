@@ -1,0 +1,15 @@
+{
+  "task_id": "s2_join_third_v2",
+  "public_goal": "请阅读「备忘」、「日历」、「印章」。提醒只由纪要和日程共同决定。第三份水印通知不改变这个决定。与目标无关的更新不要写进结果。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "备忘",
+    "clock": "日历",
+    "extra": "印章"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

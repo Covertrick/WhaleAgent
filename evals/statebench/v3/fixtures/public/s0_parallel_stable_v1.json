@@ -1,0 +1,14 @@
+{
+  "task_id": "s0_parallel_stable_v1",
+  "public_goal": "请阅读「会议纪要」、「截止说明」。待办草稿只依赖纪要，提醒只依赖另一份时间，两条分支互不引用。阅读之后资料不会再改。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "会议纪要",
+    "clock": "截止说明"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "task_id": "s4_fanout_no_owner_v2",
+  "public_goal": "请阅读「任务卡片」、「候选名单」。原文没有负责人。两段草稿只写待办，不要把候选名单里的人名写进去。证据冲突或缺失时不要编造。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "任务卡片",
+    "extra": "候选名单"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

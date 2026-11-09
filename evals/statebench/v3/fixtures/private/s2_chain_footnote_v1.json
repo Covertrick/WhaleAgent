@@ -1,0 +1,57 @@
+{
+  "task_id": "s2_chain_footnote_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "正文",
+      "v1": "正文｜待办：核对引用。",
+      "v2": "正文｜待办：核对引用。",
+      "phrase": "核对引用",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "结论",
+      "v1": "结论｜结论：维持原结论。",
+      "v2": "结论｜结论：维持原结论。",
+      "phrase": "维持原结论",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "extra",
+      "title": "脚注",
+      "v1": "脚注｜脚注甲",
+      "v2": "脚注｜脚注乙",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "脚注甲",
+      "token_v2": "脚注乙"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "result",
+      "kind": "draft",
+      "needs": [
+        "r2"
+      ],
+      "slot": "result",
+      "must_from": [
+        "clock"
+      ],
+      "detail_from": [],
+      "must_not_from": [
+        "extra"
+      ],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "结论句来自第二份正文。文末脚注有通知，也不进入结论草稿。"
+}

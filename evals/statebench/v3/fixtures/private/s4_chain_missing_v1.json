@@ -1,0 +1,46 @@
+{
+  "task_id": "s4_chain_missing_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "会议纪要",
+      "v1": "会议纪要｜待办：整理实验记录。",
+      "v2": "会议纪要｜待办：整理实验记录。",
+      "phrase": "整理实验记录",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "时间栏",
+      "v1": "时间栏｜时间：时间未定。",
+      "v2": "时间栏｜时间：时间未定。",
+      "phrase": "时间未定",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r2"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes",
+        "clock"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "never",
+  "notify": false,
+  "goal_structure": "先读事项再读时间栏。时间栏写明还没定，草稿记下事项和「时间未定」，不要创建提醒。"
+}

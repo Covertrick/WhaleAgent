@@ -1,0 +1,13 @@
+{
+  "task_id": "s0_fanout_memo_index_v2",
+  "public_goal": "请阅读「采样备忘」。一份备忘同时产出正文草稿和索引行。阅读之后资料不会再改。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "采样备忘"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

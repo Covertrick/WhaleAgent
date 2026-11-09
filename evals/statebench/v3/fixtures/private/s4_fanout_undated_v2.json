@@ -1,0 +1,50 @@
+{
+  "task_id": "s4_fanout_undated_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "设计讨论",
+      "v1": "设计讨论｜待办：补一版流程图。",
+      "v2": "设计讨论｜待办：补一版流程图。",
+      "phrase": "补一版流程图",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "copy",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "copy",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "never",
+  "notify": false,
+  "goal_structure": "同一份原文只有待办、没有时间。两段草稿都只写待办，不要创建提醒。"
+}

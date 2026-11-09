@@ -1,0 +1,70 @@
+{
+  "task_id": "s2_parallel_irrelevant_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "需求待办",
+      "v1": "需求待办｜待办：补齐接口示例。",
+      "v2": "需求待办｜待办：补齐接口示例。",
+      "phrase": "补齐接口示例",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "需求时间",
+      "v1": "需求时间｜时间：2026-12-02T11:00:00+08:00。",
+      "v2": "需求时间｜时间：2026-12-02T11:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-02T11:00:00+08:00",
+      "token_v2": "2026-12-02T11:00:00+08:00"
+    },
+    {
+      "sid": "extra",
+      "title": "封面文件",
+      "v1": "封面文件｜封面甲",
+      "v2": "封面文件｜封面乙",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "封面甲",
+      "token_v2": "封面乙"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [
+        "extra"
+      ],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "会议待办和提醒照写。附件标签即使有通知，也不进入待办或提醒。"
+}

@@ -1,0 +1,14 @@
+{
+  "task_id": "s4_parallel_partial_time_v1",
+  "public_goal": "请阅读「需求说明」、「排期栏」。一份写了待办，另一份明确没有时间。草稿只写待办，不要用空时间创建提醒。证据冲突或缺失时不要编造。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "需求说明",
+    "clock": "排期栏"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

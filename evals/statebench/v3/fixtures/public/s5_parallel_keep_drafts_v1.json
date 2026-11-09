@@ -1,0 +1,15 @@
+{
+  "task_id": "s5_parallel_keep_drafts_v1",
+  "public_goal": "请阅读「预算说明」、「风险说明」、「付款时间」。预算说明和风险说明都不变，只有付款时间变化。两段说明保持原文，提醒用新时间。只有一部分资料会变。没变的内容保持原样。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "预算说明",
+    "extra": "风险说明",
+    "clock": "付款时间"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

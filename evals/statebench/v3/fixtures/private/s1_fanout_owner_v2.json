@@ -1,0 +1,50 @@
+{
+  "task_id": "s1_fanout_owner_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "支持名单",
+      "v1": "支持名单｜待办：回复工单。负责人：旧支持。",
+      "v2": "支持名单｜待办：回复工单。负责人：新支持。",
+      "phrase": "回复工单",
+      "detail": "新支持",
+      "token_v1": "",
+      "token_v2": ""
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "owner",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "owner",
+      "must_from": [],
+      "detail_from": [
+        "notes"
+      ],
+      "must_not_from": [],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "同一份名单更新了负责人。待办保持，负责人备忘改用通知后的人名。"
+}

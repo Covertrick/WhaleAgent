@@ -1,0 +1,14 @@
+{
+  "task_id": "s1_chain_notified_v2",
+  "public_goal": "请阅读「值守记录」、「最新通知」。先读工单再读状态。草稿必须同时留下工单事项和通知后的状态原句。若出现更新通知，以重新读到的原文为准。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "值守记录",
+    "clock": "最新通知"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

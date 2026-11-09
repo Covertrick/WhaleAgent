@@ -1,0 +1,64 @@
+{
+  "task_id": "s2_fanout_irrelevant_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "设计纪要",
+      "v1": "设计纪要｜待办：按钮文案。负责人：林夏。",
+      "v2": "设计纪要｜待办：按钮文案。负责人：林夏。",
+      "phrase": "按钮文案",
+      "detail": "林夏",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "extra",
+      "title": "颜色通知",
+      "v1": "颜色通知｜蓝色",
+      "v2": "颜色通知｜灰色",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "蓝色",
+      "token_v2": "灰色"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "body",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "body",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [
+        "extra"
+      ],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "owner",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "owner",
+      "must_from": [],
+      "detail_from": [
+        "notes"
+      ],
+      "must_not_from": [
+        "extra"
+      ],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "两段草稿都只来自纪要。第三份颜色通知不进入任何草稿。"
+}

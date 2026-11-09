@@ -2,9 +2,6 @@
 
 from __future__ import annotations
 
-from agent.core.llm import chat
-
-
 def model_step(
     messages: list,
     tools: list | None = None,
@@ -13,6 +10,8 @@ def model_step(
     timeout: int = 180,
     temperature: float | None = None,
 ) -> dict:
+    from agent.core.loop import chat
+
     return chat(
         messages,
         tools=tools,

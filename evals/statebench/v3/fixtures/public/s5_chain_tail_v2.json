@@ -1,0 +1,15 @@
+{
+  "task_id": "s5_chain_tail_v2",
+  "public_goal": "请阅读「账号单」、「权限复查」、「审批」。长链里只有最后一份签核会变。草稿使用变后的签核原句。只有一部分资料会变。没变的内容保持原样。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "账号单",
+    "extra": "权限复查",
+    "tail": "审批"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}

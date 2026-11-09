@@ -1,0 +1,61 @@
+{
+  "task_id": "s5_join_one_side_v2",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "检查清单",
+      "v1": "检查清单｜索引：已勾选。",
+      "v2": "检查清单｜索引：已勾选。",
+      "phrase": "已勾选",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "clock",
+      "title": "上线窗口",
+      "v1": "上线窗口｜时间：2026-12-03T21:00:00+08:00。",
+      "v2": "上线窗口｜时间：2026-12-05T21:00:00+08:00。",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "2026-12-03T21:00:00+08:00",
+      "token_v2": "2026-12-05T21:00:00+08:00"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "index",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "index",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [
+        "clock"
+      ],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "reminder",
+      "kind": "reminder",
+      "needs": [
+        "r_notes",
+        "r_clock"
+      ],
+      "slot": "",
+      "must_from": [],
+      "detail_from": [],
+      "must_not_from": [],
+      "reminder_mode": "exact",
+      "reminder_source": "clock"
+    }
+  ],
+  "change_on": "after_first_read",
+  "notify": true,
+  "goal_structure": "索引草稿不能混入新时间。提醒仍要等两侧都读完，并使用变后的时间。"
+}

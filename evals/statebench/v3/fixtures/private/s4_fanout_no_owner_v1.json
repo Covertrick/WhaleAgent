@@ -1,0 +1,64 @@
+{
+  "task_id": "s4_fanout_no_owner_v1",
+  "sources": [
+    {
+      "sid": "notes",
+      "title": "任务说明",
+      "v1": "任务说明｜待办：整理实验记录。",
+      "v2": "任务说明｜待办：整理实验记录。",
+      "phrase": "整理实验记录",
+      "detail": "",
+      "token_v1": "",
+      "token_v2": ""
+    },
+    {
+      "sid": "extra",
+      "title": "候选名单",
+      "v1": "候选名单｜佚名",
+      "v2": "候选名单｜佚名",
+      "phrase": "",
+      "detail": "",
+      "token_v1": "佚名",
+      "token_v2": "佚名"
+    }
+  ],
+  "writes": [
+    {
+      "wid": "todo",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "todo",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [
+        "extra"
+      ],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    },
+    {
+      "wid": "copy",
+      "kind": "draft",
+      "needs": [
+        "r_notes"
+      ],
+      "slot": "copy",
+      "must_from": [
+        "notes"
+      ],
+      "detail_from": [],
+      "must_not_from": [
+        "extra"
+      ],
+      "reminder_mode": "none",
+      "reminder_source": ""
+    }
+  ],
+  "change_on": "never",
+  "notify": false,
+  "goal_structure": "原文没有负责人。两段草稿只写待办，不要把候选名单里的人名写进去。"
+}

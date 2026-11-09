@@ -1,0 +1,13 @@
+{
+  "task_id": "s3_fanout_owner_hidden_v1",
+  "public_goal": "请阅读「值班名单」。名单上的负责人会悄悄更换。待办句子保持，负责人备忘使用新名字。没有更新通知。不要提交已经变掉的旧值。只能使用工具读到的原文，不要编造时间、负责人或提醒。",
+  "titles": {
+    "notes": "值班名单"
+  },
+  "allowed_tools": [
+    "read_doc",
+    "write_draft",
+    "create_reminder",
+    "list_notices"
+  ]
+}
