@@ -2,241 +2,102 @@
 
 **Evidence-Aware Agent for Multi-Step Workflows**
 
-状态感知的多步任务 Agent。QQ 里给出跨资料、笔记和提醒的目标后，Agent 自己取证并执行工具；资料变化或回执未知时改后续动作。未确认的外部效果不会自动再执行。
+多步任务里的证据会过期，未知回执也不能再执行一次。WhaleAgent 把 ReAct 和 EGAA 放进同一个 Engine，用同一套工具比较成功率、过期写入、观察次数和 token。
 
-本项目为个人独立设计与实现。QQ 是入口，Harness 是可靠执行底座，EGAA 是证据门控决策。三者服务同一条任务。
+本项目为个人独立设计与实现。模型分数不写进贡献列表。
 
-## 核心贡献
+## StateBench v3
 
-- 同一 `agent.engine` 承载 ReAct 与 EGAA。Policy 在 Run 开始时冻结为 `react@1` 或 `egaa@2`，决策与执行分离。
-- Harness 在工具执行前把 Intent 落成 `STARTED`。提醒是不可逆技能；回执 `UNKNOWN` 时同一次决策不再创建，Run 保持 `unknown`。
-- 证据门控区分可重写草稿和不可逆提醒。已经读成 `UNKNOWN` 的事实不会为了 `MISSING_EVIDENCE` 被反复重读。
+正式测试是 48 条任务 × 3 种策略 × 2 次，共 288 次。模型 `deepseek-flash`，温度 0。每种策略 96 次。开发者复核过题目，`third_party` 为 no，不是第三方盲审。验证集在开跑前按规则选中了 react@1，测试集仍保留三组。
 
-模型分数放在文末的结果里，不放进贡献列表。故障轨迹能复核的范围在 [docs/evaluation/recovery-trace.md](docs/evaluation/recovery-trace.md)。
+![StateBench v3 测试集成功率。ReAct 80，EGAA 58，Always Refresh 42](docs/assets/v3-success.svg)
 
-## 问题与动机
+ReAct 成功率最高，过期写入也最少。EGAA 相比 Always Refresh 成功率更高、过期写入更少，但没有超过 ReAct。这不是 EGAA 对 ReAct 的全面升级。
 
-多步任务 Agent 常见四种失败。读一次再写一次，写入时来源已经变了。回执未知被当成失败重放，外部提醒可能发出两次。草稿和不可逆动作用同一套策略，要么过度观察，要么该核对时不核对。
+| 策略 | 成功 | 过期写入 | 观察 | 每次成功 token | 耗时合计 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| react@1 | 80/96 | 1 | 279 | 5131 | 586.5 秒 |
+| egaa@2 | 58/96 | 4 | 256 | 802 | 99.7 秒 |
+| Always Refresh | 42/96 | 14 | 208 | 1105 | 98.0 秒 |
 
-ReAct 把下一步交给单次模型调用。它没有显式证据槽，也分不清「可重写」和「不可逆」。模型可以完成任务，但观察成本和过期写入都不由规则约束。
+耗时是 96 次 `elapsed_ms` 相加，不是平均，也不是分位数。
 
-本项目的切入点是三件事放在同一条执行链上。证据门控决定何时再读。副作用账本决定未知回执能不能重放。同一个 Engine 在 Run 开始时冻结一个 Policy，使 ReAct、EGAA 和 Always Refresh 面对同一套工具与观察语义。
+![过期写入、观察次数和每次成功 token](docs/assets/v3-cost.svg)
 
-演示目标是：整理项目会议资料，把待办写入 Vault，按最新截止时间创建提醒；信息冲突先核实，结束时说明哪些已确认、哪些还要用户确认。
+按蓝图聚类、5000 次、种子 20261110：
 
-## 系统流程
+- EGAA 减 Always Refresh 的成功率差区间是 [0.042, 0.313]，不含 0。观察差区间是 [0.292, 0.708]，EGAA 观察更多。单次 token 差的区间含 0。每次成功 token 更低，是因为成功数更多，两边的提示 token 都是 31200。
+- EGAA 减 ReAct 的成功率差区间是 [-0.417, -0.052]，不含 0，上界低于 5 个百分点。这份样本不支持“EGAA 不差过 5 个百分点”。token 差的区间整个在 0 以下。
 
-一条 QQ 消息变成一次 Run。`start_run` 之后选定 ReAct 或 EGAA，把 `policy_name` 和 `policy_version` 写入这笔 Run，之后只调用这一个 Policy。工具执行、轮次和停止由 Engine 负责。Intent 账本仍由 Harness 负责。
+原始行在 [evals/statebench/v3/results/test.json](evals/statebench/v3/results/test.json)。区间说明在 [docs/evaluation/v3-statistical-analysis.md](docs/evaluation/v3-statistical-analysis.md)。
 
-```mermaid
-flowchart TD
-  subgraph entry ["入口"]
-    QQ["QQ 用户"]
-    CLI["Coding CLI<br>python -m agent.main"]
-    Bench["StateBench<br>离线快照世界"]
-  end
+## 失败落在哪
 
-  QQ --> NapCat["NapCat / OneBot WebSocket"]
-  NapCat --> Channel["channel<br>去重、限流、短句拦截、会话"]
-  Channel --> Run["harness.runtime.start_run<br>冻结技能版本和 guardrails<br>生成 Run ID"]
+![缺提醒与过期写入](docs/assets/v3-failures.svg)
 
-  Run --> Select{"start_run 之后选定一次 Policy"}
-  Select -->|"整理或同步资料、会议、截止、提醒、待办或 Vault"| FreezeE["冻结 egaa&#64;2"]
-  Select -->|"其它 QQ 消息"| FreezeR["冻结 react&#64;1"]
-  FreezeE --> Engine["agent.engine.run_engine<br>重复调用同一个 Policy"]
-  FreezeR --> Engine
-  CLI --> FreezeC["Coding CLI 使用 react<br>不写 QQ 账本"]
-  FreezeC --> Engine
+两种计划策略各有 14 次“该有提醒却没有”，刷新规则没有把提醒补出来。过期写入是 14 对 4，这一层 EGAA 比 Always Refresh 好。EGAA 的 `value_from` 只能指向一份事实，两份原文要合成一段、或待办不能混入新名字时，整份拷贝就会失败。ReAct 没有这条限制，所以成功率更高，也更贵。归因在 [docs/evaluation/v3-failure-attribution.md](docs/evaluation/v3-failure-attribution.md)。
 
-  Engine --> Policy{"本 Run 已冻结的 Policy"}
-  Policy -->|"egaa&#64;2"| Egaa["EGAA Policy<br>模型生成计划并抽取原文，decide 控制观察和修复"]
-  Egaa --> Decide["algorithms.decide<br>只看信念、计划和已见通知"]
-  Decide --> Kind{"Decision.kind"}
-  Kind -->|OBSERVE 或继续读取| Exec
-  Kind -->|CONTINUE 写入| Exec
-  Kind -->|REPLAN| Repair["repair_plan<br>未完成节点重新绑定证据<br>已完成节点保持 DONE"]
-  Kind -->|RECOVER 或 STOP| Reply
-  Repair --> Engine
+## 核心设计
 
-  Policy -->|"react&#64;1"| React["ReAct Policy<br>一次 model_step，返回工具或停止"]
-  React --> Model["model_step<br>一次推理，返回文本或 tool call"]
-  Model -->|有工具调用| Exec["执行器.execute<br>QQ 走 Harness 账本，CLI 不写 QQ 账本"]
-  Model -->|无工具调用| Reply
-
-  Exec --> Started["PreToolUse<br>Intent STARTED 先落盘"]
-  Started --> Dispatch["dispatch 领域工具<br>Vault / 催办 / 记忆"]
-  Dispatch --> Effect{"拿到结果后收口"}
-  Effect -->|SUCCEEDED| Obs["Observation<br>事实、source_version、来源 URI"]
-  Effect -->|FAILED| Reply
-  Effect -->|UNKNOWN| Hold["不自动重放<br>只按本次 operation_id 查 schedule_list"]
-  Hold --> Reply
-  Obs --> Belief["apply_observation<br>VALID / UNKNOWN / SUPERSEDED / 冲突"]
-  Belief --> Decide
-
-  Reply["回复用户"] --> Finish["runtime.finish<br>有 UNKNOWN Intent 时 Run 状态保持 unknown"]
-  Finish --> Trace["同一 Run ID<br>runs/run_id.json 的 Intent<br>decisions/run_id.json 的决策原因"]
-  Trace --> Console["FastAPI 控制台 /harness/runs/id"]
-
-  Bench --> V1["StateBench v1<br>冻结 Runner，复现旧结果"]
-  Bench --> V2["StateBench v2<br>同一个 Engine 和 Policy"]
-  V1 --> V1Run["原 Runner<br>B0 脚本 / B1–B4 decide"]
-  V2 --> V2Ad["模拟执行适配器<br>不打开 QQ Run"]
-  V2Ad --> Engine
-  V1Run --> Score["循环结束后评分<br>隐藏真值不进入策略"]
-  V2Ad --> Score
-```
-
-如果图不渲染，读这段。QQ 经 NapCat 进入 channel，`start_run` 生成 Run 并冻结一个 Policy，然后进入 `agent.engine`。EGAA 只返回继续、观察、修复、恢复或停止；副作用只发生在 `execute_tool`。顺序是先把 Intent 落成 `STARTED`，再 dispatch 领域工具，拿到结果后才收成成功、失败或 `UNKNOWN`。成功的结果写成观察并回到同一个 Policy。失败直接回复。`UNKNOWN` 不把同一次写入再执行一遍；提醒只在 `schedule_list` 里出现这次的 `operation_id` 时才确认，同名提醒不算。Run 结束时，未确认的 Intent 使 Run 保持 `unknown`。同一 Run ID 串起账本和决策原因。StateBench v1 用冻结 Runner 复现旧结果。v2 用同一个 Engine 和模拟执行器，评分在循环结束之后。Coding CLI 走 ReAct，不写 QQ 账本。
-
-读图时抓住五件事：
-
-1. **一次消息选定一次 Policy。** `policy_name` 和 `policy_version` 写入 Run 之后不再更换。Run ID 同时挂上 Intent 账本和决策记录。
-2. **决策者不执行工具。** `decide` 返回继续、观察、修复、恢复或停止。副作用只发生在 `execute_tool`。
-3. **ReAct 和 EGAA 都不再自己执行工具。** `core.loop.agent_loop` 只是组装 ReAct Policy 后调用 Engine。项目资料任务把模型计划交给 EGAA Policy，再进入同一个 Engine。
-4. **UNKNOWN 先落账，再停止。** 超时或工具声明结果未知时，应用层不再发第二次同样的写入。提醒只在查询结果含本次 `operation_id` 时确认，同名任务不算。
-5. **v1 和 v2 不是两个执行循环。** v1 保留冻结 Runner，用来复现旧结果。v2 使用同一个 Engine、同一个 Policy 和模拟执行适配器。评分器在循环结束后才读世界真值。
-
-## 项目资料任务的决策环
-
-这条任务有两个分支。草稿可以重写，提醒会造成外部催办。`v` 加整数是唯一可直接比较的版本号。文件 SHA-256 不能排序，但同一来源读到相同哈希时保持原修订，内容变了才登记下一个修订。来源对不上、两份资料冲突，或文本没有来源标识时，不可逆写入停止并请求确认。没有可排序版本，不等于证据永远 `UNKNOWN`。
+一条消息或一道评测题进入同一次 Run。Run 开始时冻结 `react@1` 或 `egaa@2`，之后不再更换。Engine 只调用这一个 Policy。工具执行前先把 Intent 记成 `STARTED`。回执 `UNKNOWN` 时，同一次不可逆写入不再执行。
 
 ```mermaid
-flowchart TD
-  Start["自然语言目标<br>不要求用户写 vN 或事实键"] --> Plan["模型生成计划<br>校验失败则不写入"]
-
-  Plan --> N1["read_materials<br>search_vault 项目会议资料"]
-  Plan --> N2["read_deadline<br>search_vault 项目截止时间"]
-  N1 --> N3["write_draft<br>write_vault_draft<br>可重写，写前不强制重读"]
-  N2 --> N4["write_reminder<br>schedule_reminder<br>不可逆，写前必须再读截止时间"]
-
-  N3 --> Check{"decide"}
-  N4 --> Check
-
-  Check -->|证据 VALID 且草稿可重写| WriteDraft["写入草稿正文<br>正文等于当前资料证据"]
-  Check -->|下一步不可逆| Refresh["再读 project.deadline<br>原因码 POTENTIALLY_STALE"]
-  Check -->|收到相关变化通知| Selective["只重读变化的事实<br>原因码 FACT_CHANGED<br>已完成草稿保持 DONE"]
-  Check -->|版本缺失或冲突| Unknown["状态 UNKNOWN<br>不创建提醒"]
-  Check -->|写入回执未知| Recover["账本 UNKNOWN<br>调用 schedule_list 后 RECOVER"]
-
-  Refresh --> WriteReminder["用最新 VALID 截止时间创建提醒"]
-  Selective --> WriteReminder
-  WriteDraft --> Goal{"两条回执都 CONFIRMED<br>且值等于当前 VALID 证据?"}
-  WriteReminder --> Goal
-  Unknown --> Ask["回复：哪些已确认，哪些需要用户确认"]
-  Recover --> Ask
-  Goal -->|是| Ask
-  Goal -->|否| Check
+flowchart LR
+  Task["消息或评测任务"] --> Freeze["冻结一种策略"]
+  Freeze --> Engine["同一个 Engine"]
+  Engine --> Tool["执行工具"]
+  Tool --> Ledger["Intent 先记 STARTED"]
+  Ledger --> Hold["UNKNOWN 不自动重放"]
 ```
 
-如果图不渲染，读这段。模型先把自然语言目标收成计划，校验失败则不写入。会议资料支撑可重写草稿，写前不强制重读。截止时间支撑不可逆提醒，写前必须再读。相关事实变化时只重读那一条，已完成草稿保持完成。来源缺失或冲突则不创建提醒。提醒回执未知时查一次已有任务并停止，不把创建再执行一遍。目标核对只看当前 `VALID` 证据和已确认回执。
+四个机制就够看首页：
 
-逐步工具对照在 [docs/architecture/project-sync-loop.md](docs/architecture/project-sync-loop.md)。
+- 草稿可重写，提醒不可逆。写提醒前才要求再核对来源。
+- 已经收成 `UNKNOWN` 的事实，不会为了缺证据被反复重读。
+- 来源修订对不上就不提交当时看到的旧值。跨系统的剩余竞态记为 `residual_race`，不把它说成强一致。
+- 评分在回合结束后看隐藏世界，策略提示里没有变化后的原文。
 
-## 结果
+## 复现
 
-数字分三层。主结果不能外推成算法优势，也不是正式榜。归因和每成功成本在 [docs/evaluation/v2-failure-attribution.md](docs/evaluation/v2-failure-attribution.md)。超时、回执丢失、同名提醒和重启的轨迹在 [docs/evaluation/recovery-trace.md](docs/evaluation/recovery-trace.md)。
-
-**探索性冻结对照：冻结五题，只跑一次。** 2026-11-10，`deepseek-flash`，温度 0，每题最多 8 轮，观察预算 6。任务在开跑前冻结，校验和在 [evals/statebench/v2_heldout_frozen.json](evals/statebench/v2_heldout_frozen.json)。三种策略看到同一句目标和同一套工具。五题不足以支持稳定推广。没有置信区间，也没有第三方人工复核。表里的耗时是五题墙钟时间相加，不是单题平均，也不是 P50 或 P95。EGAA 的 111.4 秒就是这五题 `elapsed_ms` 之和。
-
-| 策略 | 成功 | 过期提醒 | 读取 | completion tokens | 每成功 completion | 耗时 |
-|------|------|----------|------|-------------------|-------------------|------|
-| ReAct | 3/5 | 2 | 10 | 2627 | 875.7 | 25.3 秒 |
-| EGAA | 5/5 | 0 | 14 | 18384 | 3676.8 | 111.4 秒 |
-| Always Refresh | 5/5 | 0 | 18 | 19541 | 3908.2 | 120.4 秒 |
-
-ReAct 在两道截止时间会变化的题上用了旧时间。EGAA 和 Always Refresh 都用了新时间；冲突和缺时间的题都写了草稿，没有创建提醒。这次 EGAA 的读取、completion 和每成功 completion 都少于 Always Refresh，但只是这一次五题的结果。把 prompt 加进去之后，每成功总 token 是 ReAct 4216.3、EGAA 4320.4、Always Refresh 4658.6。EGAA 的 completion 里，计划生成占 12957。稳定题上它仍回读了一次会议资料。
-
-**消融：同一开发集六题。** 修复前的轨迹在 [evals/statebench/v2_live_results.json](evals/statebench/v2_live_results.json)。当时冲突题不要求草稿，EGAA 的宽松成功是 4/6；严格要求草稿后是 3/6。三题卡在同一条未确认读取上，deadline 被连读五次后观察预算耗尽。`egaa@2` 让读节点在一次观察后收口。同一六题再跑，EGAA 和 Always Refresh 的严格成功都是 6/6，过期提醒都是 0；ReAct 仍是 4/6、过期提醒 2。EGAA 读取 16 次，Always Refresh 22 次。EGAA 的 completion 仍是 24360，高于 Always Refresh 的 21616，其中计划生成 17534。每成功 completion 是 ReAct 640.5、EGAA 4060.0、Always Refresh 3602.7。开发集上 EGAA 更贵，冻结五题上这次更便宜，方向相反。这六题被用来发现失败，不能当作独立成绩。记录在 [evals/statebench/v2_dev_after.json](evals/statebench/v2_dev_after.json)。
-
-**支撑证据：StateBench v1 冻结环境。** 40 道题，脚本化配置，Mock，token 为 0。人工语义复核仍是 PENDING。B0 脚本化 ReAct 为 20/40 成功、20/40 过期写入。B2 证据门控与 B3 每次写前刷新都是 40/40 成功、0 过期写入。二者工具次数相同，只能说明写前重读这一机制可复现，不能说明选择性观察更省。成功率差 0.50，区间 [0.30, 0.70]，比较对象是脚本，不是真实模型。全文在 [docs/evaluation/egaa-v1-results.md](docs/evaluation/egaa-v1-results.md)。
-
-**旁证：Coding Harness A–F。** 2026-08-21，`qwen3.7-plus`，离线 17/17、在线 31/31。它检查工具、权限、任务图、MCP 和上下文是否按契约工作。这不是本工作流的成绩，也不是 SWE-bench。汇总见 [evals/SUMMARY.md](evals/SUMMARY.md)。
-
-**StateBench v3 正式测试。** 48 条测试任务 × react、egaa、always_refresh × 2 次，共 288 次。`deepseek-flash`，温度 0，16 轮，观察预算 12。开发者语义复核已完成，`third_party` 为 no，不是第三方盲审。验证集按开跑前的规则选中 react@1。下表是测试集。耗时是各次 `elapsed_ms` 相加，不是平均，也不是分位数。
-
-| 策略 | 成功 | 过期写入 | 观察 | completion | 每次成功 token | 耗时合计 |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| react@1 | 80/96 | 1 | 279 | 71273 | 5131.3 | 586.5 秒 |
-| egaa@2 | 58/96 | 4 | 256 | 15334 | 802.3 | 99.7 秒 |
-| Always Refresh | 42/96 | 14 | 208 | 15210 | 1105.0 | 98.0 秒 |
-
-按蓝图聚类、5000 次、种子 20261110。EGAA 减 Always Refresh 的成功率差均值 0.166，区间 [0.042, 0.313]，不含 0。观察差均值 0.50，区间 [0.292, 0.708]，EGAA 观察更多。单次 token 差的区间 [-0.42, 4.04] 含 0。EGAA 减 ReAct 的成功率差区间 [-0.417, -0.052]，不含 0，上界低于 5 个百分点，这份样本不支持“EGAA 不差过 5 个百分点”。EGAA 的 token 更少，区间整个在 0 以下。原文在 [docs/evaluation/v3-frozen-report.md](docs/evaluation/v3-frozen-report.md)。
-
-协议与复现：[docs/evaluation/statebench-v2-protocol.md](docs/evaluation/statebench-v2-protocol.md)。
-
-## 3 分钟上手
-
-不连接 QQ，也不读取模型密钥：
+不调用模型：
 
 ```bash
-python scripts/demo_whaleagent.py
 python -m evals.statebench.v3.audit
-python -m unittest tests.application.test_project_sync tests.harness.test_recovery_trace tests.architecture tests.harness.test_executor_port -v
-python -m evals.statebench.runner --split dev --mock
+python -m unittest tests.statebench.test_v3_dataset tests.harness.test_fault_matrix -q
+python scripts/demo_whaleagent.py
 ```
 
-第一条核对决策闭环和账本。第二条在快照世界里复现 v1 的脚本对照。控制台随 `python -m agent` 启动，需要 `QQ_ADMIN_PORT` 和 NapCat，不在这条离线路径上。
+已完成的 288 次在 `evals/statebench/v3/results/test.json`。要重跑测试集，需要自己的 API key，并先通过 `frozen_manifest.json` 里的开封标记：
 
-## 技术栈
-
-| 层 | 技术 | 职责 |
-|----|------|------|
-| 运行时 | Python 3.10+，`contextvars` | 一条消息在一次调用栈里完成决策和工具执行 |
-| 模型 | DeepSeek，OpenAI 兼容接口，`httpx` | QQ 对话与计划生成；v1 对照默认不请求模型 |
-| 执行 | 自研 Harness：原子 JSON、Intent 账本 | 执行前落盘 `STARTED`，未知回执收成 `UNKNOWN` |
-| 决策 | 自研 EGAA：计划图、证据槽、`decide` | 返回继续、观察、修复、恢复或停止；算法包不依赖 QQ 与 Harness |
-| 编排 | `agent/engine`，`agent/policies`，`agent/application` | 冻结 Policy，翻译工具，把回执收成观察 |
-| 资料 | SQLite，SHA-256，Obsidian Vault，`fastembed` | 检索笔记、落盘草稿、用哈希判断内容是否变化 |
-| 催办 | APScheduler + SQLite | 创建和查询本地提醒 |
-| 控制台 | FastAPI，itsdangerous Magic Link | 按 Run ID 查看 Intent，并看成功率与 `UNKNOWN` 比例 |
-| 评测 | `unittest`，StateBench 快照 | v1 冻结 Runner；v2 复用同一个 Engine |
-
-配置在 `agent/.env`，模板是 `agent/.env.example`。依赖清单是 `requirements.txt`。Coding CLI、RSS、早报、闪念和记账仍保留各自入口，不占这条主线。
-
-## 目录
-
-```text
-agent/engine/          唯一步骤循环
-agent/policies/        ReAct 与 EGAA，Run 开始时冻结其一
-agent/application/     项目资料的工具对照和目标核对
-agent/channel/         QQ 适配器，打开 Run 后进入 Engine
-agent/harness/         Run、Intent 账本、UNKNOWN、Trace
-agent/algorithms/      计划、信念、证据、decide。不执行副作用
-evals/statebench/      v1 冻结对照、v2 探索记录、v3 288 次正式测试
-tests/application/     本条主线的行为测试
-docs/                  架构、契约、评测、ADR
+```bash
+python -m evals.statebench.v3.live --split test --policies react,egaa,always_refresh --repeats 2
 ```
 
-## 本地核对
+## 工程证据
 
-第一条命令覆盖这些行为：
+故障注入 200 个情景，重复不可逆效果为 0，剩余竞态 20。这只覆盖预定义种子。记录在 [docs/evaluation/v4-reliability.md](docs/evaluation/v4-reliability.md)。未知回执的轨迹在 [docs/evaluation/recovery-trace.md](docs/evaluation/recovery-trace.md)。
 
-| 场景 | 期望 |
-|------|------|
-| 选择性观察 | 证据门控写草稿前不重读资料；每次写前都刷新会多读一次资料 |
-| 部分变化 | 截止时间从 v1 变为 v2 后，已完成草稿不重写，提醒使用新时间 |
-| 无来源 | 截止时间没有版本、哈希和来源时，不创建提醒 |
-| 内容哈希 | 同一来源的相同哈希保持一个修订，可以创建提醒；两个来源值不同则保持未知 |
-| 未知回执 | `schedule_reminder` 只出现一次。查询结果含本次 `operation_id` 才确认；同名但另一个 id 保持未知。重启把 `STARTED` 收成 `UNKNOWN`，第二次恢复不再追加通知 |
+可以写进简历的数字：`react@1` 与 `egaa@2` 在同一个 Engine 上；v3 测试集 80/96、58/96、42/96，以及上面两个不含 0 的区间；故障注入 200 次、重复不可逆效果 0。不能写 EGAA 全面优于 ReAct，不能写它更省观察或更省单次 token，不能写第三方复核通过。
 
-## 已知限制
+<details>
+<summary>v1 / v2 历史实验</summary>
 
-v3 测试集上，EGAA 的成功率高于 Always Refresh，区间不含 0；观察次数也更高，单次 token 差的区间含 0。不能写成 EGAA 更省观察或更省 token。相对 ReAct，EGAA 成功率更低、token 更少。v2 开发集和冻结五题的费用方向仍然相反，那是另一组五题和六题。200 次故障注入只覆盖预定义种子，Vault 和调度器之间仍有剩余竞态。v1 的 40/40 是 Mock。v3 复核是开发者完成的，不是第三方。
+这些数字不是 v3 正式结果。
 
-可以写进简历的数字：同一 Engine 上的 `react@1` 与 `egaa@2`；v3 测试集 80/96、58/96、42/96，以及上面两个不含 0 的区间；故障注入 200 次、重复不可逆效果 0。不能写 EGAA 稳定省过 Always Refresh，不能写第三方复核通过，不能把 v1 的 40/40 写成真实模型成绩。v2 冻结五题的 3/5、5/5、5/5 仍只是一次探索。
+v2 冻结五题只跑一次，`deepseek-flash`，温度 0。成功数是 ReAct 3/5、EGAA 5/5、Always Refresh 5/5。耗时 25.3 秒、111.4 秒、120.4 秒，是五题相加。EGAA 的 completion 是 18384，其中计划生成 12957。没有置信区间。同一开发集六题上，EGAA 的 completion 高于 Always Refresh，和这五题的方向相反。
 
-## 明确不引入
+v1 是 40 道脚本题、Mock、token 为 0。人工复核仍是 PENDING。B2 和 B3 都是 40/40，工具次数相同，不能说明选择性观察更省。
 
-问题是动态环境里的证据是否仍可信、何时值得再观察、未知副作用能否重放。为此不引入 LangGraph、Redis、Kafka、Kubernetes，也不做模型后训练、强化学习、公开基准接入或插件市场。OneBot 异步化单独验收，不拿来比较策略。深度放在证据决策、副作用账本，以及同一 Engine 上的可复现对照。
+</details>
 
-## 文档
+<details>
+<summary>进一步阅读</summary>
 
-| 文档 | 内容 |
-|------|------|
-| [docs/architecture/overview.md](docs/architecture/overview.md) | 组件边界 |
-| [docs/architecture/runtime-flow.md](docs/architecture/runtime-flow.md) | 一条 QQ 消息的账本顺序 |
-| [docs/architecture/project-sync-loop.md](docs/architecture/project-sync-loop.md) | 项目资料任务的逐步决策 |
-| [docs/architecture/algorithm-flow.md](docs/architecture/algorithm-flow.md) | 原因码与策略开关 |
-| [docs/evaluation/v2-failure-attribution.md](docs/evaluation/v2-failure-attribution.md) | 六题失败归因和冻结五题 |
-| [docs/adr/0004-application-driver.md](docs/adr/0004-application-driver.md) | 为什么由应用层把 `decide` 接进 Run |
-| [docs/README.md](docs/README.md) | 全部文档索引 |
+- [docs/evaluation/v3-frozen-report.md](docs/evaluation/v3-frozen-report.md)
+- [docs/evaluation/v3-validation-selection.md](docs/evaluation/v3-validation-selection.md)
+- [docs/evaluation/v3-dev-results.md](docs/evaluation/v3-dev-results.md)
+- [docs/architecture/overview.md](docs/architecture/overview.md)
+- [docs/architecture/project-sync-loop.md](docs/architecture/project-sync-loop.md)
+- [docs/README.md](docs/README.md)
+
+</details>

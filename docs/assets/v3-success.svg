@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="248" viewBox="0 0 760 248" role="img" aria-label="StateBench v3 测试集成功率。每种策略 96 次。ReAct 80 次，EGAA 58 次，Always Refresh 42 次。">
+  <title>StateBench v3 测试集成功率</title>
+  <rect width="760" height="248" fill="#ffffff"/>
+  <text x="24" y="32" fill="#1c1917" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="16">StateBench v3 · 每种策略 96 次</text>
+  <text x="24" y="54" fill="#57534e" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="13">测试集成功率。ReAct 最高；EGAA 高于 Always Refresh，但没有超过 ReAct。</text>
+  <g font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#78716c">
+    <text x="168" y="86" text-anchor="middle">0%</text>
+    <text x="283" y="86" text-anchor="middle">25%</text>
+    <text x="398" y="86" text-anchor="middle">50%</text>
+    <text x="513" y="86" text-anchor="middle">75%</text>
+    <text x="628" y="86" text-anchor="middle">100%</text>
+  </g>
+  <line x1="168" y1="96" x2="168" y2="214" stroke="#e7e5e4"/>
+  <line x1="283" y1="96" x2="283" y2="214" stroke="#e7e5e4"/>
+  <line x1="398" y1="96" x2="398" y2="214" stroke="#e7e5e4"/>
+  <line x1="513" y1="96" x2="513" y2="214" stroke="#e7e5e4"/>
+  <line x1="628" y1="96" x2="628" y2="214" stroke="#e7e5e4"/>
+  <text x="24" y="122" fill="#1c1917" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14">ReAct</text>
+  <rect x="168" y="106" width="383" height="22" rx="3" fill="#1e3a5f"/>
+  <text x="640" y="122" fill="#1c1917" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14">83.3% · 80</text>
+  <text x="24" y="162" fill="#1c1917" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14">EGAA</text>
+  <rect x="168" y="146" width="278" height="22" rx="3" fill="#3f6212"/>
+  <text x="640" y="162" fill="#1c1917" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14">60.4% · 58</text>
+  <text x="24" y="202" fill="#1c1917" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14">Always Refresh</text>
+  <rect x="168" y="186" width="201" height="22" rx="3" fill="#9a3412"/>
+  <text x="640" y="202" fill="#1c1917" font-family="Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" font-size="14">43.8% · 42</text>
+</svg>
