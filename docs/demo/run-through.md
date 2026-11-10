@@ -13,7 +13,7 @@ python scripts/demo_whaleagent.py
 - 来源修订不一致时判定 `reject_source`。
 - Vault 与调度器的提交窗口再变化时判定 `residual_race`。
 - 200 次故障注入里，重复不可逆效果是 0。
-- 测试集未开封，人工复核是 `HUMAN_REVIEW_PENDING`。
+- 测试集已开封。复核状态是 developer_reviewed，third_party 为 no。
 
 回执顺序仍是：STARTED → dispatch → UNKNOWN → 按 `operation_id` 查询 → 确认或停止。同一条轨迹的例子在 [../evaluation/recovery-trace.md](../evaluation/recovery-trace.md)。
 

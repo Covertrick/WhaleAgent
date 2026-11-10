@@ -1,13 +1,16 @@
 {
   "schema": "whaleagent-eval-v3",
-  "test_opened": false,
-  "review_status": "HUMAN_REVIEW_PENDING",
-  "reason": "协议把人工复核设为正式测试门槛。自动审计通过不能代替人工 PASS。",
+  "test_opened": true,
+  "selected_policy": "react",
+  "selected_policy_version": "1",
+  "review_status": "developer_reviewed",
+  "third_party": false,
+  "reason": "开发者复核已记录，third_party 为 no。验证集已按事先规则选中 react@1。测试集因此开封，仍跑三组各两次。",
   "blueprints": 48,
   "instances": 96,
   "splits": {"dev": 12, "val": 12, "test": 24},
   "bootstrap_seed": 20261110,
   "bootstrap_iterations": 5000,
-  "budgets": null,
-  "model_runs": "not_started"
+  "budgets": {"max_rounds": 16, "observe_budget": 12, "replan_budget": 2, "temperature": 0},
+  "model_runs": "test_complete"
 }

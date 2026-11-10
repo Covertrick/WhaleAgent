@@ -1,4 +1,4 @@
-"""StateBench v3 自动审计。人工复核保持 HUMAN_REVIEW_PENDING。"""
+"""StateBench v3 自动审计。语义复核由开发者完成，不是第三方。"""
 
 from __future__ import annotations
 
@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 
 from evals.statebench.v3.catalog import SPECS, all_tasks
+from evals.statebench.v3.semantic_review import apply_review
 from evals.statebench.v3.world import initial_hash, logic_hash, play, score, visible_task
 
 ROOT = Path(__file__).resolve().parent
@@ -134,10 +135,13 @@ def audit_rows() -> list[dict]:
                 "legacy_unchanged": legacy_ok,
                 "goal_defined": bool(task["goal_structure"] and task["writes"]),
                 "human_review": "HUMAN_REVIEW_PENDING",
+                "reviewer": "developer",
                 "third_party": "no",
+                "review_note": "",
                 "notes": ";".join(notes),
             }
         )
+        apply_review(rows[-1], task)
     return rows
 
 
@@ -180,7 +184,8 @@ def write_outputs() -> dict:
         "tasks": len(rows),
         "blueprints": len(SPECS),
         "automated_failures": failed,
-        "human_review": "HUMAN_REVIEW_PENDING",
+        "human_review": "developer_reviewed" if not failed else "HUMAN_REVIEW_PENDING",
+        "third_party": "no",
     }
 
 

@@ -22,6 +22,7 @@ class ReActPolicy(StepPolicy):
         use_mcp: bool = True,
         extract_memory: bool = True,
         todo_reminder: bool = True,
+        temperature: float | None = None,
     ) -> None:
         self.policy_name = "react"
         self.policy_version = "1"
@@ -33,6 +34,7 @@ class ReActPolicy(StepPolicy):
         self.use_mcp = use_mcp
         self.extract_memory = extract_memory
         self.todo_reminder = todo_reminder
+        self.temperature = temperature
         self.pool_handlers: dict = {}
         self.last_text: str | None = None
         self._reactive_retries = 0
@@ -60,7 +62,7 @@ class ReActPolicy(StepPolicy):
                 pool_tools, pool_handlers = assemble_tool_pool(TASK_TOOLS, TOOL_HANDLERS)
             self.pool_handlers = pool_handlers
             try:
-                msg = model_step(self.messages, pool_tools, max_tokens=5000)
+                msg = model_step(self.messages, pool_tools, max_tokens=5000, temperature=self.temperature)
             except Exception as exc:
                 if _is_http_overflow(exc) and self._reactive_retries < MAX_REACTIVE_RETRIES:
                     print("\033[33m[reactive compact] 上下文仍然过长，应急压缩后重试\033[0m")

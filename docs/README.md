@@ -49,12 +49,13 @@
 | [evaluation/recovery-trace.md](./evaluation/recovery-trace.md) | 超时、回执丢失、同名提醒、重启的 Run 时间线 |
 | [evaluation/v4-reliability.md](./evaluation/v4-reliability.md) | 版本条件和 200 次故障注入 |
 | [evaluation/v4-planning-cost.md](./evaluation/v4-planning-cost.md) | 分阶段 token，以及还没跑的规划消融 |
-| [evaluation/v3-dataset-audit.md](./evaluation/v3-dataset-audit.md) | 48 个蓝图、96 条实例，人工复核未完成 |
-| [evaluation/v3-preflight.md](./evaluation/v3-preflight.md) | 环境、哈希和未跑的模型预算 |
-| [evaluation/v3-planning-ablation.md](./evaluation/v3-planning-ablation.md) | 紧凑计划与局部更新，尚无费用对照 |
-| [evaluation/v3-dev-results.md](./evaluation/v3-dev-results.md) | 开发集模型对照未运行 |
-| [evaluation/v3-frozen-report.md](./evaluation/v3-frozen-report.md) | 测试集未开封 |
-| [evaluation/v3-statistical-analysis.md](./evaluation/v3-statistical-analysis.md) | Bootstrap 自检，不是实验结果 |
+| [evaluation/v3-dataset-audit.md](./evaluation/v3-dataset-audit.md) | 48 个蓝图、96 条实例，开发者已复核 |
+| [evaluation/v3-preflight.md](./evaluation/v3-preflight.md) | 开跑前的环境和哈希 |
+| [evaluation/v3-planning-ablation.md](./evaluation/v3-planning-ablation.md) | 紧凑计划有代码。正式对比是五组策略，不是紧凑提示 |
+| [evaluation/v3-dev-results.md](./evaluation/v3-dev-results.md) | 开发集 120 次，五种策略 |
+| [evaluation/v3-validation-selection.md](./evaluation/v3-validation-selection.md) | 验证集按事先规则选中 react@1 |
+| [evaluation/v3-frozen-report.md](./evaluation/v3-frozen-report.md) | 测试集 288 次 |
+| [evaluation/v3-statistical-analysis.md](./evaluation/v3-statistical-analysis.md) | 按蓝图聚类的置信区间 |
 | [demo/run-through.md](./demo/run-through.md) | 不调用模型的本地演示 |
 | [adr/0005-evaluation-gates.md](./adr/0005-evaluation-gates.md) | 为什么测试集在人工复核前关闭 |
 | [evaluation/statebench-v2-protocol.md](./evaluation/statebench-v2-protocol.md) | v2 协议。线上数字见根目录 README |

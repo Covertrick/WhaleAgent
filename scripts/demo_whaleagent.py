@@ -29,7 +29,7 @@ def main() -> None:
     report = summarize(run_matrix())
     print("7 故障注入", report["scenarios"], "次；重复不可逆", report["duplicate_irreversible"])
     print("8 回执路径 STARTED -> dispatch -> UNKNOWN -> 按 operation_id 查询 -> 确认或停止")
-    print("9 测试集", "未开封", "human_review", "HUMAN_REVIEW_PENDING")
+    print("9 测试集", "已开封", "review", "developer_reviewed", "third_party", "no")
 
 
 if __name__ == "__main__":

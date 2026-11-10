@@ -1,9 +1,9 @@
 schema: whaleagent-eval-v3
-status: test_closed_human_review_pending
+status: developer_reviewed_test_closed
 note: >
-  48 个蓝图和 96 条实例已经可以离线审计。
-  人工复核仍是 HUMAN_REVIEW_PENDING，测试集没有开封。
-  预算没有在真实开发集运行后锁定。
+  96 条已做开发者语义复核，third_party 为 no，不是第三方盲审。
+  预算在看到开发集分数之前按依赖图上限锁定。
+  测试集仍未开封。验证集选择规则也在开封前写死。
 
 dataset:
   registered_blueprints: 48
@@ -31,10 +31,31 @@ policies:
     - always_full_replan
 
 budgets:
-  max_decisions: null
-  max_tool_calls: null
-  max_observations: null
-  max_plan_calls: null
+  max_rounds: 16
+  observe_budget: 12
+  replan_budget: 2
+  max_plan_calls: 2
+  temperature: 0
+  planner: full
+  grounder: deterministic
+  note: >
+    最多三份资料，变化后可能再读一遍，再加上写入。
+    16 轮和 12 次观察是按这个上限取的，不是按某次分数调的。
+    plan_only 映射到 B1，只在缺证据时观察，不是完全不观察。
+    always_full_replan 映射到 B4，重规划会再调用模型。
+    计划请求关闭思考。否则当前模型把 4000 token 花在推理上，JSON 会被截断。max_tokens 仍是 4000。
+
+selection:
+  val_policies:
+    - react
+    - egaa
+    - always_refresh
+  rule: >
+    验证集只跑一次，不跑诊断策略。
+    某策略只有在成功数严格多于另外两个，并且每次成功的观察数不更高时，才记为选中。
+    否则冻结 egaa@2 为保守候选，并写明没有证明它更好。
+    测试集仍然跑 react、egaa、always_refresh 各两次，不因验证集结果删掉任何一组。
+    诊断策略不进入测试集。
 
 analysis:
   bootstrap_unit: blueprint_id
@@ -49,7 +70,8 @@ safety:
 
 audit:
   require_human_review: true
-  reviewer: HUMAN_REVIEW_PENDING
+  reviewer: developer
+  review_status: developer_reviewed
   third_party: false
   require_frozen_hashes: true
   preserve_failed_episodes: true

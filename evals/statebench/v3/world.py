@@ -222,6 +222,23 @@ def _source_token(task: dict, sid: str, *, final: bool) -> str:
     return source["token_v1"]
 
 
+def _forbidden_pieces(task: dict, item: dict) -> list[str]:
+    """无关来源的新旧词都算混入。同一来源只禁止被换掉的那个新值。"""
+    required = set(item["must_from"]) | set(item.get("detail_from") or [])
+    pieces: list[str] = []
+    for sid in item["must_not_from"]:
+        source = next(src for src in task["sources"] if src["sid"] == sid)
+        if sid in required:
+            changed = source["v1"] != source["v2"]
+            chosen = [source["token_v2"] if changed and source.get("token_v2") else source.get("token_v1") or ""]
+        else:
+            chosen = [source.get(key) or "" for key in ("token_v1", "token_v2", "phrase", "detail")]
+        for piece in chosen:
+            if piece and piece not in pieces:
+                pieces.append(piece)
+    return pieces
+
+
 def score(task: dict, world: World) -> dict:
     """只在回合结束后调用。期望值来自已经触发的隐藏世界，不写回策略。"""
     reasons: list[str] = []
@@ -235,7 +252,7 @@ def score(task: dict, world: World) -> dict:
         if not all(piece and piece in body for piece in required):
             draft_ok = False
             reasons.append("draft_missing:" + item["slot"])
-        forbidden = [_source_field(task, sid, "token_v2") or _source_field(task, sid, "token_v1") for sid in item["must_not_from"]]
+        forbidden = _forbidden_pieces(task, item)
         if any(piece and piece in body for piece in forbidden):
             draft_ok = False
             reasons.append("draft_forbidden:" + item["slot"])

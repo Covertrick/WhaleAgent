@@ -44,7 +44,7 @@ def compile_model_plan(prompt: str, *, schema_hint: str, compact: bool = False) 
 
         phase = usage_phase.set("plan")
         try:
-            raw = model_step(messages, tools=None, max_tokens=4000, temperature=0)
+            raw = model_step(messages, tools=None, max_tokens=4000, temperature=0, thinking=False)
         finally:
             usage_phase.reset(phase)
         text = _response_text(raw)
@@ -67,6 +67,15 @@ def _response_text(raw: dict) -> str:
     return content
 
 
+def _string_list(value) -> list[str]:
+    """模型有时把空依赖写成 true/false。那不是列表，不能拿来迭代。"""
+    if isinstance(value, str):
+        return [value] if value else []
+    if not isinstance(value, list):
+        return []
+    return [str(item) for item in value]
+
+
 def _nodes_from_text(text: str) -> list[PlanNode]:
     matched = _FENCE.search(text)
     body = matched.group(1) if matched else text
@@ -82,13 +91,14 @@ def _nodes_from_text(text: str) -> list[PlanNode]:
     for item in raw_nodes:
         if not isinstance(item, dict):
             raise PlanError("bad_node")
+        raw_args = item.get("args")
         nodes.append(
             PlanNode(
                 str(item.get("id") or ""),
                 str(item.get("action") or ""),
-                args=dict(item.get("args") or {}),
-                depends_on_nodes=[str(dep) for dep in item.get("depends_on_nodes") or []],
-                requires_evidence=[str(ev) for ev in item.get("requires_evidence") or []],
+                args=dict(raw_args) if isinstance(raw_args, dict) else {},
+                depends_on_nodes=_string_list(item.get("depends_on_nodes")),
+                requires_evidence=_string_list(item.get("requires_evidence")),
                 irreversible=bool(item.get("irreversible")),
             )
         )
@@ -96,6 +106,9 @@ def _nodes_from_text(text: str) -> list[PlanNode]:
         if node.action != "write_fact":
             continue
         source = node.args.get("value_from")
+        if isinstance(source, str) and source.strip():
+            node.args["value_from"] = {"fact_key": source.strip()}
+            source = node.args["value_from"]
         if not isinstance(source, dict) or not source.get("fact_key"):
             raise PlanError("missing_value_from:" + node.id)
     validation = plan_errors(nodes)

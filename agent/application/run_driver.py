@@ -58,6 +58,7 @@ def run_driver(
     read_binding: Callable[[str], tuple[str, dict]] | None = None,
     write_binding: Callable[[str, str], tuple[str, dict]] | None = None,
     grounder: Callable[..., object] | None = None,
+    replan_fn: Callable[[], list] | None = None,
 ) -> DriverResult:
     from agent.engine.runner import run_engine
     from agent.policies.egaa import EGAAPolicy
@@ -74,6 +75,7 @@ def run_driver(
         read_binding=read_binding or read_call,
         write_binding=write_binding or write_call,
         grounder=grounder,
+        replan_fn=replan_fn,
     )
     _freeze_policy(agent.policy_name, agent.policy_version)
     engine = run_engine(agent, executor, max_rounds=max_rounds)

@@ -15,7 +15,7 @@ WhaleAgent 是一个状态感知的长任务 Agent。一次用户目标从 QQ �
 | Coding CLI | `react@1` | `CodingExecutorAdapter`，不写 QQ 账本 |
 | StateBench v1 | 不进入这条 Run | 冻结 Runner。B0 是脚本，B1–B4 调用 `decide`，用来复现旧结果 |
 | StateBench v2 | 与线上相同的 Policy 对象 | 同一个 Engine，外加模拟执行适配器。评分器在循环结束后读取世界 |
-| StateBench v3 | 48 个蓝图、96 个实例的离线世界 | 公开提示与隐藏世界分开。人工复核未完成，测试集没有开封 |
+| StateBench v3 | 48 个蓝图、96 个实例的离线世界 | 公开提示与隐藏世界分开。开发者已复核，测试集 288 次已完成。不是第三方盲审 |
 
 ## 谁做什么
 

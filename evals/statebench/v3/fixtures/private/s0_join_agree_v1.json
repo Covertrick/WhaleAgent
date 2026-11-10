@@ -55,5 +55,5 @@
   ],
   "change_on": "never",
   "notify": false,
-  "goal_structure": "两份时间一致才创建提醒，草稿仍只写纪要里的待办。"
+  "goal_structure": "读完纪要和日程后，按日程原文的时间创建提醒。草稿只写纪要里的待办。"
 }

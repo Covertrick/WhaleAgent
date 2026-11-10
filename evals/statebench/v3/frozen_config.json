@@ -1,0 +1,30 @@
+{
+  "schema": "whaleagent-eval-v3-frozen",
+  "git_head_before_runner": "202b0afba4b6012188a7e4ec3e38c9a119175314",
+  "note": "测试开跑时工作区还没有把运行器提交进去。下面的文件哈希才是冻结对象。开跑之后不再改这些文件。",
+  "selected_policy": "react",
+  "selected_policy_version": "1",
+  "test_policies": ["react", "egaa", "always_refresh"],
+  "repeats": 2,
+  "model": "deepseek-flash",
+  "temperature": 0,
+  "budgets": {"max_rounds": 16, "observe_budget": 12, "replan_budget": 2, "max_plan_tokens": 4000},
+  "planner": "full",
+  "plan_thinking": "disabled",
+  "grounder": "deterministic",
+  "review_status": "developer_reviewed",
+  "third_party": false,
+  "selection_rule": "success strictly highest and observations per success not higher; otherwise freeze egaa@2",
+  "primary_comparison": "egaa_vs_always_refresh",
+  "bootstrap_seed": 20261110,
+  "bootstrap_iterations": 5000,
+  "hashes": {
+    "catalog.py": "0436f4712ba37019046c395f70a27c427c4e79cda4c24484a40d8f9e443bdd98",
+    "world.py": "f9fa2d163c17e890bdb3ec40ed9d3140a26f8f03013e59ec6f3e20ceb548e844",
+    "live.py": "7486113758ca2a35a3d8ab2ede4cc92d7ea5e44298f36589c68a975f7087f9ec",
+    "protocol.yaml": "2d8ce05fb23d880cd60cc675bb4d9e8c13d73c95c44b560f1bcb11cf819a507b",
+    "splits.json": "83219859feac2abf56221aa5673ed9098900ce7b6c69d38e2bfaf354c126948c",
+    "semantic_review.py": "1ee41e6e2e2d7f0a16784233b6f99e3c8e45efbf7e43eef22a86c7b0cb4e6226",
+    "audit.py": "89a49b8ceab4a96af3eaf5f7f03c7c0909fe653263f98e99e208982e8497ce55"
+  }
+}

@@ -24,6 +24,7 @@ def _payload(
     tools: list | None,
     max_tokens: int,
     temperature: float | None = None,
+    thinking: bool | None = None,
 ) -> dict:
     payload = {
         "model": MODEL_NAME,
@@ -32,6 +33,10 @@ def _payload(
     }
     if temperature is not None:
         payload["temperature"] = temperature
+    if thinking is False:
+        payload["thinking"] = {"type": "disabled"}
+    elif thinking is True:
+        payload["thinking"] = {"type": "enabled"}
     if tools is not None:
         payload["tools"] = tools
         payload["tool_choice"] = "auto"
@@ -79,13 +84,14 @@ async def chat_async(
     max_tokens: int = 5000,
     timeout: int = 180,
     temperature: float | None = None,
+    thinking: bool | None = None,
 ) -> dict:
     """异步 chat/completions，复用全局 AsyncClient 连接池。"""
     if not END_POINT:
         raise RuntimeError("未配置 BASE_URL / END_POINT")
     data = await async_post_json(
         END_POINT,
-        json_body=_payload(messages, tools, max_tokens, temperature),
+        json_body=_payload(messages, tools, max_tokens, temperature, thinking),
         headers=_headers(),
         timeout=float(timeout),
     )
@@ -99,6 +105,7 @@ def chat(
     max_tokens: int = 5000,
     timeout: int = 180,
     temperature: float | None = None,
+    thinking: bool | None = None,
 ) -> dict:
     """同步入口：在常驻事件循环上调度 chat_async（连接池仍生效）。"""
     if http_backend() == "httpx":
@@ -109,13 +116,14 @@ def chat(
                 max_tokens=max_tokens,
                 timeout=timeout,
                 temperature=temperature,
+                thinking=thinking,
             ),
             timeout=float(timeout) + 10,
         )
     # 极端无 httpx：直连
     data = sync_post_json(
         END_POINT,
-        json_body=_payload(messages, tools, max_tokens, temperature),
+        json_body=_payload(messages, tools, max_tokens, temperature, thinking),
         headers=_headers(),
         timeout=float(timeout),
     )

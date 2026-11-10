@@ -152,7 +152,15 @@ ReAct 在两道截止时间会变化的题上用了旧时间。EGAA 和 Always R
 
 **旁证：Coding Harness A–F。** 2026-08-21，`qwen3.7-plus`，离线 17/17、在线 31/31。它检查工具、权限、任务图、MCP 和上下文是否按契约工作。这不是本工作流的成绩，也不是 SWE-bench。汇总见 [evals/SUMMARY.md](evals/SUMMARY.md)。
 
-**StateBench v3。** 48 个蓝图、96 条实例已经能离线审计，覆盖 S0–S5 和四种依赖图。人工复核是 `HUMAN_REVIEW_PENDING`，测试集没有开封，所以没有新的真实模型主表，也没有置信区间。紧凑计划和局部更新有代码和单测，没有开发集费用对照。审计在 [docs/evaluation/v3-dataset-audit.md](docs/evaluation/v3-dataset-audit.md)。
+**StateBench v3 正式测试。** 48 条测试任务 × react、egaa、always_refresh × 2 次，共 288 次。`deepseek-flash`，温度 0，16 轮，观察预算 12。开发者语义复核已完成，`third_party` 为 no，不是第三方盲审。验证集按开跑前的规则选中 react@1。下表是测试集。耗时是各次 `elapsed_ms` 相加，不是平均，也不是分位数。
+
+| 策略 | 成功 | 过期写入 | 观察 | completion | 每次成功 token | 耗时合计 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| react@1 | 80/96 | 1 | 279 | 71273 | 5131.3 | 586.5 秒 |
+| egaa@2 | 58/96 | 4 | 256 | 15334 | 802.3 | 99.7 秒 |
+| Always Refresh | 42/96 | 14 | 208 | 15210 | 1105.0 | 98.0 秒 |
+
+按蓝图聚类、5000 次、种子 20261110。EGAA 减 Always Refresh 的成功率差均值 0.166，区间 [0.042, 0.313]，不含 0。观察差均值 0.50，区间 [0.292, 0.708]，EGAA 观察更多。单次 token 差的区间 [-0.42, 4.04] 含 0。EGAA 减 ReAct 的成功率差区间 [-0.417, -0.052]，不含 0，上界低于 5 个百分点，这份样本不支持“EGAA 不差过 5 个百分点”。EGAA 的 token 更少，区间整个在 0 以下。原文在 [docs/evaluation/v3-frozen-report.md](docs/evaluation/v3-frozen-report.md)。
 
 协议与复现：[docs/evaluation/statebench-v2-protocol.md](docs/evaluation/statebench-v2-protocol.md)。
 
@@ -194,7 +202,7 @@ agent/application/     项目资料的工具对照和目标核对
 agent/channel/         QQ 适配器，打开 Run 后进入 Engine
 agent/harness/         Run、Intent 账本、UNKNOWN、Trace
 agent/algorithms/      计划、信念、证据、decide。不执行副作用
-evals/statebench/      v1 冻结对照、v2 真实模型记录、v3 未开封数据集
+evals/statebench/      v1 冻结对照、v2 探索记录、v3 288 次正式测试
 tests/application/     本条主线的行为测试
 docs/                  架构、契约、评测、ADR
 ```
@@ -213,9 +221,9 @@ docs/                  架构、契约、评测、ADR
 
 ## 已知限制
 
-EGAA 还没有在 v3 上证明比 Always Refresh 更省，同时保持成功率。v2 开发集和冻结五题的费用方向相反。200 次故障注入只覆盖预定义种子，Vault 和调度器之间仍有剩余竞态。v1 的 40/40 是 Mock，不是真实模型。人工复核没有完成。
+v3 测试集上，EGAA 的成功率高于 Always Refresh，区间不含 0；观察次数也更高，单次 token 差的区间含 0。不能写成 EGAA 更省观察或更省 token。相对 ReAct，EGAA 成功率更低、token 更少。v2 开发集和冻结五题的费用方向仍然相反，那是另一组五题和六题。200 次故障注入只覆盖预定义种子，Vault 和调度器之间仍有剩余竞态。v1 的 40/40 是 Mock。v3 复核是开发者完成的，不是第三方。
 
-可以写进简历的数字只有这些：同一 Engine 上的 `react@1` 与 `egaa@2`；冻结五题一次运行的 3/5、5/5、5/5，以及 EGAA 计划 token 12957/18384；故障注入 200 次、重复不可逆效果 0。不能写稳定优于 Always Refresh，不能写 96 题真实模型成绩。
+可以写进简历的数字：同一 Engine 上的 `react@1` 与 `egaa@2`；v3 测试集 80/96、58/96、42/96，以及上面两个不含 0 的区间；故障注入 200 次、重复不可逆效果 0。不能写 EGAA 稳定省过 Always Refresh，不能写第三方复核通过，不能把 v1 的 40/40 写成真实模型成绩。v2 冻结五题的 3/5、5/5、5/5 仍只是一次探索。
 
 ## 明确不引入
 

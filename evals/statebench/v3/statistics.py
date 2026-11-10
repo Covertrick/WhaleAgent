@@ -37,15 +37,19 @@ def clustered_bootstrap(
         "seed": seed,
         "success_delta": _interval(success_deltas),
         "observation_delta": _interval(observation_deltas),
-        "cost_delta": _interval(cost_deltas),
+        "cost_delta": {"defined": False} if any(item is None for item in cost_deltas) else _interval(cost_deltas),
     }
 
 
-def _mean_delta(grouped, draw, left: str, right: str, field: str) -> float:
+def _mean_delta(grouped, draw, left: str, right: str, field: str) -> float | None:
     total = 0.0
     for key in draw:
-        left_mean = sum(float(item[field]) for item in grouped[key][left]) / len(grouped[key][left])
-        right_mean = sum(float(item[field]) for item in grouped[key][right]) / len(grouped[key][right])
+        left_values = [item[field] for item in grouped[key][left]]
+        right_values = [item[field] for item in grouped[key][right]]
+        if any(value is None for value in left_values + right_values):
+            return None
+        left_mean = sum(float(value) for value in left_values) / len(left_values)
+        right_mean = sum(float(value) for value in right_values) / len(right_values)
         total += left_mean - right_mean
     return total / len(draw)
 

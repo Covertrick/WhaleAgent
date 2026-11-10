@@ -1,0 +1,3190 @@
+{
+  "split": "val",
+  "model": "deepseek-flash",
+  "temperature": 0,
+  "max_rounds": 16,
+  "observe_budget": 12,
+  "replan_budget": 2,
+  "policies": [
+    "react",
+    "egaa",
+    "always_refresh"
+  ],
+  "repeats": 1,
+  "complete": true,
+  "summary": [
+    {
+      "policy": "react",
+      "episodes": 24,
+      "success": 21,
+      "success_rate": 0.875,
+      "stale_actions": 2,
+      "safe_abstention": 2,
+      "partial": 2,
+      "observations": 62,
+      "prompt_tokens": 79151,
+      "completion_tokens": 16623,
+      "elapsed_ms": 142057,
+      "plan_calls": 0,
+      "cost_per_success_tokens": 4560.7,
+      "failure_reasons": [
+        "draft_missing:todo",
+        "stale_action"
+      ]
+    },
+    {
+      "policy": "egaa",
+      "episodes": 24,
+      "success": 15,
+      "success_rate": 0.625,
+      "stale_actions": 1,
+      "safe_abstention": 2,
+      "partial": 7,
+      "observations": 60,
+      "prompt_tokens": 7810,
+      "completion_tokens": 4010,
+      "elapsed_ms": 27998,
+      "plan_calls": 24,
+      "cost_per_success_tokens": 788.0,
+      "failure_reasons": [
+        "draft_missing:result",
+        "reminder_missing",
+        "stale_action"
+      ]
+    },
+    {
+      "policy": "always_refresh",
+      "episodes": 24,
+      "success": 8,
+      "success_rate": 0.3333,
+      "stale_actions": 4,
+      "safe_abstention": 2,
+      "partial": 12,
+      "observations": 48,
+      "prompt_tokens": 7810,
+      "completion_tokens": 3947,
+      "elapsed_ms": 27932,
+      "plan_calls": 24,
+      "cost_per_success_tokens": 1469.6,
+      "failure_reasons": [
+        "draft_missing:result",
+        "draft_missing:signoff",
+        "reminder_missing",
+        "stale_action"
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "task_id": "s0_chain_checklist_v1",
+      "blueprint_id": "s0_chain_checklist",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 2841,
+        "completion": 403,
+        "phases": {
+          "react_step": {
+            "prompt": 2841,
+            "completion": 403,
+            "calls": 4,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 5584,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成阅读与写入草稿（slot 1）。\n\n- 清单原文：「检查清单｜待办：逐项核对。」\n- 结论原文：「结论页｜结论：可以归档。」\n\n两项都已留在同一份草稿中（pick=all）。\n\n未创建提醒：两份原文都没有给出日期、时间或负责人，按规则不编造、不设置提醒。资料阅读后不再改动，任务到此结束。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s0_chain_checklist_v1",
+      "blueprint_id": "s0_chain_checklist",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 319,
+        "completion": 194,
+        "phases": {
+          "plan": {
+            "prompt": 319,
+            "completion": 194,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1351,
+      "success": false,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "draft_missing:result"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s0_chain_checklist_v1",
+      "blueprint_id": "s0_chain_checklist",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 319,
+        "completion": 200,
+        "phases": {
+          "plan": {
+            "prompt": 319,
+            "completion": 200,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1440,
+      "success": false,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "draft_missing:result"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s0_chain_checklist_v2",
+      "blueprint_id": "s0_chain_checklist",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 321,
+        "completion": 144,
+        "phases": {
+          "plan": {
+            "prompt": 321,
+            "completion": 144,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1113,
+      "success": false,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "draft_missing:result"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s0_chain_checklist_v2",
+      "blueprint_id": "s0_chain_checklist",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 321,
+        "completion": 202,
+        "phases": {
+          "plan": {
+            "prompt": 321,
+            "completion": 202,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1240,
+      "success": false,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "draft_missing:result"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s0_chain_checklist_v2",
+      "blueprint_id": "s0_chain_checklist",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 2241,
+        "completion": 490,
+        "phases": {
+          "react_step": {
+            "prompt": 2241,
+            "completion": 490,
+            "calls": 3,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 4305,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成阅读，并把内容写入草稿，写入位置为 slot 1，pick 为 all。\n\n**草稿内容：**\n\n- 清单事项（值守单原文）：待办：确认告警。\n- 结论原句（结论文档原文）：结论：观察结束。\n\n说明：\n\n- 这两份原文中没有出现任何具体时间、负责人或截止时间，因此我没有调用提醒工具，以免编造依据。\n- 我也未对资料做任何推测或补充，草稿里只保留了工具读到的原句。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s0_join_agree_v1",
+      "blueprint_id": "s0_join_agree",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 322,
+        "completion": 194,
+        "phases": {
+          "plan": {
+            "prompt": 322,
+            "completion": 194,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1155,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s0_join_agree_v1",
+      "blueprint_id": "s0_join_agree",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 322,
+        "completion": 194,
+        "phases": {
+          "plan": {
+            "prompt": 322,
+            "completion": 194,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1217,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s0_join_agree_v1",
+      "blueprint_id": "s0_join_agree",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 2174,
+        "completion": 379,
+        "phases": {
+          "react_step": {
+            "prompt": 2174,
+            "completion": 379,
+            "calls": 3,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 3854,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "都完成了：\n\n- **提醒**：已按「共享日程」原文的时间创建，到期时间为 2026-12-05T09:30:00+08:00。\n- **草稿（第 1 格）**：只写了「例会记录」里的待办——“提交周报”。\n\n说明：例会纪要中只列出了一条待办，没有出现负责人和时间；日程中只有时间，没有待办内容，因此草稿只包含这一条待办，没有添加其他内容。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s0_join_agree_v2",
+      "blueprint_id": "s0_join_agree",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 324,
+        "completion": 196,
+        "phases": {
+          "plan": {
+            "prompt": 324,
+            "completion": 196,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1562,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s0_join_agree_v2",
+      "blueprint_id": "s0_join_agree",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 2241,
+        "completion": 484,
+        "phases": {
+          "react_step": {
+            "prompt": 2241,
+            "completion": 484,
+            "calls": 3,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 3780,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成，依据均来自原文：\n\n**1. 阅读结果**\n- 周报提纲：待办为「核对引用」。\n- 共享日历：时间为 2026-12-05T14:00:00+08:00。\n\n**2. 草稿（仅含纪要中的待办）**\n- 槽位 1，取用范围：todo\n- 内容：待办：核对引用。\n\n**3. 提醒**\n- 已按日程原文时间创建：2026-12-05T14:00:00+08:00\n\n说明：纪要中没有负责人信息，因此草稿未填写负责人；提醒时间直接采用共享日历原文，未做任何换算或推测。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s0_join_agree_v2",
+      "blueprint_id": "s0_join_agree",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 324,
+        "completion": 196,
+        "phases": {
+          "plan": {
+            "prompt": 324,
+            "completion": 196,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1324,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s1_parallel_clock_v1",
+      "blueprint_id": "s1_parallel_clock",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "clock"
+      ],
+      "observations": 3,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 5230,
+        "completion": 1060,
+        "phases": {
+          "react_step": {
+            "prompt": 5230,
+            "completion": 1060,
+            "calls": 5,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 8336,
+      "success": false,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "draft_missing:todo"
+      ],
+      "reply": "已完成，结果如下：\n\n**草稿（保持不变，按首次读到的原文）**\n- 槽位 1：发布说明｜待办：更新回滚步骤。\n- 槽位 2：上线窗口｜时间：2026-12-03T21:00:00+08:00。\n\n**更新通知处理**\n- 收到通知：「上线窗口 已更新，请重新阅读。」据此重新读取原文，原文时间已变为 **2026-12-05T21:00:00+08:00**。\n\n**提醒（跟随通知后的时间）**\n- 已创建提醒，到期时间：2026-12-05T21:00:00+08:00（依据重新读到的原文）。\n\n说明：两文档中均未提供负责人信息，因此草稿未填写负责人；提醒仅使用原文中出现的时间，无编造内容。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s1_parallel_clock_v1",
+      "blueprint_id": "s1_parallel_clock",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "clock"
+      ],
+      "observations": 3,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 319,
+        "completion": 207,
+        "phases": {
+          "plan": {
+            "prompt": 319,
+            "completion": 207,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1284,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "FACT_CHANGED",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s1_parallel_clock_v1",
+      "blueprint_id": "s1_parallel_clock",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 319,
+        "completion": 207,
+        "phases": {
+          "plan": {
+            "prompt": 319,
+            "completion": 207,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1487,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": true,
+      "failure_reasons": [
+        "stale_action"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s1_parallel_clock_v2",
+      "blueprint_id": "s1_parallel_clock",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "clock"
+      ],
+      "observations": 3,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 319,
+        "completion": 201,
+        "phases": {
+          "plan": {
+            "prompt": 319,
+            "completion": 201,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1014,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "FACT_CHANGED",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s1_parallel_clock_v2",
+      "blueprint_id": "s1_parallel_clock",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 319,
+        "completion": 201,
+        "phases": {
+          "plan": {
+            "prompt": 319,
+            "completion": 201,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1274,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": true,
+      "failure_reasons": [
+        "stale_action"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s1_parallel_clock_v2",
+      "blueprint_id": "s1_parallel_clock",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "clock"
+      ],
+      "observations": 3,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 3653,
+        "completion": 1058,
+        "phases": {
+          "react_step": {
+            "prompt": 3653,
+            "completion": 1058,
+            "calls": 4,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 8270,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成。\n\n**读取到的原文**\n- 变更说明：待办：补监控截图。\n- 变更窗口（初读）：2026-12-09T20:00:00+08:00\n- 资料更新通知：「变更窗口 已更新，请重新阅读。」\n\n**重读后的原文**\n- 变更窗口：2026-12-11T20:00:00+08:00\n\n**执行结果**\n- 草稿（slot 1，todo）：待办：补监控截图。—— 草稿分支保持不变，未因通知改动。\n- 提醒：2026-12-11T20:00:00+08:00 —— 跟随通知后重读到的原文时间（非初读的 12-09）。\n\n说明：原文中未出现负责人信息，故草稿未填写 owner 内容；未创建 12-09 的提醒，因该时间已被更新原文取代。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s1_fanout_time_v1",
+      "blueprint_id": "s1_fanout_time",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "notes"
+      ],
+      "observations": 2,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 3897,
+        "completion": 576,
+        "phases": {
+          "react_step": {
+            "prompt": 3897,
+            "completion": 576,
+            "calls": 5,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 5121,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成，均依据重新读取到的最新原文：\n\n- **原文待办句子**：整理实验记录\n- **截止时间**：2026-12-06T13:00:00+08:00\n\n处理说明：首次读到的时间为 2026-12-01T09:00:00+08:00，随后收到「项目纪要 已更新」通知，因此重新读取原文，并按更新后的时间（2026-12-06T13:00:00+08:00）输出。\n\n输出结果：\n- 草稿（slot 1，待办）：已写入\n- 提醒：已创建，到期时间 2026-12-06T13:00:00+08:00\n\n原文未提及负责人，故未填写负责人信息。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s1_fanout_time_v1",
+      "blueprint_id": "s1_fanout_time",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "notes"
+      ],
+      "observations": 2,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 326,
+        "completion": 104,
+        "phases": {
+          "plan": {
+            "prompt": 326,
+            "completion": 104,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 887,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "reminder_missing"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "FACT_CHANGED",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s1_fanout_time_v1",
+      "blueprint_id": "s1_fanout_time",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes"
+      ],
+      "observations": 1,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 326,
+        "completion": 103,
+        "phases": {
+          "plan": {
+            "prompt": 326,
+            "completion": 103,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1390,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "reminder_missing"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s1_fanout_time_v2",
+      "blueprint_id": "s1_fanout_time",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "notes"
+      ],
+      "observations": 2,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 326,
+        "completion": 101,
+        "phases": {
+          "plan": {
+            "prompt": 326,
+            "completion": 101,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1102,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "reminder_missing"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "FACT_CHANGED",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s1_fanout_time_v2",
+      "blueprint_id": "s1_fanout_time",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes"
+      ],
+      "observations": 1,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 326,
+        "completion": 101,
+        "phases": {
+          "plan": {
+            "prompt": 326,
+            "completion": 101,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 633,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "reminder_missing"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s1_fanout_time_v2",
+      "blueprint_id": "s1_fanout_time",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "notes"
+      ],
+      "observations": 2,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 3105,
+        "completion": 504,
+        "phases": {
+          "react_step": {
+            "prompt": 3105,
+            "completion": 504,
+            "calls": 4,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 5024,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成。处理说明：\n\n- 首次读到的原文中，时间是 2026-12-08T16:00:00+08:00；但出现了「计划书 已更新」的通知，所以我重新读了原文。\n- 以重新读到的原文为准，两路输出都来自这份更新后的原文：\n  - 待办句子（草稿）：**待办：补齐监控。**\n  - 截止时间（提醒）：**2026-12-10T16:00:00+08:00**（已据此创建提醒）\n\n原文中没有提到负责人，所以我没有填写负责人或编造其他信息。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s2_chain_footnote_v1",
+      "blueprint_id": "s2_chain_footnote",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "extra",
+        "extra"
+      ],
+      "observations": 4,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 326,
+        "completion": 173,
+        "phases": {
+          "plan": {
+            "prompt": 326,
+            "completion": 173,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1113,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "FACT_CHANGED",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s2_chain_footnote_v1",
+      "blueprint_id": "s2_chain_footnote",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "extra"
+      ],
+      "observations": 3,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 326,
+        "completion": 173,
+        "phases": {
+          "plan": {
+            "prompt": 326,
+            "completion": 173,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1368,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s2_chain_footnote_v1",
+      "blueprint_id": "s2_chain_footnote",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "extra",
+        "extra"
+      ],
+      "observations": 4,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 5069,
+        "completion": 1362,
+        "phases": {
+          "react_step": {
+            "prompt": 5069,
+            "completion": 1362,
+            "calls": 5,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 11792,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已读取三份资料，结果如下：\n\n**原文实际内容**\n- 正文：`待办：核对引用。`\n- 结论：`结论：维持原结论。`\n- 脚注：先读到「脚注甲」，通知提示已更新，重读为「脚注乙」。该变化与本目标无关，按指示未写入结果。\n\n**需要说明的两点偏差**\n1. 目标说结论句来自「第二份正文」，但工具中只有一份「正文」，且内容仅为待办“核对引用”，不含结论句。因此我没有可引用的结论句，也没有自行补写或改写（未编造“维持原结论”之外的表述）。\n2. 原文没有出现任何时间、负责人信息，也没有可用于提醒的 ISO8601 时间，因此未创建提醒。\n\n草稿已写入 slot 1（pick=todo），内容仅为原文直引＋来源缺失说明＋“核对引用”待办，等你补充第二份正文后可据此定稿。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s2_chain_footnote_v2",
+      "blueprint_id": "s2_chain_footnote",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "extra"
+      ],
+      "observations": 3,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 330,
+        "completion": 176,
+        "phases": {
+          "plan": {
+            "prompt": 330,
+            "completion": 176,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 911,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s2_chain_footnote_v2",
+      "blueprint_id": "s2_chain_footnote",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "extra",
+        "extra"
+      ],
+      "observations": 4,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 4860,
+        "completion": 1187,
+        "phases": {
+          "react_step": {
+            "prompt": 4860,
+            "completion": 1187,
+            "calls": 5,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 9435,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "我已按你的要求完成。以下是已读到的原文内容和写入的草稿：\n\n**原文核对**\n- 正文页：「待办：核对数字。」\n- 结论页：「结论：维持原数字。」这就是第二份正文中的结论句，我已经把它作为结论写入草稿。\n- 批注原本是「批注甲」；资料更新通知提示它已更新，于是我重新阅读了原文，现在内容是「批注乙」。\n\n**草稿（slot 1）**\n- 结论：维持原数字。\n- 待办：核对数字。\n\n**未写入草稿的内容及原因**\n- 批注从「批注甲」变为「批注乙」，但该更新没有给出任何与结论相关的实质内容，因此按「与目标无关的更新不要写进结果」的要求，我没有把它写进草稿。\n- 我没有创建提醒，因为三份原文和资料更新通知中都没有任何日期或时间信息，没有可供依据的 ISO8601 时间，所以我不会编造时间。\n- 我也没有标注负责人，因为原文中没有出现负责人。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s2_chain_footnote_v2",
+      "blueprint_id": "s2_chain_footnote",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "extra",
+        "extra"
+      ],
+      "observations": 4,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 330,
+        "completion": 182,
+        "phases": {
+          "plan": {
+            "prompt": 330,
+            "completion": 182,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1410,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "FACT_CHANGED",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s2_join_third_v1",
+      "blueprint_id": "s2_join_third",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "extra"
+      ],
+      "observations": 3,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 325,
+        "completion": 176,
+        "phases": {
+          "plan": {
+            "prompt": 325,
+            "completion": 176,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1180,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "reminder_missing"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s2_join_third_v1",
+      "blueprint_id": "s2_join_third",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "extra"
+      ],
+      "observations": 3,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 2358,
+        "completion": 538,
+        "phases": {
+          "react_step": {
+            "prompt": 2358,
+            "completion": 538,
+            "calls": 3,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 4410,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成。\n\n**已读原文**\n- 纪要｜待办：整理实验记录。\n- 日程｜时间：2026-12-01T09:00:00+08:00。\n- 水印｜水印甲（与目标无关，未纳入结果，也不影响提醒决定）\n\n**产出**\n- 草稿（slot 1）：待办「整理实验记录」，时间 2026-12-01T09:00:00+08:00\n- 提醒：2026-12-01T09:00:00+08:00\n\n说明：提醒时间取自日程原文；「谁负责」原文未提及；水印未改写任何决定。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s2_join_third_v1",
+      "blueprint_id": "s2_join_third",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "extra",
+        "extra"
+      ],
+      "observations": 4,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 325,
+        "completion": 179,
+        "phases": {
+          "plan": {
+            "prompt": 325,
+            "completion": 179,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1351,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "reminder_missing"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "FACT_CHANGED",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s2_join_third_v2",
+      "blueprint_id": "s2_join_third",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "extra",
+        "extra"
+      ],
+      "observations": 4,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 3580,
+        "completion": 741,
+        "phases": {
+          "react_step": {
+            "prompt": 3580,
+            "completion": 741,
+            "calls": 4,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 5959,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成，结果如下：\n\n**草稿（slot 1）**\n- 待办：提交周报。\n- 日程时间：2026-12-03T09:00:00+08:00。\n\n**提醒**\n- 已按日程时间创建提醒：2026-12-03T09:00:00+08:00\n\n说明：\n- 提醒仅依据「备忘」（待办：提交周报）与「日历」（2026-12-03T09:00:00+08:00）确定。\n- 「印章」的更新通知（内容由印章甲变为印章乙）为水印类更新，未影响上述决定，也未写入结果；其中不含待办、负责人或时间信息。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s2_join_third_v2",
+      "blueprint_id": "s2_join_third",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "extra",
+        "extra"
+      ],
+      "observations": 4,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 323,
+        "completion": 226,
+        "phases": {
+          "plan": {
+            "prompt": 323,
+            "completion": 226,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1551,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "FACT_CHANGED",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s2_join_third_v2",
+      "blueprint_id": "s2_join_third",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "extra"
+      ],
+      "observations": 3,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 323,
+        "completion": 175,
+        "phases": {
+          "plan": {
+            "prompt": 323,
+            "completion": 175,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1177,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "reminder_missing"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s3_parallel_hidden_v1",
+      "blueprint_id": "s3_parallel_hidden",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 322,
+        "completion": 137,
+        "phases": {
+          "plan": {
+            "prompt": 322,
+            "completion": 137,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1082,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "reminder_missing"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s3_parallel_hidden_v1",
+      "blueprint_id": "s3_parallel_hidden",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 2497,
+        "completion": 809,
+        "phases": {
+          "react_step": {
+            "prompt": 2497,
+            "completion": 809,
+            "calls": 3,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 6438,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": true,
+      "failure_reasons": [
+        "stale_action"
+      ],
+      "reply": "已完成，依据只有两份原文：\n\n**原文内容**\n- 「实验记录」：待办：整理实验记录。\n- 「提交时间」：时间：2026-12-01T09:00:00+08:00。\n\n**处理结果**\n- 草稿 slot 1 已写入（pick=todo）：待办「整理实验记录」，并附上提交时间 2026-12-01T09:00:00+08:00，注明以原文为准。\n- 提醒已按阅读后原文的时间创建：2026-12-01T09:00:00+08:00。\n\n**说明**\n- 我未使用任何未在原文出现的旧时间值，也未编造负责人或提醒内容。\n- 由于指定原文中只出现这一个时间，没有发现时间冲突；如果「提交时间」已变化，将来通知会指出来，届时需重新读原文再改草稿与提醒。\n- 按你的说明（没有通知），我未额外查询通知列表。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s3_parallel_hidden_v1",
+      "blueprint_id": "s3_parallel_hidden",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 322,
+        "completion": 137,
+        "phases": {
+          "plan": {
+            "prompt": 322,
+            "completion": 137,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1221,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "reminder_missing"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s3_parallel_hidden_v2",
+      "blueprint_id": "s3_parallel_hidden",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 2639,
+        "completion": 911,
+        "phases": {
+          "react_step": {
+            "prompt": 2639,
+            "completion": 911,
+            "calls": 3,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 7249,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": true,
+      "failure_reasons": [
+        "stale_action"
+      ],
+      "reply": "已按原文完成，以下是依据：\n\n**读到的原文**\n- 「备份记录」：待办：补齐备份校验。\n- 「备份时间」：时间：2026-12-03T18:00:00+08:00。\n\n**执行结果**\n- 草稿已写入槽位 1（pick=todo），内容仅为「备份记录」原文待办，并标注提醒时间的来源。\n- 提醒已创建，due_at 使用本次阅读「备份时间」得到的 2026-12-03T18:00:00+08:00（即阅读后确认的当前值，不是旧值）。\n\n**说明**\n- 未调用通知查询，按你的说明没有通知、没有更新通知。\n- 原文中没有负责人信息，因此草稿未写负责人，也未编造任何时间或负责人。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s3_parallel_hidden_v2",
+      "blueprint_id": "s3_parallel_hidden",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 322,
+        "completion": 203,
+        "phases": {
+          "plan": {
+            "prompt": 322,
+            "completion": 203,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1009,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": true,
+      "failure_reasons": [
+        "stale_action"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s3_parallel_hidden_v2",
+      "blueprint_id": "s3_parallel_hidden",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 322,
+        "completion": 137,
+        "phases": {
+          "plan": {
+            "prompt": 322,
+            "completion": 137,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1037,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "reminder_missing"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s3_fanout_hidden_v1",
+      "blueprint_id": "s3_fanout_hidden",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes"
+      ],
+      "observations": 1,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 325,
+        "completion": 101,
+        "phases": {
+          "plan": {
+            "prompt": 325,
+            "completion": 101,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 981,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "reminder_missing"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s3_fanout_hidden_v1",
+      "blueprint_id": "s3_fanout_hidden",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "notes",
+        "notes"
+      ],
+      "observations": 3,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 4427,
+        "completion": 707,
+        "phases": {
+          "react_step": {
+            "prompt": 4427,
+            "completion": 707,
+            "calls": 5,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 6797,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成，结果如下：\n\n- **资料核对**：已读「值班纪要」，并查看通知，没有新通知。这个待办只会出现在同一份原文里，我先后读了三次：首次读到的时间是 `2026-12-02T08:00:00+08:00`，再读时已悄悄变为 `2026-12-03T08:00:00+08:00`，之后稳定不变。\n- **草稿（slot 1）**：只保留待办「接听告警」，时间采用变化后的 `2026-12-03T08:00:00+08:00`；原文未提及负责人，故未填写负责人。\n- **提醒**：按变化后的时间 `2026-12-03T08:00:00+08:00` 创建，未提交已失效的旧值 `2026-12-02T08:00:00+08:00`。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s3_fanout_hidden_v1",
+      "blueprint_id": "s3_fanout_hidden",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes"
+      ],
+      "observations": 1,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 325,
+        "completion": 101,
+        "phases": {
+          "plan": {
+            "prompt": 325,
+            "completion": 101,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 936,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "reminder_missing"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s3_fanout_hidden_v2",
+      "blueprint_id": "s3_fanout_hidden",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "notes"
+      ],
+      "observations": 2,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 3424,
+        "completion": 724,
+        "phases": {
+          "react_step": {
+            "prompt": 3424,
+            "completion": 724,
+            "calls": 4,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 5974,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成，依据均来自工具读到的原文：\n\n**待办（两次读取一致，未变）**\n- 冻结分支。\n\n**时间（已发现变化，因此使用了新值）**\n- 首次读取：2026-12-04T20:00:00+08:00（旧值，已弃用）\n- 再次读取：2026-12-05T20:00:00+08:00 ✅ 已用于创建提醒\n\n**通知**：无新通知（已确认）。\n\n**产出**\n- 草稿（slot 1）已写入待办内容，未包含时间字段。\n- 提醒已创建，到期时间为 2026-12-05T20:00:00+08:00。\n\n原文中未提及负责人，因此草稿与提醒均未填写负责人，也未自行设定任何时间或提醒。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s3_fanout_hidden_v2",
+      "blueprint_id": "s3_fanout_hidden",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes"
+      ],
+      "observations": 1,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 325,
+        "completion": 105,
+        "phases": {
+          "plan": {
+            "prompt": 325,
+            "completion": 105,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 991,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "reminder_missing"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s3_fanout_hidden_v2",
+      "blueprint_id": "s3_fanout_hidden",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes"
+      ],
+      "observations": 1,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 325,
+        "completion": 105,
+        "phases": {
+          "plan": {
+            "prompt": 325,
+            "completion": 105,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1057,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "reminder_missing"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s4_parallel_partial_time_v1",
+      "blueprint_id": "s4_parallel_partial_time",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 330,
+        "completion": 143,
+        "phases": {
+          "plan": {
+            "prompt": 330,
+            "completion": 143,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1007,
+      "success": true,
+      "partial": false,
+      "safe_abstention": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s4_parallel_partial_time_v1",
+      "blueprint_id": "s4_parallel_partial_time",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 330,
+        "completion": 143,
+        "phases": {
+          "plan": {
+            "prompt": 330,
+            "completion": 143,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1145,
+      "success": true,
+      "partial": false,
+      "safe_abstention": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s4_parallel_partial_time_v1",
+      "blueprint_id": "s4_parallel_partial_time",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 2112,
+        "completion": 337,
+        "phases": {
+          "react_step": {
+            "prompt": 2112,
+            "completion": 337,
+            "calls": 3,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 3286,
+      "success": true,
+      "partial": false,
+      "safe_abstention": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成。\n\n**读取结果**\n- 「需求说明」：待办：补齐接口示例。\n- 「排期栏」：时间：时间未定。\n\n**处理**\n- 草稿 1 只写入待办内容：补齐接口示例。\n- 「排期栏」没有给出任何具体时间，因此我既没有填写时间，也没有创建提醒。\n- 这两份资料都没有提到负责人，所以草稿中不写负责人，我没有编造。\n\n注：这两份资料都没有写负责人，草稿中也就没有可以提取的负责人信息。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s4_parallel_partial_time_v2",
+      "blueprint_id": "s4_parallel_partial_time",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 330,
+        "completion": 143,
+        "phases": {
+          "plan": {
+            "prompt": 330,
+            "completion": 143,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 928,
+      "success": true,
+      "partial": false,
+      "safe_abstention": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s4_parallel_partial_time_v2",
+      "blueprint_id": "s4_parallel_partial_time",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 2122,
+        "completion": 380,
+        "phases": {
+          "react_step": {
+            "prompt": 2122,
+            "completion": 380,
+            "calls": 3,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 3630,
+      "success": true,
+      "partial": false,
+      "safe_abstention": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成。\n\n**读取到的原文**\n- 测试说明：待办：补齐回归用例。\n- 排期栏：时间：时间未定。\n\n**处理结果**\n- 草稿（slot 1，只取待办）：已写入「补齐回归用例」这一项，并注明来源为「测试说明」。\n- 提醒：**未创建**。排期栏明确写「时间未定」，没有可用的 ISO8601 时间依据，按要求不用空时间创建提醒。\n- 负责人：两份原文均未提及，未编造，草稿中标注为留空。\n\n如果你之后拿到确定的时间，或者确认了负责人，可以再让我更新草稿或补建提醒。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s4_parallel_partial_time_v2",
+      "blueprint_id": "s4_parallel_partial_time",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 330,
+        "completion": 143,
+        "phases": {
+          "plan": {
+            "prompt": 330,
+            "completion": 143,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1190,
+      "success": true,
+      "partial": false,
+      "safe_abstention": true,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s4_fanout_undated_v1",
+      "blueprint_id": "s4_fanout_undated",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes"
+      ],
+      "observations": 1,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 326,
+        "completion": 156,
+        "phases": {
+          "plan": {
+            "prompt": 326,
+            "completion": 156,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1495,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s4_fanout_undated_v1",
+      "blueprint_id": "s4_fanout_undated",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes"
+      ],
+      "observations": 1,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 326,
+        "completion": 156,
+        "phases": {
+          "plan": {
+            "prompt": 326,
+            "completion": 156,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1180,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s4_fanout_undated_v1",
+      "blueprint_id": "s4_fanout_undated",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes"
+      ],
+      "observations": 1,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 2160,
+        "completion": 512,
+        "phases": {
+          "react_step": {
+            "prompt": 2160,
+            "completion": 512,
+            "calls": 3,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 4034,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成。\n\n**原文内容（讨论记录）**\n- 待办：整理实验记录。\n\n**处理结果**\n- 草稿 1（槽位 1）：只列待办「整理实验记录。」，并注明原文未提供时间和负责人。\n- 草稿 2（槽位 2）：同样只列这一条待办，并说明因原文无截止时间、无负责人，故不设时间、不指派负责人。\n- 未创建提醒：原文只有待办、没有任何时间信息，缺少可依据的 ISO8601 时间，按规则不调用提醒工具。\n\n原文信息确实很单薄，除这一条待办外没有其他内容，因此两段草稿内容都以该待办为核心，未补充任何原文没有的时间、负责人或细节。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s4_fanout_undated_v2",
+      "blueprint_id": "s4_fanout_undated",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes"
+      ],
+      "observations": 1,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 326,
+        "completion": 156,
+        "phases": {
+          "plan": {
+            "prompt": 326,
+            "completion": 156,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1182,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s4_fanout_undated_v2",
+      "blueprint_id": "s4_fanout_undated",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes"
+      ],
+      "observations": 1,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 2110,
+        "completion": 376,
+        "phases": {
+          "react_step": {
+            "prompt": 2110,
+            "completion": 376,
+            "calls": 3,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 3441,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成。\n\n**原文内容（设计讨论）**\n> 设计讨论｜待办：补一版流程图。\n\n**处理结果**\n- 草稿 1 和草稿 2 都已写入，且仅包含待办内容：补一版流程图。\n- 未创建提醒：原文没有给出任何时间信息，也没有负责人，因此没有可依据的提醒时间。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s4_fanout_undated_v2",
+      "blueprint_id": "s4_fanout_undated",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": false,
+      "reads": [
+        "notes"
+      ],
+      "observations": 1,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 326,
+        "completion": 156,
+        "phases": {
+          "plan": {
+            "prompt": 326,
+            "completion": 156,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 897,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s5_chain_tail_v1",
+      "blueprint_id": "s5_chain_tail",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "extra",
+        "tail"
+      ],
+      "observations": 3,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 334,
+        "completion": 182,
+        "phases": {
+          "plan": {
+            "prompt": 334,
+            "completion": 182,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1007,
+      "success": false,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "draft_missing:signoff"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s5_chain_tail_v1",
+      "blueprint_id": "s5_chain_tail",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "extra",
+        "tail",
+        "tail"
+      ],
+      "observations": 4,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 4413,
+        "completion": 799,
+        "phases": {
+          "react_step": {
+            "prompt": 4413,
+            "completion": 799,
+            "calls": 5,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 5688,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成：三份资料均已阅读，按更新后的原文写入草稿。\n\n- 变更情况：通知显示只有「签核」更新。重新阅读后，签核原句由「签核：待审批」变为「签核：同意开通」。\n- 草稿 1（申请单，未变，保持原样）：申请单｜待办：开通只读权限。\n- 草稿 2（安全复查，未变，保持原样）：安全复查｜复查：没有外联。\n- 草稿 3（签核，使用变后原句）：签核｜签核：同意开通。\n\n未创建提醒：原文中没有出现任何日期或时间，也没有明确的负责人，按规则不臆造提醒时间。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s5_chain_tail_v1",
+      "blueprint_id": "s5_chain_tail",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "extra",
+        "tail",
+        "tail"
+      ],
+      "observations": 4,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 334,
+        "completion": 182,
+        "phases": {
+          "plan": {
+            "prompt": 334,
+            "completion": 182,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1186,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "FACT_CHANGED",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s5_chain_tail_v2",
+      "blueprint_id": "s5_chain_tail",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "extra",
+        "tail",
+        "tail"
+      ],
+      "observations": 4,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 3480,
+        "completion": 675,
+        "phases": {
+          "react_step": {
+            "prompt": 3480,
+            "completion": 675,
+            "calls": 4,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 5804,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成。三份资料原文和更新情况如下：\n\n- **账号单**：待办：加入审计组。（未变，保持原样）\n- **权限复查**：复查：没有写权限。（未变，保持原样）\n- **审批**：签核：待审批。→ 收到更新通知后重读，变为「签核：同意加入。」草稿采用变后的签核原句。\n\n草稿已写入槽位 1，内容为上述三条原句。原文中没有任何日期时间，因此未创建提醒。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s5_chain_tail_v2",
+      "blueprint_id": "s5_chain_tail",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "extra",
+        "tail",
+        "tail"
+      ],
+      "observations": 4,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 332,
+        "completion": 180,
+        "phases": {
+          "plan": {
+            "prompt": 332,
+            "completion": 180,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1174,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "FACT_CHANGED",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s5_chain_tail_v2",
+      "blueprint_id": "s5_chain_tail",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "extra",
+        "tail"
+      ],
+      "observations": 3,
+      "reminder_writes": 0,
+      "tokens": {
+        "prompt": 332,
+        "completion": 180,
+        "phases": {
+          "plan": {
+            "prompt": 332,
+            "completion": 180,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1388,
+      "success": false,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [
+        "draft_missing:signoff"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s5_join_one_side_v1",
+      "blueprint_id": "s5_join_one_side",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "clock"
+      ],
+      "observations": 3,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 329,
+        "completion": 202,
+        "phases": {
+          "plan": {
+            "prompt": 329,
+            "completion": 202,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1024,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "FACT_CHANGED",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s5_join_one_side_v1",
+      "blueprint_id": "s5_join_one_side",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 329,
+        "completion": 202,
+        "phases": {
+          "plan": {
+            "prompt": 329,
+            "completion": 202,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1080,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": true,
+      "failure_reasons": [
+        "stale_action"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s5_join_one_side_v1",
+      "blueprint_id": "s5_join_one_side",
+      "variant_id": 1,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "clock"
+      ],
+      "observations": 3,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 4205,
+        "completion": 771,
+        "phases": {
+          "react_step": {
+            "prompt": 4205,
+            "completion": 771,
+            "calls": 5,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 6833,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成，情况如下：\n\n**资料原文**\n- 「附件索引」：索引：已同步。（无时间信息，未发生变化，保持原样）\n- 「截止说明」：时间原为 2026-12-01T09:00:00+08:00；收到更新通知后重新读取，现为 **2026-12-04T15:00:00+08:00**\n\n**产出**\n- 草稿（slot 1）：仅写入「附件索引｜索引：已同步。」——未混入任何新时间。\n- 提醒：按变后的时间设置为 2026-12-04T15:00:00+08:00（两侧均已读完后才创建）。\n\n只有「截止说明」发生了变化，「附件索引」内容照原样保留。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s5_join_one_side_v2",
+      "blueprint_id": "s5_join_one_side",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "always_refresh",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock"
+      ],
+      "observations": 2,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 329,
+        "completion": 201,
+        "phases": {
+          "plan": {
+            "prompt": 329,
+            "completion": 201,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 986,
+      "success": false,
+      "partial": true,
+      "safe_abstention": false,
+      "stale_action": true,
+      "failure_reasons": [
+        "stale_action"
+      ],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    },
+    {
+      "task_id": "s5_join_one_side_v2",
+      "blueprint_id": "s5_join_one_side",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "react",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "clock"
+      ],
+      "observations": 3,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 4313,
+        "completion": 840,
+        "phases": {
+          "react_step": {
+            "prompt": 4313,
+            "completion": 840,
+            "calls": 5,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 7013,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "reply": "已完成。\n\n**读取情况**\n- 检查清单：`索引：已勾选。`（本次未收到它的更新通知，因此内容保持原样）\n- 上线窗口：初次读到 `2026-12-03T21:00:00+08:00`，随后收到「上线窗口 已更新，请重新阅读」的通知，于是重新读取，得到 `2026-12-05T21:00:00+08:00`。这是唯一变更的资料。\n\n**产出**\n- 草稿（slot 1，pick=all）：`索引：已勾选。`——只用了检查清单原文，没有混入任何时间。\n- 提醒：已在两侧（检查清单、上线窗口）都读完后创建，到期时间采用变更后的 `2026-12-05T21:00:00+08:00`。\n\n补充说明：检查清单的原文只有索引一项，没有可据以填写负责人或待办的时间；因此草稿中没有编造这些内容，提醒也没有涉及负责人。",
+      "error": "",
+      "plan_calls": 0
+    },
+    {
+      "task_id": "s5_join_one_side_v2",
+      "blueprint_id": "s5_join_one_side",
+      "variant_id": 2,
+      "split": "val",
+      "policy": "egaa",
+      "repeat": 1,
+      "checkpoint_reached": true,
+      "reads": [
+        "notes",
+        "clock",
+        "clock"
+      ],
+      "observations": 3,
+      "reminder_writes": 1,
+      "tokens": {
+        "prompt": 329,
+        "completion": 201,
+        "phases": {
+          "plan": {
+            "prompt": 329,
+            "completion": 201,
+            "calls": 1,
+            "missing": 0
+          }
+        },
+        "missing_calls": 0
+      },
+      "elapsed_ms": 1213,
+      "success": true,
+      "partial": false,
+      "safe_abstention": false,
+      "stale_action": false,
+      "failure_reasons": [],
+      "plan_error": "",
+      "termination": "GOAL_UNVERIFIED",
+      "reason_codes": [
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "FACT_CHANGED",
+        "PRECONDITIONS_HOLD",
+        "PRECONDITIONS_HOLD",
+        "GOAL_UNVERIFIED"
+      ],
+      "plan_calls": 1
+    }
+  ],
+  "comparison": {
+    "egaa_minus_always_refresh": {
+      "defined": true,
+      "pairs": 12,
+      "iterations": 5000,
+      "seed": 20261110,
+      "success_delta": {
+        "mean": 0.2924,
+        "lower": 0.08333333333333333,
+        "upper": 0.5416666666666666
+      },
+      "observation_delta": {
+        "mean": 0.5013333333333333,
+        "lower": 0.25,
+        "upper": 0.75
+      },
+      "cost_delta": {
+        "mean": 2.7172,
+        "lower": -5.458333333333333,
+        "upper": 11.041666666666666
+      }
+    },
+    "egaa_minus_react": {
+      "defined": true,
+      "pairs": 12,
+      "iterations": 5000,
+      "seed": 20261110,
+      "success_delta": {
+        "mean": -0.25068333333333337,
+        "lower": -0.5416666666666666,
+        "upper": 0.0
+      },
+      "observation_delta": {
+        "mean": -0.08225,
+        "lower": -0.375,
+        "upper": 0.125
+      },
+      "cost_delta": {
+        "mean": -3498.955825,
+        "lower": -4173.625,
+        "upper": -2852.6666666666665
+      }
+    }
+  }
+}

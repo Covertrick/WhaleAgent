@@ -37,6 +37,7 @@ class EGAAPolicy(StepPolicy):
         grounder: Callable[..., object] | None = None,
         revision_probe: Callable[[str], str] | None = None,
         commit_window_changed: Callable[[str], bool] | None = None,
+        replan_fn: Callable[[], list[PlanNode]] | None = None,
     ) -> None:
         self.nodes = nodes
         self.policy_name = "egaa"
@@ -53,6 +54,7 @@ class EGAAPolicy(StepPolicy):
         self.grounder = grounder
         self.revision_probe = revision_probe
         self.commit_window_changed = commit_window_changed
+        self.replan_fn = replan_fn
         self.revisions = ContentRevisionLedger()
         self.pool_handlers: dict = {}
         self.belief = BeliefState()
@@ -202,6 +204,26 @@ class EGAAPolicy(StepPolicy):
         self._finish_write(pending, content)
 
     def apply_replan(self, decision: StepDecision) -> None:
+        if self.evidence_policy == "B4" and self.replan_fn is not None:
+            self.replans_used += 1
+            try:
+                fresh = self.replan_fn()
+            except (OSError, RuntimeError, TimeoutError, ValueError, KeyError, TypeError):
+                self.termination = "REPLAN_FAILED"
+                self._stop_answer = self.last_text
+                return
+            done = {node.id: node for node in self.nodes if node.status == "DONE"}
+            merged: list[PlanNode] = []
+            seen: set[str] = set()
+            for node in fresh:
+                merged.append(done.get(node.id, node))
+                seen.add(node.id)
+            for node in self.nodes:
+                if node.status == "DONE" and node.id not in seen:
+                    merged.insert(0, node)
+            self.nodes = merged
+            self.replanned.update(decision.meta.get("notice_ids") or [])
+            return
         result = repair_plan(
             self.nodes,
             decision.meta.get("target_nodes") or [],

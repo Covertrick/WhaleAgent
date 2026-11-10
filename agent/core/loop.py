@@ -82,6 +82,7 @@ def agent_loop(
     todo_reminder: bool = True,
     max_rounds: int | None = None,
     executor: ToolExecutor | None = None,
+    temperature: float | None = None,
 ) -> str | None:
     """兼容入口。真正的轮次在 Engine，本函数返回最后一条 assistant 文本。"""
     from agent.engine.runner import run_engine
@@ -96,6 +97,7 @@ def agent_loop(
         use_mcp=use_mcp,
         extract_memory=extract_memory,
         todo_reminder=todo_reminder,
+        temperature=temperature,
     )
     from agent.application.run_driver import _freeze_policy
 
